@@ -96,20 +96,22 @@ namespace Warpinator
             // rescanToolStripMenuItem
             // 
             this.rescanToolStripMenuItem.Name = "rescanToolStripMenuItem";
-            this.rescanToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.rescanToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rescanToolStripMenuItem.Text = "Rescan";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 

@@ -59,7 +59,7 @@ namespace Warpinator
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new AboutBox().Show();
+            new AboutBox().ShowDialog();
         }
 
         private void FlowLayoutPanel_ClientSizeChanged(object sender, EventArgs e)
@@ -69,5 +69,12 @@ namespace Warpinator
                 c.Width = flowLayoutPanel.ClientSize.Width - 10;
             }
         }
+
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new SettingsForm().Show();
+        }
+
+        private void QuitToolStripMenuItem_Click(object sender, EventArgs e) => Close();
     }
 }

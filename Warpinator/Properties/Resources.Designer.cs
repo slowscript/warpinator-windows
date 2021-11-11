@@ -69,5 +69,15 @@ namespace Warpinator.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Icon podobný (Ikona).
+        /// </summary>
+        internal static System.Drawing.Icon warplogo {
+            get {
+                object obj = ResourceManager.GetObject("warplogo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

@@ -25,7 +25,6 @@ namespace Warpinator
         public string ProfilePicture;
         public bool AllowOverwrite;
         public bool NotifyIncoming;
-        public string DownloadDir;
         public bool Running = false;
         public string SelectedInterface = "{B9BF60D5-32E1-4BE1-A548-1CB105020611}"; //TODO: Make this a setting
 
@@ -36,6 +35,7 @@ namespace Warpinator
         readonly MulticastService mdns;
         ServiceProfile serviceProfile;
         readonly ConcurrentDictionary<string, ServiceRecord> mdnsServices = new ConcurrentDictionary<string, ServiceRecord>();
+        internal Properties.Settings settings = Properties.Settings.Default;
 
         public Server()
         {
@@ -43,14 +43,20 @@ namespace Warpinator
             DisplayName = System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName;
             Hostname = Environment.MachineName;
             UserName = Environment.UserName;
-            UUID = Hostname.ToUpper() + "-" + String.Format("{0:X6}", new Random().Next(0x1000000)); //TODO: Save this
-
-            //Load settings...
-
-            if (DownloadDir == null)
+            
+            //Load settings
+            settings = Properties.Settings.Default;
+            if (!String.IsNullOrEmpty(settings.UUID))
+                UUID = settings.UUID;
+            else
             {
-                DownloadDir = Path.Combine(Utils.GetDefaultDownloadFolder(), "Warpinator");
-                Directory.CreateDirectory(DownloadDir);
+                UUID = Hostname.ToUpper() + "-" + String.Format("{0:X6}", new Random().Next(0x1000000));
+                settings.UUID = UUID;
+            }
+            if (String.IsNullOrEmpty(settings.DownloadDir))
+            {
+                settings.DownloadDir = Path.Combine(Utils.GetDefaultDownloadFolder(), "Warpinator");
+                Directory.CreateDirectory(settings.DownloadDir);
             }
 
             mdns = new MulticastService((ifaces) => ifaces.Where((iface) => SelectedInterface == null || iface.Id == SelectedInterface));

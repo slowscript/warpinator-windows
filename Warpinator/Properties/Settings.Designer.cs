@@ -22,5 +22,29 @@ namespace Warpinator.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DownloadDir {
+            get {
+                return ((string)(this["DownloadDir"]));
+            }
+            set {
+                this["DownloadDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UUID {
+            get {
+                return ((string)(this["UUID"]));
+            }
+            set {
+                this["UUID"] = value;
+            }
+        }
     }
 }
