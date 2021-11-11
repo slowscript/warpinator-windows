@@ -29,6 +29,7 @@ namespace Warpinator
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblIP = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -95,19 +96,19 @@ namespace Warpinator
             // rescanToolStripMenuItem
             // 
             this.rescanToolStripMenuItem.Name = "rescanToolStripMenuItem";
-            this.rescanToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rescanToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.rescanToolStripMenuItem.Text = "Rescan";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             // 
             // helpToolStripMenuItem
@@ -123,20 +124,20 @@ namespace Warpinator
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // connectionIssuesToolStripMenuItem
             // 
             this.connectionIssuesToolStripMenuItem.Name = "connectionIssuesToolStripMenuItem";
-            this.connectionIssuesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.connectionIssuesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.connectionIssuesToolStripMenuItem.Text = "Connection issues";
             // 
             // gitHubToolStripMenuItem
             // 
             this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
-            this.gitHubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gitHubToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.gitHubToolStripMenuItem.Text = "GitHub";
             // 
             // label1
@@ -171,6 +172,7 @@ namespace Warpinator
             this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Warpinator";

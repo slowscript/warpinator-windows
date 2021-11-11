@@ -110,7 +110,7 @@ namespace Warpinator
             [DllImport("Shell32.dll")]
             public static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken, out IntPtr ppszPath);
         }
-        static class User32
+        internal static class User32
         {
             [DllImport("User32.dll")]
             public static extern int DestroyIcon(IntPtr hIcon);

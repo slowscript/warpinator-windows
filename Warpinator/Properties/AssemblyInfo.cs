@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -6,11 +7,11 @@ using System.Runtime.InteropServices;
 // sadu atributů. Změnou hodnot těchto atributů se upraví informace
 // přidružené k sestavení.
 [assembly: AssemblyTitle("Warpinator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("An unofficial port Warpinator. Send and receive files over local network")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Warpinator")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
+[assembly: AssemblyCompany("slowscript")]
+[assembly: AssemblyProduct("Warpinator for Windows (unofficial)")]
+[assembly: AssemblyCopyright("Copyright © 2021 slowscript")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,3 +35,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguage("en")]

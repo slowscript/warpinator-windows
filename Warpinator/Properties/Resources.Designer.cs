@@ -59,5 +59,15 @@ namespace Warpinator.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warp_banner_v {
+            get {
+                object obj = ResourceManager.GetObject("warp-banner-v", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
