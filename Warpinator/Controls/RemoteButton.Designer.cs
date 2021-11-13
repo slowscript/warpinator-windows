@@ -30,13 +30,13 @@ namespace Warpinator.Controls
         private void InitializeComponent()
         {
             this.btnSelf = new System.Windows.Forms.Button();
-            this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.lblDisplayName = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
-            this.pictureBoxStatus = new System.Windows.Forms.PictureBox();
             this.lblIP = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
+            this.pictureBoxStatus = new System.Windows.Forms.PictureBox();
+            this.pictureBoxProfile = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSelf
@@ -44,24 +44,13 @@ namespace Warpinator.Controls
             this.btnSelf.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelf.Location = new System.Drawing.Point(3, 3);
             this.btnSelf.Name = "btnSelf";
             this.btnSelf.Size = new System.Drawing.Size(344, 64);
             this.btnSelf.TabIndex = 0;
             this.btnSelf.UseVisualStyleBackColor = true;
             this.btnSelf.Click += new System.EventHandler(this.BtnSelf_Click);
-            // 
-            // pictureBoxProfile
-            // 
-            this.pictureBoxProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBoxProfile.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxProfile.Location = new System.Drawing.Point(8, 8);
-            this.pictureBoxProfile.Name = "pictureBoxProfile";
-            this.pictureBoxProfile.Size = new System.Drawing.Size(54, 54);
-            this.pictureBoxProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxProfile.TabIndex = 1;
-            this.pictureBoxProfile.TabStop = false;
             // 
             // lblDisplayName
             // 
@@ -84,15 +73,6 @@ namespace Warpinator.Controls
             this.lblUser.TabIndex = 3;
             this.lblUser.Text = "userName@Machine";
             // 
-            // pictureBoxStatus
-            // 
-            this.pictureBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxStatus.Location = new System.Drawing.Point(301, 20);
-            this.pictureBoxStatus.Name = "pictureBoxStatus";
-            this.pictureBoxStatus.Size = new System.Drawing.Size(36, 33);
-            this.pictureBoxStatus.TabIndex = 4;
-            this.pictureBoxStatus.TabStop = false;
-            // 
             // lblIP
             // 
             this.lblIP.AutoSize = true;
@@ -101,6 +81,30 @@ namespace Warpinator.Controls
             this.lblIP.Size = new System.Drawing.Size(97, 13);
             this.lblIP.TabIndex = 5;
             this.lblIP.Text = "192.168.1.1:42000";
+            // 
+            // pictureBoxStatus
+            // 
+            this.pictureBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBoxStatus.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBoxStatus.Location = new System.Drawing.Point(301, 20);
+            this.pictureBoxStatus.Name = "pictureBoxStatus";
+            this.pictureBoxStatus.Size = new System.Drawing.Size(36, 33);
+            this.pictureBoxStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxStatus.TabIndex = 4;
+            this.pictureBoxStatus.TabStop = false;
+            // 
+            // pictureBoxProfile
+            // 
+            this.pictureBoxProfile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBoxProfile.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxProfile.Location = new System.Drawing.Point(8, 8);
+            this.pictureBoxProfile.Name = "pictureBoxProfile";
+            this.pictureBoxProfile.Size = new System.Drawing.Size(54, 54);
+            this.pictureBoxProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxProfile.TabIndex = 1;
+            this.pictureBoxProfile.TabStop = false;
             // 
             // RemoteButton
             // 
@@ -116,8 +120,8 @@ namespace Warpinator.Controls
             this.MaximumSize = new System.Drawing.Size(500, 70);
             this.Name = "RemoteButton";
             this.Size = new System.Drawing.Size(350, 70);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfile)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

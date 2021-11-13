@@ -235,6 +235,11 @@
     <None Include="Resources\warp-banner-v.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\connecting.png" />
+    <None Include="Resources\awaiting_duplex.png" />
+    <None Include="Resources\connected.png" />
+    <None Include="Resources\disconnected.png" />
+    <None Include="Resources\error.png" />
     <Content Include="Resources\warplogo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
