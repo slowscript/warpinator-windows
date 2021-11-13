@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -22,13 +23,23 @@ namespace Warpinator
             UpdateTransfers();
         }
 
+        IntPtr hIcon = IntPtr.Zero;
         internal void UpdateLabels()
         {
             pictureUser.Image = remote.Picture;
+            if (remote.Picture != null)
+            {
+                var oldIcon = hIcon;
+                hIcon = remote.Picture.GetHicon();
+                this.Icon = Icon.FromHandle(hIcon);
+                if (oldIcon != IntPtr.Zero)
+                    Utils.User32.DestroyIcon(oldIcon);
+            }
             lblDisplayName.Text = remote.DisplayName;
             lblUserString.Text = remote.UserName + "@" + remote.Hostname;
             lblAddress.Text = remote.Address + ":" + remote.Port;
             lblStatus.Text = remote.Status.ToString();
+            btnReconnect.Visible = remote.Status == Remote.RemoteStatus.DISCONNECTED || remote.Status == Remote.RemoteStatus.ERROR;
             //pictureStatus
 
             this.Text = lblUserString.Text;
@@ -107,6 +118,16 @@ namespace Warpinator
             {
                 c.Width = flowLayoutTransfers.ClientSize.Width - 10;
             }
+        }
+
+        private void BtnDlDir_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", String.Format("/n, /e, \"{0}\"", Properties.Settings.Default.DownloadDir));
+        }
+
+        private void BtnReconnect_Click(object sender, EventArgs e)
+        {
+            remote.Connect();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Timers;
 using Common.Logging;
 using Grpc.Core;
 using Makaretu.Dns;
@@ -37,6 +38,7 @@ namespace Warpinator
         ServiceProfile serviceProfile;
         readonly ConcurrentDictionary<string, ServiceRecord> mdnsServices = new ConcurrentDictionary<string, ServiceRecord>();
         internal Properties.Settings settings = Properties.Settings.Default;
+        Timer pingTimer = new Timer(10_000);
 
         public Server()
         {
@@ -63,6 +65,8 @@ namespace Warpinator
             mdns = new MulticastService((ifaces) => ifaces.Where((iface) => SelectedInterface == null || iface.Id == SelectedInterface));
             mdns.UseIpv6 = false;
             sd = new ServiceDiscovery(mdns);
+            pingTimer.Elapsed += (a, b) => PingRemotes();
+            pingTimer.AutoReset = true;
         }
 
         public void Start()
@@ -75,6 +79,7 @@ namespace Warpinator
             StartGrpcServer(); //Also initializes authenticator for certserver
             CertServer.Start(Port);
             StartMDNS();
+            pingTimer.Start();
             Form1.UpdateUI();
         }
 
@@ -83,6 +88,7 @@ namespace Warpinator
             if (!Running)
                 return;
             Running = false;
+            pingTimer.Stop();
             sd.Unadvertise(serviceProfile);
             mdns.Stop();
             CertServer.Stop();
@@ -138,6 +144,15 @@ namespace Warpinator
             serviceProfile.AddProperty("type", flush ? "flush" : "real");
             sd.Advertise(serviceProfile);
             sd.Announce(serviceProfile);
+        }
+
+        private void PingRemotes()
+        {
+            foreach (var r in Remotes.Values)
+            {
+                if (r.Status == Remote.RemoteStatus.CONNECTED)
+                    r.Ping();
+            }
         }
 
         private void OnServiceInstanceDiscovered(object sender, ServiceInstanceDiscoveryEventArgs e)

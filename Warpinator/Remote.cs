@@ -106,7 +106,7 @@ namespace Warpinator
             {
                 await client.PingAsync(new LookupName() { Id = Server.current.UUID }, deadline: DateTime.UtcNow.AddSeconds(10));
             }
-            catch (RpcException ex) when (ex.StatusCode == StatusCode.DeadlineExceeded)
+            catch (RpcException ex)
             {
                 log.Debug($"Ping to {Hostname} timed out");
                 Status = RemoteStatus.DISCONNECTED;

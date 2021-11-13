@@ -43,6 +43,7 @@ namespace Warpinator
             this.browseFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.browseFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBrowseDir = new System.Windows.Forms.Button();
+            this.btnReconnect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureStatus)).BeginInit();
             this.SuspendLayout();
@@ -158,6 +159,7 @@ namespace Warpinator
             this.btnDlDir.TabIndex = 10;
             this.btnDlDir.Text = "Open download folder";
             this.btnDlDir.UseVisualStyleBackColor = true;
+            this.btnDlDir.Click += new System.EventHandler(this.BtnDlDir_Click);
             // 
             // browseFilesToolStripMenuItem
             // 
@@ -182,11 +184,22 @@ namespace Warpinator
             this.btnBrowseDir.UseVisualStyleBackColor = true;
             this.btnBrowseDir.Click += new System.EventHandler(this.BtnBrowseDir_Click);
             // 
+            // btnReconnect
+            // 
+            this.btnReconnect.Location = new System.Drawing.Point(317, 28);
+            this.btnReconnect.Name = "btnReconnect";
+            this.btnReconnect.Size = new System.Drawing.Size(75, 23);
+            this.btnReconnect.TabIndex = 12;
+            this.btnReconnect.Text = "Reconnect";
+            this.btnReconnect.UseVisualStyleBackColor = true;
+            this.btnReconnect.Click += new System.EventHandler(this.BtnReconnect_Click);
+            // 
             // TransferForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 302);
+            this.Controls.Add(this.btnReconnect);
             this.Controls.Add(this.btnBrowseDir);
             this.Controls.Add(this.btnDlDir);
             this.Controls.Add(this.txtFile);
@@ -226,5 +239,6 @@ namespace Warpinator
         private System.Windows.Forms.ToolStripMenuItem browseFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem browseFoldersToolStripMenuItem;
         private System.Windows.Forms.Button btnBrowseDir;
+        private System.Windows.Forms.Button btnReconnect;
     }
 }
