@@ -55,6 +55,13 @@ namespace Warpinator
                 btn.Width = flowLayoutPanel.ClientSize.Width - 10;
                 btn.Show();
             }
+            
+            string iface = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) => i.Id == server.SelectedInterface)?.Name ?? "Selected interface unavailable";
+            if (String.IsNullOrEmpty(server.SelectedInterface))
+                iface = "Any";
+            lblIP.Text = Utils.GetLocalIPAddress() + " | " + iface;
+            
+            lblStatus.Text = server.Running ? "Service is running" : "Service not running!";
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)

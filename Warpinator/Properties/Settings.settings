@@ -8,5 +8,14 @@
     <Setting Name="UUID" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="NetworkInterface" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">42000</Value>
+    </Setting>
+    <Setting Name="GroupCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Warpinator</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

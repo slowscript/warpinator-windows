@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Common.Logging;
 using Grpc.Core;
 using Makaretu.Dns;
@@ -26,7 +27,7 @@ namespace Warpinator
         public bool AllowOverwrite;
         public bool NotifyIncoming;
         public bool Running = false;
-        public string SelectedInterface = "{B9BF60D5-32E1-4BE1-A548-1CB105020611}"; //TODO: Make this a setting
+        public string SelectedInterface;
 
         public Dictionary<string, Remote> Remotes = new Dictionary<string, Remote>();
 
@@ -62,22 +63,22 @@ namespace Warpinator
             mdns = new MulticastService((ifaces) => ifaces.Where((iface) => SelectedInterface == null || iface.Id == SelectedInterface));
             mdns.UseIpv6 = false;
             sd = new ServiceDiscovery(mdns);
-
-            sd.ServiceInstanceDiscovered += OnServiceInstanceDiscovered;
-            sd.ServiceInstanceShutdown += OnServiceInstanceShutdown;
-            mdns.AnswerReceived += OnAnswerReceived;
         }
 
         public void Start()
         {
             log.Info("-- Starting server");
             Running = true;
+            if (String.IsNullOrEmpty(settings.NetworkInterface))
+                SelectedInterface = null;
+            else SelectedInterface = settings.NetworkInterface;
             StartGrpcServer(); //Also initializes authenticator for certserver
             CertServer.Start(Port);
             StartMDNS();
+            Form1.UpdateUI();
         }
 
-        public async void Stop()
+        public async Task Stop()
         {
             if (!Running)
                 return;
@@ -86,7 +87,14 @@ namespace Warpinator
             mdns.Stop();
             CertServer.Stop();
             await grpcServer.ShutdownAsync();
+            Form1.UpdateUI();
             log.Info("-- Server stopped");
+        }
+
+        public async void Restart()
+        {
+            await Stop();
+            Start();
         }
 
         private void StartGrpcServer()
@@ -115,6 +123,9 @@ namespace Warpinator
                     log.Debug($"discovered NIC '{nic.Name}', id: {nic.Id}");
                 }
             };
+            sd.ServiceInstanceDiscovered += OnServiceInstanceDiscovered;
+            sd.ServiceInstanceShutdown += OnServiceInstanceShutdown;
+            mdns.AnswerReceived += OnAnswerReceived;
 
             mdns.Start();
             sd.QueryServiceInstances(SERVICE_TYPE);

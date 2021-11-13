@@ -33,14 +33,14 @@ namespace Warpinator
             this.txtRecvDir = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtGroupcode = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.numPort = new System.Windows.Forms.NumericUpDown();
+            this.comboInterfaces = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnRestart = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -49,7 +49,7 @@ namespace Warpinator
             this.btnOK = new System.Windows.Forms.Button();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -90,23 +90,24 @@ namespace Warpinator
             this.label2.TabIndex = 3;
             this.label2.Text = "Group code";
             // 
-            // textBox2
+            // txtGroupcode
             // 
-            this.textBox2.Location = new System.Drawing.Point(75, 19);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(128, 20);
-            this.textBox2.TabIndex = 4;
+            this.txtGroupcode.Location = new System.Drawing.Point(75, 19);
+            this.txtGroupcode.Name = "txtGroupcode";
+            this.txtGroupcode.PasswordChar = '*';
+            this.txtGroupcode.Size = new System.Drawing.Size(128, 20);
+            this.txtGroupcode.TabIndex = 4;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.numPort);
+            this.groupBox1.Controls.Add(this.comboInterfaces);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.btnRestart);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.txtGroupcode);
             this.groupBox1.Location = new System.Drawing.Point(12, 143);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(354, 136);
@@ -124,20 +125,36 @@ namespace Warpinator
             this.label5.Text = "Changing these settings requires the service to be restarted (running transfers w" +
     "ill fail)";
             // 
-            // numericUpDown1
+            // numPort
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(75, 45);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(128, 20);
-            this.numericUpDown1.TabIndex = 6;
+            this.numPort.Location = new System.Drawing.Point(75, 45);
+            this.numPort.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numPort.Minimum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.numPort.Name = "numPort";
+            this.numPort.Size = new System.Drawing.Size(128, 20);
+            this.numPort.TabIndex = 6;
+            this.numPort.Value = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
             // 
-            // comboBox1
+            // comboInterfaces
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(75, 71);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(230, 21);
-            this.comboBox1.TabIndex = 9;
+            this.comboInterfaces.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboInterfaces.FormattingEnabled = true;
+            this.comboInterfaces.Location = new System.Drawing.Point(75, 71);
+            this.comboInterfaces.Name = "comboInterfaces";
+            this.comboInterfaces.Size = new System.Drawing.Size(230, 21);
+            this.comboInterfaces.TabIndex = 9;
             // 
             // label4
             // 
@@ -157,16 +174,16 @@ namespace Warpinator
             this.label3.TabIndex = 6;
             this.label3.Text = "Port";
             // 
-            // button2
+            // btnRestart
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(273, 107);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Restart";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.BtnRestart_Click);
+            this.btnRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRestart.Location = new System.Drawing.Point(273, 107);
+            this.btnRestart.Name = "btnRestart";
+            this.btnRestart.Size = new System.Drawing.Size(75, 23);
+            this.btnRestart.TabIndex = 5;
+            this.btnRestart.Text = "Restart";
+            this.btnRestart.UseVisualStyleBackColor = true;
+            this.btnRestart.Click += new System.EventHandler(this.BtnRestart_Click);
             // 
             // checkBox1
             // 
@@ -264,7 +281,7 @@ namespace Warpinator
             this.Text = "Settings";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,14 +293,14 @@ namespace Warpinator
         private System.Windows.Forms.TextBox txtRecvDir;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtGroupcode;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.NumericUpDown numPort;
+        private System.Windows.Forms.ComboBox comboInterfaces;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;

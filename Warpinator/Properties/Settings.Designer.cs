@@ -46,5 +46,41 @@ namespace Warpinator.Properties {
                 this["UUID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string NetworkInterface {
+            get {
+                return ((string)(this["NetworkInterface"]));
+            }
+            set {
+                this["NetworkInterface"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("42000")]
+        public int Port {
+            get {
+                return ((int)(this["Port"]));
+            }
+            set {
+                this["Port"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Warpinator")]
+        public string GroupCode {
+            get {
+                return ((string)(this["GroupCode"]));
+            }
+            set {
+                this["GroupCode"] = value;
+            }
+        }
     }
 }

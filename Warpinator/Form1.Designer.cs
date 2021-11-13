@@ -32,7 +32,7 @@ namespace Warpinator
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblIP = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rescanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,7 +52,7 @@ namespace Warpinator
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblIP,
-            this.toolStripStatusLabel1});
+            this.lblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 403);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(457, 22);
@@ -65,12 +65,12 @@ namespace Warpinator
             this.lblIP.Size = new System.Drawing.Size(96, 17);
             this.lblIP.Text = "192.168.1.1 | WiFi";
             // 
-            // toolStripStatusLabel1
+            // lblStatus
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(346, 17);
-            this.toolStripStatusLabel1.Spring = true;
-            this.toolStripStatusLabel1.Text = "Service not running!";
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(315, 17);
+            this.lblStatus.Spring = true;
+            this.lblStatus.Text = "Service not running!";
             // 
             // menuStrip1
             // 
@@ -96,20 +96,20 @@ namespace Warpinator
             // rescanToolStripMenuItem
             // 
             this.rescanToolStripMenuItem.Name = "rescanToolStripMenuItem";
-            this.rescanToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rescanToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.rescanToolStripMenuItem.Text = "Rescan";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
@@ -203,7 +203,7 @@ namespace Warpinator
         private System.Windows.Forms.ToolStripMenuItem connectionIssuesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gitHubToolStripMenuItem;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
     }
 }
