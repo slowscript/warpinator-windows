@@ -26,16 +26,15 @@ namespace Warpinator
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            server.Remotes.Add("a", new Remote { DisplayName = "TEST", UserName = "test", Hostname = "PC1", Address = System.Net.IPAddress.Parse("192.168.1.1"), Port = 42000 });
+            //server.Remotes.Add("a", new Remote { DisplayName = "TEST", UserName = "test", Hostname = "PC1", Address = System.Net.IPAddress.Parse("192.168.1.1"), Port = 42000 });
 
-            DoUpdateUI();
             server.Start();
         }
 
-        private void OnFormClosed(object sender, FormClosedEventArgs e)
+        private async void OnFormClosed(object sender, FormClosedEventArgs e)
         {
             current = null;
-            server.Stop();
+            await server.Stop();
         }
 
         public static void UpdateUI()
@@ -83,5 +82,7 @@ namespace Warpinator
         }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e) => Close();
+        private void RescanToolStripMenuItem_Click(object sender, EventArgs e) => server.Rescan();
+        private void ReannounceToolStripMenuItem_Click(object sender, EventArgs e) => server.Reannounce();
     }
 }

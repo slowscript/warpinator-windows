@@ -97,6 +97,9 @@ namespace Warpinator
             Start();
         }
 
+        public void Rescan() => sd.QueryServiceInstances(SERVICE_TYPE);
+        public void Reannounce() => sd.Announce(serviceProfile);
+
         private void StartGrpcServer()
         {
             KeyCertificatePair kcp = Authenticator.GetKeyCertificatePair();
