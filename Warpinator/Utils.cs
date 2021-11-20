@@ -25,11 +25,13 @@ namespace Warpinator
             return Environment.MachineName;
         }
 
-        public static string GetLocalIPAddress()
+        public static IPAddress GetLocalIPAddress()
         {
-            var ip = Makaretu.Dns.MulticastService.GetLinkLocalAddresses().FirstOrDefault((i) => i.GetAddressBytes().Length == 4);
+            var ip = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) => i.Id == Server.current.SelectedInterface)?.GetIPProperties().UnicastAddresses
+                .FirstOrDefault((a) => a.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && a.Address.GetAddressBytes().Length == 4)?.Address ?? IPAddress.Loopback;
+            //var ip = Makaretu.Dns.MulticastService.GetLinkLocalAddresses().FirstOrDefault((i) => i.GetAddressBytes().Length == 4);
             Console.WriteLine("Got ip " + ip?.ToString());
-            return ip?.ToString();
+            return ip;
         }
 
         public static string BytesToHumanReadable(long _bytes)

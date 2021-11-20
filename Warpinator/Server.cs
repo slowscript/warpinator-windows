@@ -25,7 +25,6 @@ namespace Warpinator
         public ushort Port = 42000;
         public string UUID;
         public string ProfilePicture;
-        public bool AllowOverwrite;
         public bool NotifyIncoming;
         public bool Running = false;
         public string SelectedInterface;
@@ -37,6 +36,7 @@ namespace Warpinator
         readonly MulticastService mdns;
         ServiceProfile serviceProfile;
         readonly ConcurrentDictionary<string, ServiceRecord> mdnsServices = new ConcurrentDictionary<string, ServiceRecord>();
+        readonly ConcurrentDictionary<string, IPAddress> hostnameDict = new ConcurrentDictionary<string, IPAddress>();
         internal Properties.Settings settings = Properties.Settings.Default;
         Timer pingTimer = new Timer(10_000);
 
@@ -111,7 +111,7 @@ namespace Warpinator
             KeyCertificatePair kcp = Authenticator.GetKeyCertificatePair();
             grpcServer = new Grpc.Core.Server() { 
                 Services = { Warp.BindService(new GrpcService()) },
-                Ports = { new ServerPort(Utils.GetLocalIPAddress(), Port, new SslServerCredentials(new List<KeyCertificatePair>() { kcp })) }
+                Ports = { new ServerPort(Utils.GetLocalIPAddress().ToString(), Port, new SslServerCredentials(new List<KeyCertificatePair>() { kcp })) }
             };
             grpcServer.Start();
             log.Info("GRPC started");
@@ -139,11 +139,10 @@ namespace Warpinator
             mdns.Start();
             sd.QueryServiceInstances(SERVICE_TYPE);
 
-            serviceProfile = new ServiceProfile(UUID, SERVICE_TYPE, Port);
+            serviceProfile = new ServiceProfile(UUID, SERVICE_TYPE, Port, new List<IPAddress> { Utils.GetLocalIPAddress() });
             serviceProfile.AddProperty("hostname", Utils.GetHostname());
             serviceProfile.AddProperty("type", flush ? "flush" : "real");
             sd.Advertise(serviceProfile);
-            sd.Announce(serviceProfile);
         }
 
         private void PingRemotes()
@@ -184,6 +183,8 @@ namespace Warpinator
                 if (!mdnsServices.ContainsKey(server.CanonicalName))
                     mdnsServices.TryAdd(server.CanonicalName, new ServiceRecord { FullName = server.Name.ToString() });
                 mdnsServices[server.CanonicalName].Hostname = server.Target.ToString();
+                if (hostnameDict.TryGetValue(server.Target.ToString(), out IPAddress addr))
+                    mdnsServices[server.CanonicalName].Address = addr;
                 mdnsServices[server.CanonicalName].Port = server.Port;
                 mdns.SendQuery(server.Target, type: DnsType.A);
             }
@@ -194,6 +195,7 @@ namespace Warpinator
                 if (address.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
                     log.Debug($"  Hostname '{address.Name}' resolves to {address.Address}");
+                    hostnameDict.AddOrUpdate(address.Name.ToString(), address.Address, (a, b) => address.Address);
                     var svc = mdnsServices.Values.Where((s) => (s.Hostname == address.Name.ToString())).FirstOrDefault();
                     if (svc != null)
                         svc.Address = address.Address;
@@ -216,12 +218,12 @@ namespace Warpinator
 
         private void OnServiceResolved(ServiceRecord svc)
         {
-            svc.resolved = true; //TODO: support svc being updated
             string name = svc.FullName.Split('.')[0];
             log.Debug("Resolved " + name);
             if (name == UUID)
             {
                 log.Debug("That's me - ignoring...");
+                svc.resolved = true;
                 return;
             }
 
@@ -234,6 +236,7 @@ namespace Warpinator
                 return;
             }
 
+            svc.resolved = true; //TODO: support svc being updated
             if (Remotes.ContainsKey(name))
             {
                 Remote r = Remotes[name];
@@ -260,10 +263,9 @@ namespace Warpinator
 
             Remotes.Add(name, remote);
             Form1.UpdateUI();
-            remote.Connect(); //TODO: Maybe new thread???
+            remote.Connect();
         }
 
-        //TODO: Have a separaet hostname map (when that information comes first
         private class ServiceRecord
         {
             public string FullName;

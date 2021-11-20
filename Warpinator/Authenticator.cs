@@ -134,20 +134,21 @@ namespace Warpinator
             {
                 var pair1 = LoadKeyCertificatePair();
                 var cert = new X509CertificateParser().ReadCertificate(serverCertificate);
-                var l = (ArrayList)cert.GetSubjectAlternativeNames();
-                var ipHexStr = (string)((ArrayList)l[0])[1];
-                long ipNetInt = Convert.ToInt64(ipHexStr.Substring(1), 16);
-                var addr = new IPAddress(IPAddress.NetworkToHostOrder(ipNetInt) >> 32);
                 try
                 {
+                    var l = (ArrayList)cert.GetSubjectAlternativeNames();
+                    var ipHexStr = (string)((ArrayList)l[0])[1];
+                    long ipNetInt = Convert.ToInt64(ipHexStr.Substring(1), 16);
+                    var addr = new IPAddress(IPAddress.NetworkToHostOrder(ipNetInt) >> 32);
+                    
                     cert.CheckValidity(); //Throws if invalid
-                    if (addr.ToString() != Utils.GetLocalIPAddress())
+                    if (addr != Utils.GetLocalIPAddress())
                         throw new Org.BouncyCastle.Security.Certificates.CertificateExpiredException();
                     return pair1;
                 } catch {}
             }
 
-            KeyCertificatePair pair = CreateKeyCertificatePair(Utils.GetHostname(), Utils.GetLocalIPAddress());
+            KeyCertificatePair pair = CreateKeyCertificatePair(Utils.GetHostname(), Utils.GetLocalIPAddress().ToString());
             log.Debug(Path.Combine(Utils.GetCertDir(), CertificateFileName));
             Directory.CreateDirectory(Utils.GetCertDir());
             File.WriteAllText(Path.Combine(Utils.GetCertDir(), CertificateFileName), pair.CertificateChain);
