@@ -145,7 +145,7 @@ namespace Warpinator
                     {
                         RelativePath = p.Remove(0,parentLen+1),
                         FileType = (int)FileType.DIRECTORY,
-                        FileMode = 0644
+                        FileMode = 493 //0755, C# doesn't have octal literals :(
                         //Time = new FileTime() { Mtime = }
                     };
                     await stream.WriteAsync(chunk);
@@ -164,7 +164,7 @@ namespace Warpinator
                         {
                             RelativePath = relPath,
                             FileType = (int)FileType.FILE,
-                            FileMode = 0644,
+                            FileMode = 420, //0644, C# doesn't have octal literals :(
                             Chunk = Google.Protobuf.ByteString.CopyFrom(buf, 0, r)
                             //Time = new FileTime() { Mtime = }
                         };

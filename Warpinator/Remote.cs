@@ -236,10 +236,21 @@ namespace Warpinator
             int tries = 0;
             while (tries < 10)
             {
-                var haveDuplex = await client.CheckDuplexConnectionAsync(new LookupName() {
-                    Id = Server.current.UUID, ReadableName = Server.current.Hostname });
-                if (haveDuplex.Response)
-                    return true;
+                try
+                {
+                    var haveDuplex = await client.CheckDuplexConnectionAsync(new LookupName()
+                    {
+                        Id = Server.current.UUID,
+                        ReadableName = Server.current.Hostname
+                    });
+                    if (haveDuplex.Response)
+                        return true;
+                }
+                catch (RpcException e)
+                {
+                    log.Error("Connection interrupted while waiting for duplex", e);
+                    return false;
+                }
                 log.Trace($"Duplex check attempt {tries}: No duplex");
                 await Task.Delay(3000);
                 tries++;

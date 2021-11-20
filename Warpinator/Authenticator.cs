@@ -97,9 +97,10 @@ namespace Warpinator
             byte[] nonce = new byte[NaCl.XSalsa20Poly1305.NonceLength];
             using (var rng = RandomNumberGenerator.Create())
                 rng.GetBytes(nonce);
-                     
-            byte[] result = new byte[nonce.Length + serverCertificate.Length + NaCl.XSalsa20Poly1305.TagLength];
-            box.Encrypt(result, nonce.Length, serverCertificate, 0, serverCertificate.Length, nonce, 0);
+
+            var data = File.ReadAllBytes(Path.Combine(Utils.GetCertDir(), ".self.pem"));
+            byte[] result = new byte[nonce.Length + data.Length + NaCl.XSalsa20Poly1305.TagLength];
+            box.Encrypt(result, nonce.Length, data, 0, data.Length, nonce, 0);
 
             nonce.CopyTo(result, 0);
             return result;

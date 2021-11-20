@@ -182,9 +182,10 @@ namespace Warpinator
             {
                 log.Debug($"  Service '{server.Name}' has hostname '{server.Target} and port {server.Port}'");
                 if (!mdnsServices.ContainsKey(server.CanonicalName))
-                    mdnsServices.TryAdd(server.CanonicalName, new ServiceRecord { FullName = server.CanonicalName });
+                    mdnsServices.TryAdd(server.CanonicalName, new ServiceRecord { FullName = server.Name.ToString() });
                 mdnsServices[server.CanonicalName].Hostname = server.Target.ToString();
                 mdnsServices[server.CanonicalName].Port = server.Port;
+                mdns.SendQuery(server.Target, type: DnsType.A);
             }
 
             var addresses = e.Message.Answers.OfType<AddressRecord>();
@@ -193,7 +194,7 @@ namespace Warpinator
                 if (address.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
                     log.Debug($"  Hostname '{address.Name}' resolves to {address.Address}");
-                    var svc = mdnsServices.Values.Where((s) => (s.Hostname == address.CanonicalName)).FirstOrDefault();
+                    var svc = mdnsServices.Values.Where((s) => (s.Hostname == address.Name.ToString())).FirstOrDefault();
                     if (svc != null)
                         svc.Address = address.Address;
                 }

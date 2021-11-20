@@ -84,6 +84,7 @@ namespace Warpinator
         }
         public override async Task StartTransfer(OpInfo request, IServerStreamWriter<FileChunk> responseStream, ServerCallContext context)
         {
+            log.Debug("Transfer was accepted");
             var t = GetTransfer(request);
             if (t != null)
                 await t.StartSending(responseStream);
@@ -91,6 +92,7 @@ namespace Warpinator
 
         public override Task<VoidType> StopTransfer(StopInfo request, ServerCallContext context)
         {
+            log.Debug($"Transfer stopped by the other side, error: {request.Error}");
             var t = GetTransfer(request.Info);
             if (t != null)
                 t.OnStopped(request.Error);
