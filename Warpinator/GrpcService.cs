@@ -64,8 +64,7 @@ namespace Warpinator
                 FileCount = request.Count,
                 SingleMIME = request.MimeIfSingle,
                 SingleName = request.NameIfSingle,
-                TopDirBaseNames = request.TopDirBasenames.ToList(),
-                id = r.Transfers.Count
+                TopDirBaseNames = request.TopDirBasenames.ToList()
             };
             r.Transfers.Add(t);
             t.PrepareReceive();

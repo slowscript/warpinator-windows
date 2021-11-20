@@ -40,7 +40,7 @@ namespace Warpinator
         private string currentRelativePath;
         private string currentPath;
         private bool cancelled = false;
-        internal int id;
+        public event EventHandler TransferUpdated;
 
         public long BytesTransferred;
         public long BytesPerSecond;
@@ -63,18 +63,18 @@ namespace Warpinator
             if (Direction == TransferDirection.RECEIVE)
                 StopReceiving();
             else StopSending();
-            UpdateUI();
+            OnTransferUpdated();
         }
 
         public void MakeDeclined()
         {
             Status = TransferStatus.DECLINED;
-            UpdateUI();
+            OnTransferUpdated();
         }
 
-        public void UpdateUI()
+        public void OnTransferUpdated()
         {
-            Server.current.Remotes[RemoteUUID].UpdateTransfer(id);
+            TransferUpdated?.Invoke(this, null);
         }
 
         public string GetRemainingTime()
@@ -130,7 +130,7 @@ namespace Warpinator
             RealStartTime = DateTime.Now.Ticks;
             BytesTransferred = 0;
             cancelled = false;
-            UpdateUI();
+            OnTransferUpdated();
 
             string f1 = FilesToSend[0];
             int parentLen = f1.TrimEnd(Path.DirectorySeparatorChar).LastIndexOf(Path.DirectorySeparatorChar);
@@ -155,7 +155,8 @@ namespace Warpinator
                     string relPath = p.Remove(0, parentLen + 1);
 
                     var fs = File.OpenRead(p);
-                    long read = 0; long length = fs.Length;
+                    long read = 0;
+                    long length = fs.Length;
                     byte[] buf = new byte[CHUNK_SIZE];
                     do //Send at least one chunk for empty files
                     {
@@ -174,14 +175,14 @@ namespace Warpinator
                         long now = DateTime.Now.Ticks;
                         BytesPerSecond = (long)(r / ((double)(now - lastTicks) / TimeSpan.TicksPerSecond));
                         lastTicks = now;
-                        UpdateUI();
+                        OnTransferUpdated();
                     } while (read < length && !cancelled);
                 }
             }
             if (!cancelled)
             {
                 Status = TransferStatus.FINISHED;
-                UpdateUI();
+                OnTransferUpdated();
             }
         }
 
@@ -242,6 +243,7 @@ namespace Warpinator
             }
 
             Server.current.Remotes[RemoteUUID].UpdateTransfers();
+            Form1.OnIncomingTransfer(this);
 
             if (Properties.Settings.Default.AutoAccept)
                 StartReceiving();
@@ -252,7 +254,7 @@ namespace Warpinator
             log.Info("Transfer accepted");
             Status = TransferStatus.TRANSFERRING;
             RealStartTime = DateTime.Now.Ticks;
-            UpdateUI();
+            OnTransferUpdated();
             Server.current.Remotes[RemoteUUID].StartReceiveTransfer(this);
         }
 
@@ -317,7 +319,7 @@ namespace Warpinator
             long now = DateTime.Now.Ticks;
             BytesPerSecond = (long)(chunkSize / ((double)(now - lastTicks) / TimeSpan.TicksPerSecond));
             lastTicks = now;
-            UpdateUI();
+            OnTransferUpdated();
             return Status == TransferStatus.TRANSFERRING;
         }
 
@@ -326,7 +328,7 @@ namespace Warpinator
             log.Debug("Finalizing transfer");
             Status = TransferStatus.FINISHED; //TODO: Finish with errors
             CloseStream();
-            UpdateUI();
+            OnTransferUpdated();
         }
 
         private void StopReceiving()

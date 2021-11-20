@@ -57,12 +57,7 @@ namespace Warpinator
                 p.Show();
             }
         }
-
-        internal void UpdateTransfer(int i)
-        {
-            ((TransferPanel)flowLayoutTransfers.Controls[i]).UpdateControls();
-        }
-        
+     
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog
@@ -102,8 +97,7 @@ namespace Warpinator
             Transfer t = new Transfer()
             {
                 FilesToSend = selectedFiles.ToList(),
-                RemoteUUID = remote.UUID,
-                id = remote.Transfers.Count
+                RemoteUUID = remote.UUID
             };
             t.PrepareSend();
             remote.Transfers.Add(t);

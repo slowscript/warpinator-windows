@@ -171,7 +171,7 @@ namespace Warpinator
                     //t.errors.add
                     t.Status = Transfer.TransferStatus.FAILED;
                 }
-                t.UpdateUI();
+                t.OnTransferUpdated();
             }
         }
 
@@ -223,12 +223,6 @@ namespace Warpinator
         {
             if (form != null)
                 form.Invoke(new Action(() => form.UpdateTransfers()));
-        }
-
-        internal void UpdateTransfer(int i)
-        {
-            if (form != null)
-                form.Invoke(new Action(() => form.UpdateTransfer(i)));
         }
 
         private async Task<bool> WaitForDuplex()

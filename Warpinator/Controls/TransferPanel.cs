@@ -15,9 +15,22 @@ namespace Warpinator.Controls
             if (t.FileCount == 1)
                 imgFile.Image = Utils.GetFileIcon(t.SingleName, true).ToBitmap();
             UpdateControls();
+            transfer.TransferUpdated += OnTransferUpdated;
+            Disposed += OnDisposed;
         }
 
-        public void UpdateControls()
+        private void OnDisposed(object sender, EventArgs e)
+        {
+            Disposed -= OnDisposed;
+            transfer.TransferUpdated -= OnTransferUpdated;
+        }
+
+        private void OnTransferUpdated(object s, EventArgs a)
+        {
+            Invoke(new Action(() => UpdateControls()));
+        }
+
+        private void UpdateControls()
         {
             btnAccept.Visible = (transfer.Status == Transfer.TransferStatus.WAITING_PERMISSION) && (transfer.Direction == Transfer.TransferDirection.RECEIVE);
             btnDecline.Visible = transfer.Status == Transfer.TransferStatus.WAITING_PERMISSION;
