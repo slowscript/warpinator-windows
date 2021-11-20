@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,17 @@ namespace Warpinator
     {
         readonly Server server;
         static Form1 current;
+        bool quit = false;
 
         public Form1()
         {
             current = this;
             InitializeComponent();
-            server = new Server();
             flowLayoutPanel.ClientSizeChanged += FlowLayoutPanel_ClientSizeChanged;
+            notifyIcon.DoubleClick += (s, e) => Show();
+            notifyIcon.Icon = Properties.Resources.warplogo;
+            
+            server = new Server();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,10 +36,25 @@ namespace Warpinator
             server.Start();
         }
 
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Properties.Settings.Default.RunInBackground && !quit)
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
+        }
+
         private async void OnFormClosed(object sender, FormClosedEventArgs e)
         {
             current = null;
             await server.Stop();
+        }
+
+        private void Quit()
+        {
+            quit = true;
+            Close();
         }
 
         public static void UpdateUI()
@@ -63,6 +83,25 @@ namespace Warpinator
             lblStatus.Text = server.Running ? "Service is running" : "Service not running!";
         }
 
+        public static void OnIncomingTransfer(Transfer t)
+        {
+            if (Properties.Settings.Default.NotifyIncoming && current != null)
+                current.Invoke(new Action(() => current.ShowTransferBaloon(t)));
+        }
+
+        EventHandler ballonClickHandler;
+        private void ShowTransferBaloon(Transfer t)
+        {
+            notifyIcon.BalloonTipTitle = "Incoming transfer from " + server.Remotes[t.RemoteUUID].Hostname;
+            notifyIcon.BalloonTipText = (t.FileCount == 1 ? t.SingleName : t.FileCount + " files") + " (" + Utils.BytesToHumanReadable((long)t.TotalSize) + ")";
+
+            if (ballonClickHandler != null)
+                notifyIcon.BalloonTipClicked -= ballonClickHandler;
+            ballonClickHandler = (a, b) => server.Remotes[t.RemoteUUID].OpenWindow();
+            notifyIcon.BalloonTipClicked += ballonClickHandler;
+            notifyIcon.ShowBalloonTip(5000);
+        }
+
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutBox().ShowDialog();
@@ -81,8 +120,21 @@ namespace Warpinator
             new SettingsForm().Show();
         }
 
-        private void QuitToolStripMenuItem_Click(object sender, EventArgs e) => Close();
+        private void QuitToolStripMenuItem_Click(object sender, EventArgs e) => Quit();
         private void RescanToolStripMenuItem_Click(object sender, EventArgs e) => server.Rescan();
         private void ReannounceToolStripMenuItem_Click(object sender, EventArgs e) => server.Reannounce();
+        private void GitHubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo("https://github.com/slowscript/warpinator-windows"));
+            } catch
+            {
+                MessageBox.Show("Could not open web browser. Use this URL: https://github.com/slowscript/warpinator-windows", "Info");
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e) => this.Show();
+        private void quitToolStripMenuItem1_Click(object sender, EventArgs e) => Quit();
     }
 }

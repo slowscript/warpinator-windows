@@ -94,5 +94,41 @@ namespace Warpinator.Properties {
                 this["AllowOverwrite"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoAccept {
+            get {
+                return ((bool)(this["AutoAccept"]));
+            }
+            set {
+                this["AutoAccept"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RunInBackground {
+            get {
+                return ((bool)(this["RunInBackground"]));
+            }
+            set {
+                this["RunInBackground"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool NotifyIncoming {
+            get {
+                return ((bool)(this["NotifyIncoming"]));
+            }
+            set {
+                this["NotifyIncoming"] = value;
+            }
+        }
     }
 }

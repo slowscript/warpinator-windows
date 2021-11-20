@@ -26,7 +26,10 @@ namespace Warpinator
             txtRecvDir.Text = Properties.Settings.Default.DownloadDir;
             txtGroupcode.Text = Properties.Settings.Default.GroupCode;
             numPort.Value = Properties.Settings.Default.Port;
+            chkNotify.Checked = Properties.Settings.Default.NotifyIncoming;
             chkOverwrite.Checked = Properties.Settings.Default.AllowOverwrite;
+            chkAutoAccept.Checked = Properties.Settings.Default.AutoAccept;
+            chkBackground.Checked = Properties.Settings.Default.RunInBackground;
 
             var ifaces = MulticastService.GetNetworkInterfaces();
             ifaceDict.Clear();
@@ -66,8 +69,11 @@ namespace Warpinator
                 Properties.Settings.Default.DownloadDir = txtRecvDir.Text;
             else
                 MessageBox.Show("Selected directory does not exist, therefore this setting will not change", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            Properties.Settings.Default.NotifyIncoming = chkNotify.Checked;
             Properties.Settings.Default.AllowOverwrite = chkOverwrite.Checked;
-            
+            Properties.Settings.Default.AutoAccept = chkAutoAccept.Checked;
+            Properties.Settings.Default.RunInBackground = chkBackground.Checked;
+
             Properties.Settings.Default.Save();
         }
 

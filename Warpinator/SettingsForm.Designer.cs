@@ -41,13 +41,13 @@ namespace Warpinator
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnRestart = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkNotify = new System.Windows.Forms.CheckBox();
             this.chkOverwrite = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.chkAutoAccept = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.chkBackground = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
@@ -185,15 +185,15 @@ namespace Warpinator
             this.btnRestart.UseVisualStyleBackColor = true;
             this.btnRestart.Click += new System.EventHandler(this.BtnRestart_Click);
             // 
-            // checkBox1
+            // chkNotify
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 51);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(171, 17);
-            this.checkBox1.TabIndex = 6;
-            this.checkBox1.Text = "Notify about incoming transfers";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkNotify.AutoSize = true;
+            this.chkNotify.Location = new System.Drawing.Point(12, 51);
+            this.chkNotify.Name = "chkNotify";
+            this.chkNotify.Size = new System.Drawing.Size(171, 17);
+            this.chkNotify.TabIndex = 6;
+            this.chkNotify.Text = "Notify about incoming transfers";
+            this.chkNotify.UseVisualStyleBackColor = true;
             // 
             // chkOverwrite
             // 
@@ -206,15 +206,15 @@ namespace Warpinator
     "es will be renamed";
             this.chkOverwrite.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // chkAutoAccept
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(12, 97);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(167, 17);
-            this.checkBox3.TabIndex = 8;
-            this.checkBox3.Text = "Automatically accept transfers";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.chkAutoAccept.AutoSize = true;
+            this.chkAutoAccept.Location = new System.Drawing.Point(12, 97);
+            this.chkAutoAccept.Name = "chkAutoAccept";
+            this.chkAutoAccept.Size = new System.Drawing.Size(167, 17);
+            this.chkAutoAccept.TabIndex = 8;
+            this.chkAutoAccept.Text = "Automatically accept transfers";
+            this.chkAutoAccept.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
@@ -249,28 +249,28 @@ namespace Warpinator
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
-            // checkBox4
+            // chkBackground
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(12, 120);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(95, 17);
-            this.checkBox4.TabIndex = 12;
-            this.checkBox4.Text = "Run in taskbar";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.chkBackground.AutoSize = true;
+            this.chkBackground.Location = new System.Drawing.Point(12, 120);
+            this.chkBackground.Name = "chkBackground";
+            this.chkBackground.Size = new System.Drawing.Size(112, 17);
+            this.chkBackground.TabIndex = 12;
+            this.chkBackground.Text = "Run in system tray";
+            this.chkBackground.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(497, 323);
-            this.Controls.Add(this.checkBox4);
+            this.Controls.Add(this.chkBackground);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.chkAutoAccept);
             this.Controls.Add(this.chkOverwrite);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.chkNotify);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtRecvDir);
@@ -301,12 +301,12 @@ namespace Warpinator
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnRestart;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkNotify;
         private System.Windows.Forms.CheckBox chkOverwrite;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox chkAutoAccept;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox chkBackground;
     }
 }

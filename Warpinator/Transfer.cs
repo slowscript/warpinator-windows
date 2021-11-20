@@ -243,7 +243,8 @@ namespace Warpinator
 
             Server.current.Remotes[RemoteUUID].UpdateTransfers();
 
-            //if (Autoaccept) StartReceiving();
+            if (Properties.Settings.Default.AutoAccept)
+                StartReceiving();
         }
 
         public void StartReceiving()
