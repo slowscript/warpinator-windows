@@ -39,6 +39,7 @@ namespace Warpinator
         private List<string> ResolvedFiles;
         private string currentRelativePath;
         private string currentPath;
+        private DateTime? currentFileDateTime;
         private bool cancelled = false;
         public event EventHandler TransferUpdated;
 
@@ -146,7 +147,6 @@ namespace Warpinator
                         RelativePath = p.Remove(0,parentLen+1),
                         FileType = (int)FileType.DIRECTORY,
                         FileMode = 493 //0755, C# doesn't have octal literals :(
-                        //Time = new FileTime() { Mtime = }
                     };
                     await stream.WriteAsync(chunk);
                 }
@@ -158,16 +158,27 @@ namespace Warpinator
                     long read = 0;
                     long length = fs.Length;
                     byte[] buf = new byte[CHUNK_SIZE];
+                    bool firstChunk = true;
                     do //Send at least one chunk for empty files
                     {
                         int r = fs.Read(buf, 0, CHUNK_SIZE);
+                        FileTime ftime = null;
+                        if (firstChunk)
+                        {
+                            firstChunk = false;
+                            ftime = new FileTime() {
+                                Mtime = (ulong)new DateTimeOffset(File.GetLastWriteTime(p)).ToUnixTimeSeconds(),
+                                MtimeUsec = (uint)File.GetLastWriteTime(p).Millisecond * 1000
+                            };
+                        }
+
                         var chunk = new FileChunk()
                         {
                             RelativePath = relPath,
                             FileType = (int)FileType.FILE,
                             FileMode = 420, //0644, C# doesn't have octal literals :(
-                            Chunk = Google.Protobuf.ByteString.CopyFrom(buf, 0, r)
-                            //Time = new FileTime() { Mtime = }
+                            Chunk = Google.Protobuf.ByteString.CopyFrom(buf, 0, r),
+                            Time = ftime
                         };
                         await stream.WriteAsync(chunk);
                         read += r;
@@ -272,6 +283,9 @@ namespace Warpinator
             {
                 // End of file
                 CloseStream();
+                if (currentFileDateTime.HasValue)
+                    File.SetLastWriteTime(currentPath, currentFileDateTime.Value);
+                currentFileDateTime = null;
                 // Begin new file
                 currentRelativePath = chunk.RelativePath;
                 string sanitizedPath = Utils.SanitizePath(currentRelativePath);
@@ -287,6 +301,8 @@ namespace Warpinator
                 {
                     if (File.Exists(currentPath))
                         currentPath = HandleFileExists(currentPath);
+                    if (chunk.Time != null)
+                        currentFileDateTime = DateTimeOffset.FromUnixTimeSeconds((long)chunk.Time.Mtime).LocalDateTime;
                     try
                     {
                         currentStream = File.Create(currentPath);
@@ -328,6 +344,8 @@ namespace Warpinator
             log.Debug("Finalizing transfer");
             Status = TransferStatus.FINISHED; //TODO: Finish with errors
             CloseStream();
+            if (currentFileDateTime.HasValue)
+                File.SetLastWriteTime(currentPath, currentFileDateTime.Value);
             OnTransferUpdated();
         }
 
