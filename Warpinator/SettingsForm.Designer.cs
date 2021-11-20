@@ -42,7 +42,7 @@ namespace Warpinator
             this.label3 = new System.Windows.Forms.Label();
             this.btnRestart = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.chkOverwrite = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApply = new System.Windows.Forms.Button();
@@ -195,16 +195,16 @@ namespace Warpinator
             this.checkBox1.Text = "Notify about incoming transfers";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // chkOverwrite
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(12, 74);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(482, 17);
-            this.checkBox2.TabIndex = 7;
-            this.checkBox2.Text = "Allow overwriting (a warning will be shown beforehand), otherwise conflicting fil" +
+            this.chkOverwrite.AutoSize = true;
+            this.chkOverwrite.Location = new System.Drawing.Point(12, 74);
+            this.chkOverwrite.Name = "chkOverwrite";
+            this.chkOverwrite.Size = new System.Drawing.Size(482, 17);
+            this.chkOverwrite.TabIndex = 7;
+            this.chkOverwrite.Text = "Allow overwriting (a warning will be shown beforehand), otherwise conflicting fil" +
     "es will be renamed";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chkOverwrite.UseVisualStyleBackColor = true;
             // 
             // checkBox3
             // 
@@ -269,7 +269,7 @@ namespace Warpinator
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.chkOverwrite);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
@@ -302,7 +302,7 @@ namespace Warpinator
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox chkOverwrite;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnApply;

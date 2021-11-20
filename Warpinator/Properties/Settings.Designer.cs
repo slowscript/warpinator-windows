@@ -82,5 +82,17 @@ namespace Warpinator.Properties {
                 this["GroupCode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowOverwrite {
+            get {
+                return ((bool)(this["AllowOverwrite"]));
+            }
+            set {
+                this["AllowOverwrite"] = value;
+            }
+        }
     }
 }

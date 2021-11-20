@@ -27,10 +27,18 @@ namespace Warpinator.Controls
                 (transfer.Status == Transfer.TransferStatus.FAILED || transfer.Status == Transfer.TransferStatus.STOPPED);
             
             lblFiles.Text = (transfer.FileCount == 1 ? transfer.SingleName : transfer.FileCount + " files") + " (" + Utils.BytesToHumanReadable((long)transfer.TotalSize) + ")";
-            lblProgress.Text = transfer.Status == Transfer.TransferStatus.TRANSFERRING ?
-                Utils.BytesToHumanReadable(transfer.BytesTransferred) + " / " + Utils.BytesToHumanReadable((long)transfer.TotalSize) + " (" +
-                Utils.BytesToHumanReadable(transfer.BytesPerSecond) + "/s, " + transfer.GetRemainingTime() + " remaining)"
-                : transfer.Status.ToString();
+            // Status label
+            if (transfer.Status == Transfer.TransferStatus.WAITING_PERMISSION)
+            {
+                lblProgress.Text = "Waiting for permission";
+                if (transfer.OverwriteWarning)
+                    lblProgress.Text += " (Files may be overwritten!)";
+            }
+            else if (transfer.Status == Transfer.TransferStatus.TRANSFERRING)
+                lblProgress.Text = Utils.BytesToHumanReadable(transfer.BytesTransferred) + " / " + Utils.BytesToHumanReadable((long)transfer.TotalSize) + " (" +
+                Utils.BytesToHumanReadable(transfer.BytesPerSecond) + "/s, " + transfer.GetRemainingTime() + " remaining)";
+            else
+                lblProgress.Text = transfer.Status.ToString();
             progressBar.Value = (int)(transfer.Progress * 100);
         }
 

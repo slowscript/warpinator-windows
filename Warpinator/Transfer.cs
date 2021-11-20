@@ -228,6 +228,18 @@ namespace Warpinator
             //TODO: Check enough space
 
             //Check if will overwrite
+            if (Properties.Settings.Default.AllowOverwrite)
+            {
+                foreach (string p in TopDirBaseNames)
+                {
+                    var path = Path.Combine(Properties.Settings.Default.DownloadDir, Utils.SanitizePath(p));
+                    if (File.Exists(path) || Directory.Exists(path))
+                    {
+                        OverwriteWarning = true;
+                        break;
+                    }
+                }
+            }
 
             Server.current.Remotes[RemoteUUID].UpdateTransfers();
 
@@ -339,10 +351,27 @@ namespace Warpinator
             }
         }
 
-        private string HandleFileExists(string fileName)
+        private string HandleFileExists(string path)
         {
-            //TODO: Implement this
-            return fileName;
+            if (Properties.Settings.Default.AllowOverwrite)
+            {
+                log.Trace("Overwriting..");
+                File.Delete(path);
+            }
+            else
+            {
+                var dir = Path.GetDirectoryName(path);
+                var file = Path.GetFileNameWithoutExtension(path);
+                var ext = Path.GetExtension(path);
+                int i = 2;
+                do
+                {
+                    path = Path.Combine(dir, $"{file} ({i}){ext}");
+                    i++;
+                } while (File.Exists(path));
+                log.Trace("New path: " + path);
+            }
+            return path;
         }
 
         private void CloseStream()

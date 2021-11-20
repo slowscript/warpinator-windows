@@ -17,5 +17,8 @@
     <Setting Name="GroupCode" Type="System.String" Scope="User">
       <Value Profile="(Default)">Warpinator</Value>
     </Setting>
+    <Setting Name="AllowOverwrite" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
