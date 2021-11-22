@@ -50,6 +50,8 @@ namespace Warpinator
             this.notifyIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRescan = new System.Windows.Forms.Button();
+            this.lblNoDevicesFound = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.notifyIconMenu.SuspendLayout();
@@ -175,6 +177,7 @@ namespace Warpinator
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.flowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel.Location = new System.Drawing.Point(16, 48);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
@@ -194,42 +197,67 @@ namespace Warpinator
             this.openToolStripMenuItem,
             this.quitToolStripMenuItem1});
             this.notifyIconMenu.Name = "notifyIconMenu";
-            this.notifyIconMenu.Size = new System.Drawing.Size(181, 70);
+            this.notifyIconMenu.Size = new System.Drawing.Size(104, 48);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem1
             // 
             this.quitToolStripMenuItem1.Name = "quitToolStripMenuItem1";
-            this.quitToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
             this.quitToolStripMenuItem1.Text = "Quit";
             this.quitToolStripMenuItem1.Click += new System.EventHandler(this.quitToolStripMenuItem1_Click);
+            // 
+            // btnRescan
+            // 
+            this.btnRescan.Location = new System.Drawing.Point(20, 70);
+            this.btnRescan.Name = "btnRescan";
+            this.btnRescan.Size = new System.Drawing.Size(75, 23);
+            this.btnRescan.TabIndex = 0;
+            this.btnRescan.Text = "Rescan";
+            this.btnRescan.UseVisualStyleBackColor = true;
+            this.btnRescan.Click += new System.EventHandler(this.RescanToolStripMenuItem_Click);
+            // 
+            // lblNoDevicesFound
+            // 
+            this.lblNoDevicesFound.AutoSize = true;
+            this.lblNoDevicesFound.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblNoDevicesFound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblNoDevicesFound.Location = new System.Drawing.Point(20, 50);
+            this.lblNoDevicesFound.Name = "lblNoDevicesFound";
+            this.lblNoDevicesFound.Size = new System.Drawing.Size(118, 17);
+            this.lblNoDevicesFound.TabIndex = 4;
+            this.lblNoDevicesFound.Text = "No devices found";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 425);
+            this.Controls.Add(this.lblNoDevicesFound);
+            this.Controls.Add(this.btnRescan);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(280, 180);
             this.Name = "Form1";
             this.Text = "Warpinator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OnFormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.Form1_Show);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.notifyIconMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,6 +284,8 @@ namespace Warpinator
         private System.Windows.Forms.ContextMenuStrip notifyIconMenu;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem1;
+        private System.Windows.Forms.Button btnRescan;
+        private System.Windows.Forms.Label lblNoDevicesFound;
     }
 }
 

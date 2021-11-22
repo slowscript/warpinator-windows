@@ -15,6 +15,7 @@ namespace Warpinator
     public partial class Form1 : Form
     {
         readonly Server server;
+        readonly Timer rescanTimer = new Timer();
         static Form1 current;
         bool quit = false;
 
@@ -25,11 +26,14 @@ namespace Warpinator
             flowLayoutPanel.ClientSizeChanged += FlowLayoutPanel_ClientSizeChanged;
             notifyIcon.DoubleClick += (s, e) => Show();
             notifyIcon.Icon = Properties.Resources.warplogo;
-            
+            rescanTimer.Interval = 2000;
+            rescanTimer.Tick += (s, e) => {
+                btnRescan.Enabled = true; rescanToolStripMenuItem.Enabled = true; rescanTimer.Stop();
+            };
             server = new Server();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Show(object sender, EventArgs e)
         {
             //server.Remotes.Add("a", new Remote { DisplayName = "TEST", UserName = "test", Hostname = "PC1", Address = System.Net.IPAddress.Parse("192.168.1.1"), Port = 42000 });
 
@@ -74,7 +78,9 @@ namespace Warpinator
                 btn.Width = flowLayoutPanel.ClientSize.Width - 10;
                 btn.Show();
             }
-            
+            lblNoDevicesFound.Visible = server.Remotes.Count == 0;
+            btnRescan.Visible = server.Remotes.Count == 0;
+
             string iface = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) => i.Id == server.SelectedInterface)?.Name ?? "Selected interface unavailable";
             if (String.IsNullOrEmpty(server.SelectedInterface))
                 iface = "Any";
@@ -121,7 +127,13 @@ namespace Warpinator
         }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e) => Quit();
-        private void RescanToolStripMenuItem_Click(object sender, EventArgs e) => server.Rescan();
+        private void RescanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            server.Rescan();
+            btnRescan.Enabled = false;
+            rescanToolStripMenuItem.Enabled = false;
+            rescanTimer.Start();
+        }
         private void ReannounceToolStripMenuItem_Click(object sender, EventArgs e) => server.Reannounce();
         private void GitHubToolStripMenuItem_Click(object sender, EventArgs e)
         {
