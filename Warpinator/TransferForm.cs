@@ -123,5 +123,33 @@ namespace Warpinator
         {
             remote.Connect();
         }
+
+        private void DropTargets_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void FlowLayoutTransfers_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var data = (string[])e.Data.GetData(DataFormats.FileDrop);
+                var bak = selectedFiles;
+                selectedFiles = data;
+                BtnSend_Click(null, null);
+                selectedFiles = bak;
+            }
+        }
+
+        private void TxtFile_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                selectedFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
+                txtFile.Text = String.Join("; ", selectedFiles.Select((f) => Path.GetFileName(f)));
+            }
+        }
     }
 }

@@ -106,6 +106,7 @@ namespace Warpinator
             // 
             // flowLayoutTransfers
             // 
+            this.flowLayoutTransfers.AllowDrop = true;
             this.flowLayoutTransfers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -117,6 +118,8 @@ namespace Warpinator
             this.flowLayoutTransfers.TabIndex = 6;
             this.flowLayoutTransfers.WrapContents = false;
             this.flowLayoutTransfers.ClientSizeChanged += new System.EventHandler(this.FlowLayoutPanel_ClientSizeChanged);
+            this.flowLayoutTransfers.DragDrop += new System.Windows.Forms.DragEventHandler(this.FlowLayoutTransfers_DragDrop);
+            this.flowLayoutTransfers.DragEnter += new System.Windows.Forms.DragEventHandler(this.DropTargets_DragEnter);
             // 
             // btnBrowse
             // 
@@ -142,6 +145,7 @@ namespace Warpinator
             // 
             // txtFile
             // 
+            this.txtFile.AllowDrop = true;
             this.txtFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFile.Location = new System.Drawing.Point(110, 269);
@@ -149,6 +153,8 @@ namespace Warpinator
             this.txtFile.ReadOnly = true;
             this.txtFile.Size = new System.Drawing.Size(203, 20);
             this.txtFile.TabIndex = 9;
+            this.txtFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.TxtFile_DragDrop);
+            this.txtFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.DropTargets_DragEnter);
             // 
             // btnDlDir
             // 
