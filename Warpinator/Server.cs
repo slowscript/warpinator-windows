@@ -149,7 +149,7 @@ namespace Warpinator
         {
             foreach (var r in Remotes.Values)
             {
-                if (r.Status == Remote.RemoteStatus.CONNECTED)
+                if (r.Status == RemoteStatus.CONNECTED)
                     r.Ping();
             }
         }
@@ -244,7 +244,7 @@ namespace Warpinator
                 if (txt.ContainsKey("hostname"))
                     r.Hostname = txt["hostname"];
                 r.ServiceAvailable = true;
-                if (r.Status == Remote.RemoteStatus.DISCONNECTED || r.Status == Remote.RemoteStatus.ERROR)
+                if (r.Status == RemoteStatus.DISCONNECTED || r.Status == RemoteStatus.ERROR)
                 {
                     //TODO: Update and reconnect
                 }

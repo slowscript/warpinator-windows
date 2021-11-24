@@ -17,8 +17,8 @@ namespace Warpinator
             if (Server.current.Remotes.ContainsKey(request.Id))
             {
                 Remote r = Server.current.Remotes[request.Id];
-                result = (r.Status == Remote.RemoteStatus.CONNECTED) || (r.Status == Remote.RemoteStatus.AWAITING_DUPLEX);
-                if (r.Status == Remote.RemoteStatus.ERROR || r.Status == Remote.RemoteStatus.DISCONNECTED)
+                result = (r.Status == RemoteStatus.CONNECTED) || (r.Status == RemoteStatus.AWAITING_DUPLEX);
+                if (r.Status == RemoteStatus.ERROR || r.Status == RemoteStatus.DISCONNECTED)
                 {
                     // TODO: Query new IP address first time this happens
                     // Try reconnecting
@@ -56,10 +56,10 @@ namespace Warpinator
             log.Info($"Incoming transfer from {r.UserName}");
 
             var t = new Transfer() {
-                Direction = Transfer.TransferDirection.RECEIVE,
+                Direction = TransferDirection.RECEIVE,
                 RemoteUUID = remoteUUID,
                 StartTime = request.Info.Timestamp,
-                Status = Transfer.TransferStatus.WAITING_PERMISSION,
+                Status = TransferStatus.WAITING_PERMISSION,
                 TotalSize = request.Size,
                 FileCount = request.Count,
                 SingleMIME = request.MimeIfSingle,

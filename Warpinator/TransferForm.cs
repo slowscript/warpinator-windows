@@ -39,7 +39,7 @@ namespace Warpinator
             lblUserString.Text = remote.UserName + "@" + remote.Hostname;
             lblAddress.Text = remote.Address + ":" + remote.Port;
             lblStatus.Text = remote.Status.ToString();
-            btnReconnect.Visible = remote.Status == Remote.RemoteStatus.DISCONNECTED || remote.Status == Remote.RemoteStatus.ERROR;
+            btnReconnect.Visible = remote.Status == RemoteStatus.DISCONNECTED || remote.Status == RemoteStatus.ERROR;
             //pictureStatus
 
             this.Text = lblUserString.Text;

@@ -8,17 +8,18 @@ using Common.Logging.Simple;
 
 namespace Warpinator
 {
+    public enum TransferStatus
+    {
+        WAITING_PERMISSION, DECLINED, TRANSFERRING, PAUSED, STOPPED,
+        FAILED, FINISHED, FINISHED_WITH_ERRORS
+    }
+    public enum TransferDirection {
+        SEND, RECEIVE
+    }
+    
     public class Transfer
     {
         ConsoleOutLogger log = new ConsoleOutLogger("Transfer", Common.Logging.LogLevel.All, true, false, true, "", true);
-        public enum TransferDirection {
-            SEND, RECEIVE
-        }
-        public enum TransferStatus
-        {
-            WAITING_PERMISSION, DECLINED, TRANSFERRING, PAUSED, STOPPED,
-            FAILED, FINISHED, FINISHED_WITH_ERRORS
-        }
         private enum FileType : int {
             FILE = 1, DIRECTORY = 2, SYMLINK = 3
         }

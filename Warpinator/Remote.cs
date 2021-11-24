@@ -13,16 +13,17 @@ using Grpc.Core;
 
 namespace Warpinator
 {
+    public enum RemoteStatus
+    {
+        CONNECTED,
+        DISCONNECTED,
+        CONNECTING,
+        ERROR,
+        AWAITING_DUPLEX
+    }
+    
     public class Remote
     {
-        public enum RemoteStatus
-        {
-            CONNECTED,
-            DISCONNECTED,
-            CONNECTING,
-            ERROR,
-            AWAITING_DUPLEX
-        }
 
         public IPAddress Address;
         public int Port;
@@ -163,13 +164,13 @@ namespace Warpinator
                 if (e.StatusCode == StatusCode.Cancelled)
                 {
                     log.Info("Transfer was reportedly cancelled");
-                    t.Status = Transfer.TransferStatus.STOPPED;
+                    t.Status = TransferStatus.STOPPED;
                 }
                 else
                 {
                     log.Error("Error while receiving", e);
                     //t.errors.add
-                    t.Status = Transfer.TransferStatus.FAILED;
+                    t.Status = TransferStatus.FAILED;
                 }
                 t.OnTransferUpdated();
             }

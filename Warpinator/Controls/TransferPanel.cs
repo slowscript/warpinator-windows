@@ -32,22 +32,22 @@ namespace Warpinator.Controls
 
         private void UpdateControls()
         {
-            btnAccept.Visible = (transfer.Status == Transfer.TransferStatus.WAITING_PERMISSION) && (transfer.Direction == Transfer.TransferDirection.RECEIVE);
-            btnDecline.Visible = transfer.Status == Transfer.TransferStatus.WAITING_PERMISSION;
-            btnStop.Visible = transfer.Status == Transfer.TransferStatus.TRANSFERRING;
-            progressBar.Visible = transfer.Status == Transfer.TransferStatus.TRANSFERRING;
-            btnRestart.Visible = (transfer.Direction == Transfer.TransferDirection.SEND) &&
-                (transfer.Status == Transfer.TransferStatus.FAILED || transfer.Status == Transfer.TransferStatus.STOPPED);
+            btnAccept.Visible = (transfer.Status == TransferStatus.WAITING_PERMISSION) && (transfer.Direction == TransferDirection.RECEIVE);
+            btnDecline.Visible = transfer.Status == TransferStatus.WAITING_PERMISSION;
+            btnStop.Visible = transfer.Status == TransferStatus.TRANSFERRING;
+            progressBar.Visible = transfer.Status == TransferStatus.TRANSFERRING;
+            btnRestart.Visible = (transfer.Direction == TransferDirection.SEND) &&
+                (transfer.Status == TransferStatus.FAILED || transfer.Status == TransferStatus.STOPPED);
             
             lblFiles.Text = (transfer.FileCount == 1 ? transfer.SingleName : transfer.FileCount + " files") + " (" + Utils.BytesToHumanReadable((long)transfer.TotalSize) + ")";
             // Status label
-            if (transfer.Status == Transfer.TransferStatus.WAITING_PERMISSION)
+            if (transfer.Status == TransferStatus.WAITING_PERMISSION)
             {
                 lblProgress.Text = "Waiting for permission";
                 if (transfer.OverwriteWarning)
                     lblProgress.Text += " (Files may be overwritten!)";
             }
-            else if (transfer.Status == Transfer.TransferStatus.TRANSFERRING)
+            else if (transfer.Status == TransferStatus.TRANSFERRING)
                 lblProgress.Text = Utils.BytesToHumanReadable(transfer.BytesTransferred) + " / " + Utils.BytesToHumanReadable((long)transfer.TotalSize) + " (" +
                 Utils.BytesToHumanReadable(transfer.BytesPerSecond) + "/s, " + transfer.GetRemainingTime() + " remaining)";
             else
@@ -67,7 +67,7 @@ namespace Warpinator.Controls
 
         private void BtnRestart_Click(object sender, EventArgs e)
         {
-            transfer.Status = Transfer.TransferStatus.WAITING_PERMISSION;
+            transfer.Status = TransferStatus.WAITING_PERMISSION;
             UpdateControls();
             Server.current.Remotes[transfer.RemoteUUID].StartSendTransfer(transfer);
         }
