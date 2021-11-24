@@ -117,7 +117,7 @@ namespace Warpinator
         {
             foreach(Control c in flowLayoutPanel.Controls)
             {
-                c.Width = flowLayoutPanel.ClientSize.Width - 10;
+                c.Width = flowLayoutPanel.ClientSize.Width - 6;
             }
         }
 

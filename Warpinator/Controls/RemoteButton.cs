@@ -4,51 +4,72 @@ using System.Windows.Forms;
 
 namespace Warpinator.Controls
 {
-    public partial class RemoteButton : UserControl
+    public class RemoteButton : Button
     {
-        public string DisplayName { get { return lblDisplayName.Text; } set { lblDisplayName.Text = value; } }
-        public string UserString { get { return lblUser.Text; } set { lblUser.Text = value; } }
-        public string IPString { get { return lblIP.Text; } set { lblIP.Text = value; } }
-        public Image ProfilePicture { set { pictureBoxProfile.Image = value; } }
-        public Remote.RemoteStatus Status { set {
-                switch (value)
-                {
-                    case Remote.RemoteStatus.AWAITING_DUPLEX:
-                        pictureBoxStatus.Image = Properties.Resources.awaiting_duplex; break;
-                    case Remote.RemoteStatus.CONNECTING:
-                        pictureBoxStatus.Image = Properties.Resources.connecting; break;
-                    case Remote.RemoteStatus.CONNECTED:
-                        pictureBoxStatus.Image = Properties.Resources.connected; break;
-                    case Remote.RemoteStatus.DISCONNECTED:
-                        pictureBoxStatus.Image = Properties.Resources.disconnected; break;
-                    case Remote.RemoteStatus.ERROR:
-                        pictureBoxStatus.Image = Properties.Resources.error; break;
-                }
-            }
-        }
-
         private readonly Remote remote;
+        private bool mouseHover = false;
+        private bool mouseDown = false;
 
         public RemoteButton(Remote r)
         {
-            InitializeComponent();
+            this.Height = 64;
+            this.MaximumSize = new Size(450, 64);
+            this.Padding = new Padding(8);
+            this.Paint += DrawButton;
+            this.MouseEnter += RemoteButton_MouseEnter;
+            this.MouseLeave += RemoteButton_MouseLeave;
+            this.MouseDown += RemoteButton_MouseDown;
+            this.MouseUp += RemoteButton_MouseUp;
+            this.Click += RemoteButton_Click;
             
-            remote = r;
-            UpdateInfo();
+            remote = r ?? throw new ArgumentNullException("Remote cannot be null");
         }
+
+        private void RemoteButton_MouseDown(object sender, MouseEventArgs e) => mouseDown = true;
+        private void RemoteButton_MouseUp(object sender, MouseEventArgs e) => mouseDown = false;
+        private void RemoteButton_MouseEnter(object sender, EventArgs e) => mouseHover = true;
+        private void RemoteButton_MouseLeave(object sender, EventArgs e) => mouseHover = false;
 
         public void UpdateInfo()
         {
-            DisplayName = remote.DisplayName;
-            UserString = remote.UserName + "@" + remote.Hostname;
-            IPString = remote.Address + ":" + remote.Port;
-            ProfilePicture = remote.Picture;
-            Status = remote.Status;
+            Invalidate();
         }
 
-        private void BtnSelf_Click(object sender, EventArgs e)
+        private void RemoteButton_Click(object sender, EventArgs e)
         {
             remote.OpenWindow();
+        }
+
+        private void DrawButton(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            var border = new Pen(SystemColors.ControlDark, 2);
+            Brush clr = remote.IncomingTransferFlag ? Brushes.CornflowerBlue : SystemBrushes.ControlLight;
+            if (mouseDown) clr = Brushes.LightGray;
+            else if (mouseHover) clr = SystemBrushes.Control;
+            g.FillRectangle(clr, e.ClipRectangle);
+            g.DrawRectangle(border, e.ClipRectangle);
+            if (remote.Picture != null)
+                g.DrawImage(remote.Picture, 8, 8, 48, 48);
+            g.DrawString(remote.DisplayName, SystemFonts.DefaultFont, SystemBrushes.ControlText, 68, 8);
+            g.DrawString(remote.UserName + "@" + remote.Hostname, SystemFonts.DefaultFont, SystemBrushes.ControlText, 68, 28);
+            g.DrawString(remote.Address + ":" + remote.Port, SystemFonts.DefaultFont, SystemBrushes.ControlText, 68, 48);
+            Image statusImg = null;
+            switch (remote.Status)
+            {
+                case RemoteStatus.AWAITING_DUPLEX:
+                    statusImg = Properties.Resources.awaiting_duplex; break;
+                case RemoteStatus.CONNECTING:
+                    statusImg = Properties.Resources.connecting; break;
+                case RemoteStatus.CONNECTED:
+                    statusImg = Properties.Resources.connected; break;
+                case RemoteStatus.DISCONNECTED:
+                    statusImg = Properties.Resources.disconnected; break;
+                case RemoteStatus.ERROR:
+                    statusImg = Properties.Resources.error; break;
+            }
+            if (statusImg != null)
+                g.DrawImage(statusImg, e.ClipRectangle.Width - 48, 16, 32, 32);
         }
     }
 }
