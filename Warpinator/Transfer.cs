@@ -117,7 +117,7 @@ namespace Warpinator
             Direction = TransferDirection.SEND;
             StartTime = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds();
             TotalSize = GetTotalSendSize();
-            FileCount = (ulong)FilesToSend.Count;
+            FileCount = (ulong)ResolvedFiles.Count;
             TopDirBaseNames = new List<string>(FilesToSend.Select((f) => Path.GetFileName(f)));
             if (FileCount == 1)
             {
@@ -254,6 +254,7 @@ namespace Warpinator
                 }
             }
 
+            Server.current.Remotes[RemoteUUID].IncomingTransferFlag = true;
             Server.current.Remotes[RemoteUUID].UpdateTransfers();
             Form1.OnIncomingTransfer(this);
 

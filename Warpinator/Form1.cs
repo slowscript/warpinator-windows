@@ -93,6 +93,7 @@ namespace Warpinator
         {
             if (Properties.Settings.Default.NotifyIncoming && current != null)
                 current.Invoke(new Action(() => current.ShowTransferBaloon(t)));
+            UpdateUI();
         }
 
         EventHandler ballonClickHandler;

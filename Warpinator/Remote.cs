@@ -35,6 +35,7 @@ namespace Warpinator
         public Bitmap Picture = Properties.Resources.profile;
         public RemoteStatus Status;
         public bool ServiceAvailable;
+        public bool IncomingTransferFlag = false;
         public List<Transfer> Transfers = new List<Transfer>();
 
         ILog log = new Common.Logging.Simple.ConsoleOutLogger("Remote", LogLevel.All, true, false, true, null, true);
@@ -42,7 +43,6 @@ namespace Warpinator
         Warp.WarpClient client;
         TransferForm form;
 
-        
         public async void Connect()
         {
             log.Info($"Connecting to {Hostname}");

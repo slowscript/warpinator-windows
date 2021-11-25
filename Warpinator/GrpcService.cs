@@ -33,15 +33,13 @@ namespace Warpinator
             return Task.FromResult(new RemoteMachineInfo { DisplayName = Server.current.DisplayName, UserName = Server.current.UserName });
         }
 
-        public override Task GetRemoteMachineAvatar(LookupName request, IServerStreamWriter<RemoteMachineAvatar> responseStream, ServerCallContext context)
+        public override async Task GetRemoteMachineAvatar(LookupName request, IServerStreamWriter<RemoteMachineAvatar> responseStream, ServerCallContext context)
         {
-            //context.Status = new Status(StatusCode.NotFound, "no picture");
             var avatar = new RemoteMachineAvatar()
             {
                 AvatarChunk = Google.Protobuf.ByteString.CopyFrom(System.IO.File.ReadAllBytes(Utils.GetUserPicturePath()))
             };
-            responseStream.WriteAsync(avatar);
-            return null;
+            await responseStream.WriteAsync(avatar);
         }
 
         public override Task<VoidType> Ping(LookupName request, ServerCallContext context)

@@ -14,6 +14,8 @@ namespace Warpinator.Controls
             transfer = t;
             if (t.FileCount == 1)
                 imgFile.Image = Utils.GetFileIcon(t.SingleName, true).ToBitmap();
+            else
+                imgFile.Image = Properties.Resources.files;
             UpdateControls();
             transfer.TransferUpdated += OnTransferUpdated;
             Disposed += OnDisposed;

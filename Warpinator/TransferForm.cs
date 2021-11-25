@@ -18,7 +18,9 @@ namespace Warpinator
         {
             InitializeComponent();
 
-            remote = r;
+            remote = r ?? throw new ArgumentNullException("Remote must not be null");
+
+            this.Activated += (s, e) => { remote.IncomingTransferFlag = false; };
             UpdateLabels();
             UpdateTransfers();
         }
