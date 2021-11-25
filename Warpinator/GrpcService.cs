@@ -35,7 +35,12 @@ namespace Warpinator
 
         public override Task GetRemoteMachineAvatar(LookupName request, IServerStreamWriter<RemoteMachineAvatar> responseStream, ServerCallContext context)
         {
-            context.Status = new Status(StatusCode.NotFound, "no picture");
+            //context.Status = new Status(StatusCode.NotFound, "no picture");
+            var avatar = new RemoteMachineAvatar()
+            {
+                AvatarChunk = Google.Protobuf.ByteString.CopyFrom(System.IO.File.ReadAllBytes(Utils.GetUserPicturePath()))
+            };
+            responseStream.WriteAsync(avatar);
             return null;
         }
 

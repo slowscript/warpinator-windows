@@ -234,6 +234,7 @@
     <None Include="Resources\connected.png" />
     <None Include="Resources\disconnected.png" />
     <None Include="Resources\error.png" />
+    <None Include="Resources\profile.png" />
     <Content Include="Resources\warplogo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

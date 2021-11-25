@@ -32,7 +32,7 @@ namespace Warpinator
         public string Hostname;
         public string DisplayName;
         public string UUID;
-        public Bitmap Picture;
+        public Bitmap Picture = Properties.Resources.profile;
         public RemoteStatus Status;
         public bool ServiceAvailable;
         public List<Transfer> Transfers = new List<Transfer>();
@@ -87,7 +87,7 @@ namespace Warpinator
                     bytes.AddRange(avatar.ResponseStream.Current.AvatarChunk);
                 Picture = new Bitmap(new MemoryStream(bytes.ToArray()));
             } catch (Exception) {
-                Picture = null;
+                Picture = Properties.Resources.profile;
             }
 
             UpdateUI();

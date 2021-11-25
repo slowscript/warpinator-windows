@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Warpinator
 {
@@ -87,6 +88,13 @@ namespace Warpinator
             return icon;
         }
 
+        public static string GetUserPicturePath()
+        {
+            var sb = new StringBuilder(1000);
+            Shell32.GetUserTilePath(Environment.UserName, 0x80000000, sb, sb.Capacity);
+            return sb.ToString();
+        }
+
         static class Shell32
         {
             private const int MaxPath = 256;
@@ -111,6 +119,8 @@ namespace Warpinator
             public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref Shfileinfo psfi, uint cbFileInfo, uint uFlags);
             [DllImport("Shell32.dll")]
             public static extern int SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, uint dwFlags, IntPtr hToken, out IntPtr ppszPath);
+            [DllImport("shell32.dll", EntryPoint = "#261", CharSet = CharSet.Unicode, PreserveSig = false)]
+            public static extern void GetUserTilePath(string username, UInt32 whatever, StringBuilder picpath, int maxLength);
         }
         internal static class User32
         {
