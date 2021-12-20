@@ -69,14 +69,14 @@ namespace Warpinator
             pingTimer.AutoReset = true;
         }
 
-        public void Start()
+        public async Task Start()
         {
             log.Info("-- Starting server");
             Running = true;
             if (String.IsNullOrEmpty(settings.NetworkInterface))
                 SelectedInterface = null;
             else SelectedInterface = settings.NetworkInterface;
-            StartGrpcServer(); //Also initializes authenticator for certserver
+            await StartGrpcServer(); //Also initializes authenticator for certserver
             CertServer.Start(Port);
             StartMDNS();
             pingTimer.Start();
@@ -100,15 +100,15 @@ namespace Warpinator
         public async void Restart()
         {
             await Stop();
-            Start();
+            await Start();
         }
 
         public void Rescan() => sd.QueryServiceInstances(SERVICE_TYPE);
         public void Reannounce() => sd.Announce(serviceProfile);
 
-        private void StartGrpcServer()
+        private async Task StartGrpcServer()
         {
-            KeyCertificatePair kcp = Authenticator.GetKeyCertificatePair();
+            KeyCertificatePair kcp = await Task.Run(Authenticator.GetKeyCertificatePair);
             grpcServer = new Grpc.Core.Server() { 
                 Services = { Warp.BindService(new GrpcService()) },
                 Ports = { new ServerPort(Utils.GetLocalIPAddress().ToString(), Port, new SslServerCredentials(new List<KeyCertificatePair>() { kcp })) }

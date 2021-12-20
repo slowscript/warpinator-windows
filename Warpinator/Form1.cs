@@ -33,11 +33,12 @@ namespace Warpinator
             server = new Server();
         }
 
-        private void Form1_Show(object sender, EventArgs e)
+        private async void Form1_Show(object sender, EventArgs e)
         {
-            //server.Remotes.Add("a", new Remote { DisplayName = "TEST", UserName = "test", Hostname = "PC1", Address = System.Net.IPAddress.Parse("192.168.1.1"), Port = 42000 });
-
-            server.Start();
+            //server.Remotes.Add("a", new Remote { DisplayName = "TEST", UserName = "test", Hostname = "PC1", Address = System.Net.IPAddress.Parse("192.168.1.1"),
+            //    Port = 42000, Status = RemoteStatus.DISCONNECTED });
+            
+            await server.Start();
         }
 
         private void OnFormClosing(object sender, FormClosingEventArgs e)
