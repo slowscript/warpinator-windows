@@ -16,6 +16,7 @@ namespace Warpinator
     {
         ILog log = new Common.Logging.Simple.ConsoleOutLogger("Server", LogLevel.All, true, false, true, "", true);
         const string SERVICE_TYPE = "_warpinator._tcp";
+        readonly DomainName ServiceDomain = new DomainName(SERVICE_TYPE+".local");
 
         public static Server current;
 
@@ -156,8 +157,8 @@ namespace Warpinator
         private void OnServiceInstanceDiscovered(object sender, ServiceInstanceDiscoveryEventArgs e)
         {
             log.Debug($"Service discovered: '{e.ServiceInstanceName}'");
-            if (!mdnsServices.ContainsKey(e.ServiceInstanceName.ToString()))
-                mdnsServices.TryAdd(e.ServiceInstanceName.ToString(), new ServiceRecord() { FullName = e.ServiceInstanceName.ToString() });
+            if (!mdnsServices.ContainsKey(e.ServiceInstanceName.ToCanonical().ToString()))
+                mdnsServices.TryAdd(e.ServiceInstanceName.ToCanonical().ToString(), new ServiceRecord() { FullName = e.ServiceInstanceName.ToString() });
         }
         
         private void OnServiceInstanceShutdown(object sender, ServiceInstanceShutdownEventArgs e)
@@ -173,9 +174,10 @@ namespace Warpinator
 
         private void OnAnswerReceived(object sender, MessageEventArgs e)
         {
-            log.Debug("-- Answer:");
-            
-            var servers = e.Message.Answers.OfType<SRVRecord>();
+            log.Debug($"-- Answer {e.Message.Id}:");
+            var answers = e.Message.Answers.Concat(e.Message.AdditionalRecords).Where((r)=>r.Name.IsSubdomainOf(ServiceDomain) || r is AddressRecord);
+
+            var servers = answers.OfType<SRVRecord>();
             foreach (var server in servers)
             {
                 log.Debug($"  Service '{server.Name}' has hostname '{server.Target} and port {server.Port}'");
@@ -185,10 +187,9 @@ namespace Warpinator
                 if (hostnameDict.TryGetValue(server.Target.ToString(), out IPAddress addr))
                     mdnsServices[server.CanonicalName].Address = addr;
                 mdnsServices[server.CanonicalName].Port = server.Port;
-                mdns.SendQuery(server.Target, type: DnsType.A);
             }
 
-            var addresses = e.Message.Answers.OfType<AddressRecord>();
+            var addresses = answers.OfType<AddressRecord>();
             foreach (var address in addresses)
             {
                 if (address.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
@@ -201,7 +202,7 @@ namespace Warpinator
                 }
             }
 
-            var txts = e.Message.Answers.OfType<TXTRecord>();
+            var txts = answers.OfType<TXTRecord>();
             foreach (var txt in txts)
             {
                 log.Debug("  Got strings: " + String.Join("; ", txt.Strings));
@@ -260,7 +261,11 @@ namespace Warpinator
             remote.UUID = name;
             remote.ServiceAvailable = true;
 
-            Remotes.Add(name, remote);
+            lock (Remotes)
+            {
+                if (!Remotes.ContainsKey(name))
+                    Remotes.Add(name, remote);
+            }
             Form1.UpdateUI();
             remote.Connect();
         }
