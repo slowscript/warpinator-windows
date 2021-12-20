@@ -37,7 +37,7 @@ namespace Warpinator
         {
             //server.Remotes.Add("a", new Remote { DisplayName = "TEST", UserName = "test", Hostname = "PC1", Address = System.Net.IPAddress.Parse("192.168.1.1"),
             //    Port = 42000, Status = RemoteStatus.DISCONNECTED });
-            
+            DoUpdateUI();
             await server.Start();
         }
 
@@ -74,13 +74,18 @@ namespace Warpinator
             foreach (var r in server.Remotes.Values)
             {
                 var btn = new RemoteButton(r);
-                btn.UpdateInfo();
                 flowLayoutPanel.Controls.Add(btn);
                 btn.Width = flowLayoutPanel.ClientSize.Width - 10;
                 btn.Show();
             }
-            lblNoDevicesFound.Visible = server.Remotes.Count == 0;
-            btnRescan.Visible = server.Remotes.Count == 0;
+            lblNoDevicesFound.Visible = server.Remotes.Count == 0 && server.Running;
+            btnRescan.Visible = server.Remotes.Count == 0 && server.Running;
+            if (lblInitializing.Visible && server.Running)
+            {
+                btnRescan.Enabled = false;
+                rescanTimer.Start();
+            }
+            lblInitializing.Visible = !server.Running;
 
             string iface = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) => i.Id == server.SelectedInterface)?.Name ?? "Selected interface unavailable";
             if (String.IsNullOrEmpty(server.SelectedInterface))

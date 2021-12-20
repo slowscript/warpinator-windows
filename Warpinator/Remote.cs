@@ -37,6 +37,7 @@ namespace Warpinator
         public bool ServiceAvailable;
         public bool IncomingTransferFlag = false;
         public List<Transfer> Transfers = new List<Transfer>();
+        public event EventHandler RemoteUpdated;
 
         ILog log = new Common.Logging.Simple.ConsoleOutLogger("Remote", LogLevel.All, true, false, true, null, true);
         Channel channel;
@@ -225,7 +226,7 @@ namespace Warpinator
         {
             if (form != null)
                 form.Invoke(new Action(() => form.UpdateLabels()));
-            Form1.UpdateUI();
+            RemoteUpdated?.Invoke(this, null);
         }
 
         internal void UpdateTransfers()

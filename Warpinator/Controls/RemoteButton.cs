@@ -16,6 +16,7 @@ namespace Warpinator.Controls
             this.MaximumSize = new Size(450, 64);
             this.Padding = new Padding(8);
             this.Paint += DrawButton;
+            this.DoubleBuffered = true;
             this.MouseEnter += RemoteButton_MouseEnter;
             this.MouseLeave += RemoteButton_MouseLeave;
             this.MouseDown += RemoteButton_MouseDown;
@@ -23,6 +24,14 @@ namespace Warpinator.Controls
             this.Click += RemoteButton_Click;
             
             remote = r ?? throw new ArgumentNullException("Remote cannot be null");
+            remote.RemoteUpdated += UpdateInfo;
+            Disposed += OnDisposed;
+        }
+
+        private void OnDisposed(object sender, EventArgs e)
+        {
+            Disposed -= OnDisposed;
+            remote.RemoteUpdated -= UpdateInfo;
         }
 
         private void RemoteButton_MouseDown(object sender, MouseEventArgs e) => mouseDown = true;
@@ -30,7 +39,7 @@ namespace Warpinator.Controls
         private void RemoteButton_MouseEnter(object sender, EventArgs e) => mouseHover = true;
         private void RemoteButton_MouseLeave(object sender, EventArgs e) => mouseHover = false;
 
-        public void UpdateInfo()
+        public void UpdateInfo(object s, EventArgs a)
         {
             Invalidate();
         }

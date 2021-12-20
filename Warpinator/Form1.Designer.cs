@@ -52,6 +52,7 @@ namespace Warpinator
             this.quitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRescan = new System.Windows.Forms.Button();
             this.lblNoDevicesFound = new System.Windows.Forms.Label();
+            this.lblInitializing = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.notifyIconMenu.SuspendLayout();
@@ -234,11 +235,23 @@ namespace Warpinator
             this.lblNoDevicesFound.TabIndex = 4;
             this.lblNoDevicesFound.Text = "No devices found";
             // 
+            // lblInitializing
+            // 
+            this.lblInitializing.AutoSize = true;
+            this.lblInitializing.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblInitializing.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblInitializing.Location = new System.Drawing.Point(20, 50);
+            this.lblInitializing.Name = "lblInitializing";
+            this.lblInitializing.Size = new System.Drawing.Size(81, 17);
+            this.lblInitializing.TabIndex = 5;
+            this.lblInitializing.Text = "Initializing...";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 425);
+            this.Controls.Add(this.lblInitializing);
             this.Controls.Add(this.lblNoDevicesFound);
             this.Controls.Add(this.btnRescan);
             this.Controls.Add(this.flowLayoutPanel);
@@ -286,6 +299,7 @@ namespace Warpinator
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem1;
         private System.Windows.Forms.Button btnRescan;
         private System.Windows.Forms.Label lblNoDevicesFound;
+        private System.Windows.Forms.Label lblInitializing;
     }
 }
 

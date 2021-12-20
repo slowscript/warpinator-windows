@@ -98,5 +98,9 @@ namespace Warpinator
             Close();
         }
 
+        private void BtnShowCode_Click(object sender, EventArgs e)
+        {
+            txtGroupcode.UseSystemPasswordChar = !txtGroupcode.UseSystemPasswordChar;
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace Warpinator
             this.label2 = new System.Windows.Forms.Label();
             this.txtGroupcode = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnShowCode = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.numPort = new System.Windows.Forms.NumericUpDown();
             this.comboInterfaces = new System.Windows.Forms.ComboBox();
@@ -94,12 +95,13 @@ namespace Warpinator
             // 
             this.txtGroupcode.Location = new System.Drawing.Point(75, 19);
             this.txtGroupcode.Name = "txtGroupcode";
-            this.txtGroupcode.PasswordChar = '*';
             this.txtGroupcode.Size = new System.Drawing.Size(128, 20);
             this.txtGroupcode.TabIndex = 4;
+            this.txtGroupcode.UseSystemPasswordChar = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnShowCode);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.numPort);
             this.groupBox1.Controls.Add(this.comboInterfaces);
@@ -114,6 +116,16 @@ namespace Warpinator
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Network settings";
+            // 
+            // btnShowCode
+            // 
+            this.btnShowCode.Location = new System.Drawing.Point(209, 17);
+            this.btnShowCode.Name = "btnShowCode";
+            this.btnShowCode.Size = new System.Drawing.Size(43, 23);
+            this.btnShowCode.TabIndex = 11;
+            this.btnShowCode.Text = "Show";
+            this.btnShowCode.UseVisualStyleBackColor = true;
+            this.btnShowCode.Click += new System.EventHandler(this.BtnShowCode_Click);
             // 
             // label5
             // 
@@ -308,5 +320,6 @@ namespace Warpinator
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.CheckBox chkBackground;
+        private System.Windows.Forms.Button btnShowCode;
     }
 }
