@@ -192,6 +192,7 @@ namespace Warpinator
             // 
             // btnReconnect
             // 
+            this.btnReconnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReconnect.Location = new System.Drawing.Point(317, 28);
             this.btnReconnect.Name = "btnReconnect";
             this.btnReconnect.Size = new System.Drawing.Size(75, 23);

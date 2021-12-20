@@ -54,7 +54,7 @@ namespace Warpinator
                 catch (Exception e)
                 {
                     if (running)
-                        Console.WriteLine("Error while running certserver. Restarting. Exception: " + e.ToString());
+                        Console.WriteLine("Error while running certserver. Restarting. Exception: " + e.Message);
                 }
             }
         }

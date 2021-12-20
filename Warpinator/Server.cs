@@ -25,7 +25,6 @@ namespace Warpinator
         public ushort Port = 42000;
         public string UUID;
         public string ProfilePicture;
-        public bool NotifyIncoming;
         public bool Running = false;
         public string SelectedInterface;
 
@@ -43,7 +42,7 @@ namespace Warpinator
         public Server()
         {
             current = this;
-            DisplayName = System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName;
+            DisplayName = System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName ?? Environment.UserName;
             Hostname = Environment.MachineName;
             UserName = Environment.UserName;
             

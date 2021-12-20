@@ -137,7 +137,7 @@
     <Compile Include="Authenticator.cs" />
     <Compile Include="CertServer.cs" />
     <Compile Include="Controls\RemoteButton.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\TransferPanel.cs">
       <SubType>UserControl</SubType>

@@ -109,8 +109,16 @@ namespace Warpinator
             }
             catch (RpcException ex)
             {
-                log.Debug($"Ping to {Hostname} timed out");
-                Status = RemoteStatus.DISCONNECTED;
+                if (ex.StatusCode == StatusCode.DeadlineExceeded)
+                {
+                    log.Debug($"Ping to {Hostname} timed out");
+                    Status = RemoteStatus.DISCONNECTED;
+                }
+                else
+                {
+                    log.Debug($"Ping to {Hostname} failed");
+                    Status = RemoteStatus.ERROR;
+                }
                 UpdateUI();
             }
         }
