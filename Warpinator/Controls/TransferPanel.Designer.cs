@@ -80,6 +80,8 @@ namespace Warpinator.Controls
             // btnStop
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStop.BackgroundImage = global::Warpinator.Properties.Resources.stop;
+            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnStop.Location = new System.Drawing.Point(307, 40);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(22, 23);

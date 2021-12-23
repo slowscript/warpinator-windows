@@ -238,6 +238,7 @@
     <None Include="Resources\profile.png" />
     <None Include="Resources\invisible.png" />
     <None Include="Resources\visible.png" />
+    <None Include="Resources\stop.png" />
     <Content Include="Resources\warplogo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
