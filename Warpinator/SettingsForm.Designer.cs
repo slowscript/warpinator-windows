@@ -119,11 +119,12 @@ namespace Warpinator
             // 
             // btnShowCode
             // 
+            this.btnShowCode.BackgroundImage = global::Warpinator.Properties.Resources.visible;
+            this.btnShowCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnShowCode.Location = new System.Drawing.Point(209, 17);
             this.btnShowCode.Name = "btnShowCode";
-            this.btnShowCode.Size = new System.Drawing.Size(43, 23);
+            this.btnShowCode.Size = new System.Drawing.Size(25, 23);
             this.btnShowCode.TabIndex = 11;
-            this.btnShowCode.Text = "Show";
             this.btnShowCode.UseVisualStyleBackColor = true;
             this.btnShowCode.Click += new System.EventHandler(this.BtnShowCode_Click);
             // 

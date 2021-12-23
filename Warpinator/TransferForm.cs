@@ -41,6 +41,8 @@ namespace Warpinator
             lblUserString.Text = remote.UserName + "@" + remote.Hostname;
             lblAddress.Text = remote.Address + ":" + remote.Port;
             lblStatus.Text = remote.Status.ToString();
+            if ((remote.Status == RemoteStatus.DISCONNECTED || remote.Status == RemoteStatus.ERROR) && !remote.ServiceAvailable)
+                lblStatus.Text += ", unavailable";
             btnReconnect.Visible = remote.Status == RemoteStatus.DISCONNECTED || remote.Status == RemoteStatus.ERROR;
             //pictureStatus
 

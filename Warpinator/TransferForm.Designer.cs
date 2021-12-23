@@ -33,7 +33,6 @@ namespace Warpinator
             this.lblDisplayName = new System.Windows.Forms.Label();
             this.lblUserString = new System.Windows.Forms.Label();
             this.lblAddress = new System.Windows.Forms.Label();
-            this.pictureStatus = new System.Windows.Forms.PictureBox();
             this.lblStatus = new System.Windows.Forms.Label();
             this.flowLayoutTransfers = new System.Windows.Forms.FlowLayoutPanel();
             this.btnBrowse = new System.Windows.Forms.Button();
@@ -45,7 +44,6 @@ namespace Warpinator
             this.btnBrowseDir = new System.Windows.Forms.Button();
             this.btnReconnect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureUser
@@ -85,24 +83,15 @@ namespace Warpinator
             this.lblAddress.TabIndex = 3;
             this.lblAddress.Text = "192.168.1.1:42000";
             // 
-            // pictureStatus
-            // 
-            this.pictureStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureStatus.Location = new System.Drawing.Point(360, 12);
-            this.pictureStatus.Name = "pictureStatus";
-            this.pictureStatus.Size = new System.Drawing.Size(32, 32);
-            this.pictureStatus.TabIndex = 4;
-            this.pictureStatus.TabStop = false;
-            // 
             // lblStatus
             // 
             this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(317, 12);
+            this.lblStatus.Location = new System.Drawing.Point(210, 12);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblStatus.Size = new System.Drawing.Size(180, 13);
             this.lblStatus.TabIndex = 5;
             this.lblStatus.Text = "Status";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // flowLayoutTransfers
             // 
@@ -214,7 +203,6 @@ namespace Warpinator
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.flowLayoutTransfers);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.pictureStatus);
             this.Controls.Add(this.lblAddress);
             this.Controls.Add(this.lblUserString);
             this.Controls.Add(this.lblDisplayName);
@@ -224,7 +212,6 @@ namespace Warpinator
             this.Name = "TransferForm";
             this.Text = "TransferForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureStatus)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,7 +223,6 @@ namespace Warpinator
         private System.Windows.Forms.Label lblDisplayName;
         private System.Windows.Forms.Label lblUserString;
         private System.Windows.Forms.Label lblAddress;
-        private System.Windows.Forms.PictureBox pictureStatus;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutTransfers;
         private System.Windows.Forms.Button btnBrowse;

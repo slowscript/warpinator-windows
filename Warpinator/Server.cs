@@ -164,9 +164,10 @@ namespace Warpinator
         private void OnServiceInstanceShutdown(object sender, ServiceInstanceShutdownEventArgs e)
         {
             log.Debug($"Service lost: '{e.ServiceInstanceName}'");
-            if (Remotes.ContainsKey(e.ServiceInstanceName.ToString()))
+            string serviceId = e.ServiceInstanceName.ToString().Split('.')[0];
+            if (Remotes.ContainsKey(serviceId))
             {
-                var r = Remotes[e.ServiceInstanceName.ToString()];
+                var r = Remotes[serviceId];
                 r.ServiceAvailable = false;
                 r.UpdateUI();
             }

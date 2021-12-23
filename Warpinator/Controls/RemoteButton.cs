@@ -77,6 +77,8 @@ namespace Warpinator.Controls
                 case RemoteStatus.ERROR:
                     statusImg = Properties.Resources.error; break;
             }
+            if ((remote.Status == RemoteStatus.DISCONNECTED || remote.Status == RemoteStatus.ERROR) && !remote.ServiceAvailable)
+                statusImg = Properties.Resources.invisible;
             if (statusImg != null)
                 g.DrawImage(statusImg, e.ClipRectangle.Width - 48, 16, 32, 32);
         }

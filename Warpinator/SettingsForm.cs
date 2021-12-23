@@ -101,6 +101,7 @@ namespace Warpinator
         private void BtnShowCode_Click(object sender, EventArgs e)
         {
             txtGroupcode.UseSystemPasswordChar = !txtGroupcode.UseSystemPasswordChar;
+            btnShowCode.BackgroundImage = txtGroupcode.UseSystemPasswordChar ? Properties.Resources.visible : Properties.Resources.invisible;
         }
     }
 }
