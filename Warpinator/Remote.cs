@@ -39,7 +39,7 @@ namespace Warpinator
         public List<Transfer> Transfers = new List<Transfer>();
         public event EventHandler RemoteUpdated;
 
-        ILog log = new Common.Logging.Simple.ConsoleOutLogger("Remote", LogLevel.All, true, false, true, null, true);
+        readonly ILog log = Program.Log.GetLogger("Remote");
         Channel channel;
         Warp.WarpClient client;
         TransferForm form;
@@ -108,18 +108,10 @@ namespace Warpinator
             {
                 await client.PingAsync(new LookupName() { Id = Server.current.UUID }, deadline: DateTime.UtcNow.AddSeconds(10));
             }
-            catch (RpcException ex)
+            catch (RpcException)
             {
-                if (ex.StatusCode == StatusCode.DeadlineExceeded)
-                {
-                    log.Debug($"Ping to {Hostname} timed out");
-                    Status = RemoteStatus.DISCONNECTED;
-                }
-                else
-                {
-                    log.Debug($"Ping to {Hostname} failed");
-                    Status = RemoteStatus.ERROR;
-                }
+                log.Debug($"Ping to {Hostname} failed");
+                Status = RemoteStatus.DISCONNECTED;
                 UpdateUI();
             }
         }
@@ -178,7 +170,7 @@ namespace Warpinator
                 else
                 {
                     log.Error("Error while receiving", e);
-                    //t.errors.add
+                    t.errors.Add("Error while receiving: " + e.Status.Detail);
                     t.Status = TransferStatus.FAILED;
                 }
                 t.OnTransferUpdated();
@@ -287,7 +279,7 @@ namespace Warpinator
                 catch (Exception e)
                 {
                     tryCount++;
-                    log.Debug("ReceiveCertificate try " + tryCount + " failed", e);
+                    log.Debug("ReceiveCertificate try " + tryCount + " failed: " + e.Message);
                     Thread.Sleep(1000);
                 }
             }
@@ -300,7 +292,7 @@ namespace Warpinator
             byte[] decoded = Convert.FromBase64String(base64encoded);
             if (!Authenticator.SaveRemoteCertificate(decoded, UUID))
             {
-                //TODO: Groupcode error
+                System.Windows.Forms.MessageBox.Show($"Could not decode certificate from {Hostname}. Wrong group code?", "Connection error");
                 log.Error("Groupcode error");
                 return false;
             }

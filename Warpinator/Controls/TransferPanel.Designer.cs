@@ -37,6 +37,7 @@ namespace Warpinator.Controls
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnDecline = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
+            this.btnShowDetails = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgFile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,7 +112,7 @@ namespace Warpinator.Controls
             // 
             // btnRestart
             // 
-            this.btnRestart.Location = new System.Drawing.Point(64, 40);
+            this.btnRestart.Location = new System.Drawing.Point(145, 40);
             this.btnRestart.Name = "btnRestart";
             this.btnRestart.Size = new System.Drawing.Size(75, 23);
             this.btnRestart.TabIndex = 7;
@@ -119,10 +120,21 @@ namespace Warpinator.Controls
             this.btnRestart.UseVisualStyleBackColor = true;
             this.btnRestart.Click += new System.EventHandler(this.BtnRestart_Click);
             // 
+            // btnShowDetails
+            // 
+            this.btnShowDetails.Location = new System.Drawing.Point(64, 40);
+            this.btnShowDetails.Name = "btnShowDetails";
+            this.btnShowDetails.Size = new System.Drawing.Size(75, 23);
+            this.btnShowDetails.TabIndex = 8;
+            this.btnShowDetails.Text = "Show details";
+            this.btnShowDetails.UseVisualStyleBackColor = true;
+            this.btnShowDetails.Click += new System.EventHandler(this.BtnShowDetails_Click);
+            // 
             // TransferPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnShowDetails);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnDecline);
             this.Controls.Add(this.btnAccept);
@@ -149,5 +161,6 @@ namespace Warpinator.Controls
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnDecline;
         private System.Windows.Forms.Button btnRestart;
+        private System.Windows.Forms.Button btnShowDetails;
     }
 }

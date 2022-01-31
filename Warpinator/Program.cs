@@ -10,20 +10,29 @@ namespace Warpinator
 {
     static class Program
     {
+        internal static ILoggerFactoryAdapter Log { get; private set; }
         [STAThread]
         static void Main()
         {
-            //Logging
+            //Global logging (libraries)
             var properties = new Common.Logging.Configuration.NameValueCollection
             {
                 ["level"] = "INFO",
                 ["showLogName"] = "true",
                 ["showDateTime"] = "false",
                 ["dateTimeFormat"] = "HH:mm:ss.fff"
-
             };
             LogManager.Adapter = new ConsoleOutLoggerFactoryAdapter(properties);
-            var log = LogManager.GetLogger("Main");
+            //Application logging
+            var properties2 = new Common.Logging.Configuration.NameValueCollection
+            {
+                ["level"] = "ALL",
+                ["showLogName"] = "true",
+                ["showDateTime"] = "false",
+            };
+            Log = new ConsoleOutLoggerFactoryAdapter(properties2);
+            
+            var log = Log.GetLogger("Main");
             log.Info("Hola hej!");
 
             Application.EnableVisualStyles();

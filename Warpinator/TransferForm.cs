@@ -44,7 +44,7 @@ namespace Warpinator
             if ((remote.Status == RemoteStatus.DISCONNECTED || remote.Status == RemoteStatus.ERROR) && !remote.ServiceAvailable)
                 lblStatus.Text += ", unavailable";
             btnReconnect.Visible = remote.Status == RemoteStatus.DISCONNECTED || remote.Status == RemoteStatus.ERROR;
-            //pictureStatus
+            btnSend.Enabled = remote.Status == RemoteStatus.CONNECTED;
 
             this.Text = lblUserString.Text;
         }

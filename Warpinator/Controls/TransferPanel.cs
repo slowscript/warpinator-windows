@@ -55,6 +55,7 @@ namespace Warpinator.Controls
             else
                 lblProgress.Text = transfer.Status.ToString();
             progressBar.Value = (int)(transfer.Progress * 100);
+            btnShowDetails.Visible = (transfer.Status == TransferStatus.FINISHED_WITH_ERRORS) || (transfer.Status == TransferStatus.FAILED && transfer.errors.Count > 0);
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
@@ -70,6 +71,7 @@ namespace Warpinator.Controls
         private void BtnRestart_Click(object sender, EventArgs e)
         {
             transfer.Status = TransferStatus.WAITING_PERMISSION;
+            transfer.errors.Clear();
             UpdateControls();
             Server.current.Remotes[transfer.RemoteUUID].StartSendTransfer(transfer);
         }
@@ -77,6 +79,11 @@ namespace Warpinator.Controls
         private void BtnStop_Click(object sender, EventArgs e)
         {
             transfer.Stop();
+        }
+
+        private void BtnShowDetails_Click(object sender, EventArgs e)
+        {            
+            MessageBox.Show(ParentForm, String.Join("\n", transfer.errors), "Transfer");
         }
     }
 }

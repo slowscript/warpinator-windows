@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Logging.Simple;
+using Common.Logging;
 
 namespace Warpinator
 {
@@ -19,7 +19,7 @@ namespace Warpinator
     
     public class Transfer
     {
-        ConsoleOutLogger log = new ConsoleOutLogger("Transfer", Common.Logging.LogLevel.All, true, false, true, "", true);
+        readonly ILog log = Program.Log.GetLogger("Transfer");
         private enum FileType : int {
             FILE = 1, DIRECTORY = 2, SYMLINK = 3
         }
@@ -43,6 +43,7 @@ namespace Warpinator
         private DateTime? currentFileDateTime;
         private bool cancelled = false;
         public event EventHandler TransferUpdated;
+        public List<string> errors = new List<string>();
 
         public long BytesTransferred;
         public long BytesPerSecond;
@@ -297,7 +298,7 @@ namespace Warpinator
                 else if (chunk.FileType == (int)FileType.SYMLINK)
                 {
                     log.Warn("Symlinks not supported");
-                    //TODO: Display warning
+                    errors.Add("WARN: Symlinks not supported");
                 }
                 else
                 {
@@ -314,7 +315,7 @@ namespace Warpinator
                     } catch (Exception e)
                     {
                         log.Error($"Failed to open file for writing {currentRelativePath}", e);
-                        //Display error
+                        errors.Add($"Failed to open file for writing {currentRelativePath}");
                         FailReceive();
                     }
                 }
@@ -329,7 +330,7 @@ namespace Warpinator
                 } catch (Exception e)
                 {
                     log.Error($"Failed to write to file {currentRelativePath}: {e.Message}");
-                    //Display error
+                    errors.Add($"Failed to write to file {currentRelativePath}: {e.Message}");
                     FailReceive();
                 }
             }
@@ -344,7 +345,9 @@ namespace Warpinator
         public void FinishReceive()
         {
             log.Debug("Finalizing transfer");
-            Status = TransferStatus.FINISHED; //TODO: Finish with errors
+            if (errors.Count > 0)
+                Status = TransferStatus.FINISHED_WITH_ERRORS;
+            else Status = TransferStatus.FINISHED;
             CloseStream();
             if (currentFileDateTime.HasValue)
                 File.SetLastWriteTime(currentPath, currentFileDateTime.Value);
@@ -360,7 +363,10 @@ namespace Warpinator
             {
                 File.Delete(currentPath);
             }
-            catch { }
+            catch (Exception e)
+            {
+                log.Warn("Could not delete incomplete file: " + e.Message);
+            }
         }
 
         private void FailReceive()

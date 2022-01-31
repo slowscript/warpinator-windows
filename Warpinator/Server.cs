@@ -14,7 +14,7 @@ namespace Warpinator
 {
     class Server
     {
-        ILog log = new Common.Logging.Simple.ConsoleOutLogger("Server", LogLevel.All, true, false, true, "", true);
+        readonly ILog log = Program.Log.GetLogger("Server");
         const string SERVICE_TYPE = "_warpinator._tcp";
         readonly DomainName ServiceDomain = new DomainName(SERVICE_TYPE+".local");
 

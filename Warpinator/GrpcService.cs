@@ -9,7 +9,7 @@ namespace Warpinator
 {
     class GrpcService : Warp.WarpBase
     {
-        private static readonly Common.Logging.ILog log = Common.Logging.LogManager.GetLogger<GrpcService>();
+        private static readonly Common.Logging.ILog log = Program.Log.GetLogger(typeof(GrpcService));
 
         public override Task<HaveDuplex> CheckDuplexConnection(LookupName request, ServerCallContext context)
         {
@@ -89,7 +89,19 @@ namespace Warpinator
             log.Debug("Transfer was accepted");
             var t = GetTransfer(request);
             if (t != null)
-                await t.StartSending(responseStream);
+            {
+                try
+                {
+                    await t.StartSending(responseStream);
+                }
+                catch (Exception e)
+                {
+                    log.Error("Transfer failed with exception", e);
+                    t.errors.Add("Sending failed with exception: " + e.Message);
+                    t.Status = TransferStatus.FAILED;
+                    t.OnTransferUpdated();
+                }
+            }
         }
 
         public override Task<VoidType> StopTransfer(StopInfo request, ServerCallContext context)
