@@ -29,6 +29,7 @@ namespace Warpinator
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.label1 = new System.Windows.Forms.Label();
             this.txtRecvDir = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -55,52 +56,35 @@ namespace Warpinator
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Receive into folder";
             // 
             // txtRecvDir
             // 
-            this.txtRecvDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRecvDir.Location = new System.Drawing.Point(12, 25);
+            resources.ApplyResources(this.txtRecvDir, "txtRecvDir");
             this.txtRecvDir.Name = "txtRecvDir";
-            this.txtRecvDir.Size = new System.Drawing.Size(392, 20);
-            this.txtRecvDir.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(410, 23);
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Browse";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.BtnBrowse_Click);
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 22);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Group code";
             // 
             // txtGroupcode
             // 
-            this.txtGroupcode.Location = new System.Drawing.Point(75, 19);
+            resources.ApplyResources(this.txtGroupcode, "txtGroupcode");
             this.txtGroupcode.Name = "txtGroupcode";
-            this.txtGroupcode.Size = new System.Drawing.Size(128, 20);
-            this.txtGroupcode.TabIndex = 4;
             this.txtGroupcode.UseSystemPasswordChar = true;
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.btnShowCode);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.numPort);
@@ -110,37 +94,25 @@ namespace Warpinator
             this.groupBox1.Controls.Add(this.btnRestart);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtGroupcode);
-            this.groupBox1.Location = new System.Drawing.Point(12, 143);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(354, 136);
-            this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Network settings";
             // 
             // btnShowCode
             // 
+            resources.ApplyResources(this.btnShowCode, "btnShowCode");
             this.btnShowCode.BackgroundImage = global::Warpinator.Properties.Resources.visible;
-            this.btnShowCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnShowCode.Location = new System.Drawing.Point(209, 17);
             this.btnShowCode.Name = "btnShowCode";
-            this.btnShowCode.Size = new System.Drawing.Size(25, 23);
-            this.btnShowCode.TabIndex = 11;
             this.btnShowCode.UseVisualStyleBackColor = true;
             this.btnShowCode.Click += new System.EventHandler(this.BtnShowCode_Click);
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label5.Location = new System.Drawing.Point(6, 102);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(218, 28);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Changing these settings requires the service to be restarted (running transfers w" +
-    "ill fail)";
             // 
             // numPort
             // 
-            this.numPort.Location = new System.Drawing.Point(75, 45);
+            resources.ApplyResources(this.numPort, "numPort");
             this.numPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -152,8 +124,6 @@ namespace Warpinator
             0,
             0});
             this.numPort.Name = "numPort";
-            this.numPort.Size = new System.Drawing.Size(128, 20);
-            this.numPort.TabIndex = 6;
             this.numPort.Value = new decimal(new int[] {
             1024,
             0,
@@ -162,121 +132,77 @@ namespace Warpinator
             // 
             // comboInterfaces
             // 
+            resources.ApplyResources(this.comboInterfaces, "comboInterfaces");
             this.comboInterfaces.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboInterfaces.FormattingEnabled = true;
-            this.comboInterfaces.Location = new System.Drawing.Point(75, 71);
             this.comboInterfaces.Name = "comboInterfaces";
-            this.comboInterfaces.Size = new System.Drawing.Size(230, 21);
-            this.comboInterfaces.TabIndex = 9;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 74);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Interface";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 47);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Port";
             // 
             // btnRestart
             // 
-            this.btnRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRestart.Location = new System.Drawing.Point(273, 107);
+            resources.ApplyResources(this.btnRestart, "btnRestart");
             this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(75, 23);
-            this.btnRestart.TabIndex = 5;
-            this.btnRestart.Text = "Restart";
             this.btnRestart.UseVisualStyleBackColor = true;
             this.btnRestart.Click += new System.EventHandler(this.BtnRestart_Click);
             // 
             // chkNotify
             // 
-            this.chkNotify.AutoSize = true;
-            this.chkNotify.Location = new System.Drawing.Point(12, 51);
+            resources.ApplyResources(this.chkNotify, "chkNotify");
             this.chkNotify.Name = "chkNotify";
-            this.chkNotify.Size = new System.Drawing.Size(171, 17);
-            this.chkNotify.TabIndex = 6;
-            this.chkNotify.Text = "Notify about incoming transfers";
             this.chkNotify.UseVisualStyleBackColor = true;
             // 
             // chkOverwrite
             // 
-            this.chkOverwrite.AutoSize = true;
-            this.chkOverwrite.Location = new System.Drawing.Point(12, 74);
+            resources.ApplyResources(this.chkOverwrite, "chkOverwrite");
             this.chkOverwrite.Name = "chkOverwrite";
-            this.chkOverwrite.Size = new System.Drawing.Size(482, 17);
-            this.chkOverwrite.TabIndex = 7;
-            this.chkOverwrite.Text = "Allow overwriting (a warning will be shown beforehand), otherwise conflicting fil" +
-    "es will be renamed";
             this.chkOverwrite.UseVisualStyleBackColor = true;
             // 
             // chkAutoAccept
             // 
-            this.chkAutoAccept.AutoSize = true;
-            this.chkAutoAccept.Location = new System.Drawing.Point(12, 97);
+            resources.ApplyResources(this.chkAutoAccept, "chkAutoAccept");
             this.chkAutoAccept.Name = "chkAutoAccept";
-            this.chkAutoAccept.Size = new System.Drawing.Size(167, 17);
-            this.chkAutoAccept.TabIndex = 8;
-            this.chkAutoAccept.Text = "Automatically accept transfers";
             this.chkAutoAccept.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(410, 288);
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // btnApply
             // 
-            this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.Location = new System.Drawing.Point(329, 288);
+            resources.ApplyResources(this.btnApply, "btnApply");
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(75, 23);
-            this.btnApply.TabIndex = 10;
-            this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // btnOK
             // 
-            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(248, 288);
+            resources.ApplyResources(this.btnOK, "btnOK");
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 11;
-            this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // chkBackground
             // 
-            this.chkBackground.AutoSize = true;
-            this.chkBackground.Location = new System.Drawing.Point(12, 120);
+            resources.ApplyResources(this.chkBackground, "chkBackground");
             this.chkBackground.Name = "chkBackground";
-            this.chkBackground.Size = new System.Drawing.Size(112, 17);
-            this.chkBackground.TabIndex = 12;
-            this.chkBackground.Text = "Run in system tray";
             this.chkBackground.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 323);
             this.Controls.Add(this.chkBackground);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnApply);
@@ -291,7 +217,6 @@ namespace Warpinator
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "SettingsForm";
-            this.Text = "Settings";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();

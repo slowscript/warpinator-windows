@@ -29,6 +29,7 @@ namespace Warpinator
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransferForm));
             this.pictureUser = new System.Windows.Forms.PictureBox();
             this.lblDisplayName = new System.Windows.Forms.Label();
             this.lblUserString = new System.Windows.Forms.Label();
@@ -48,153 +49,97 @@ namespace Warpinator
             // 
             // pictureUser
             // 
-            this.pictureUser.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.pictureUser, "pictureUser");
             this.pictureUser.Name = "pictureUser";
-            this.pictureUser.Size = new System.Drawing.Size(64, 64);
-            this.pictureUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureUser.TabIndex = 0;
             this.pictureUser.TabStop = false;
             // 
             // lblDisplayName
             // 
-            this.lblDisplayName.AutoSize = true;
-            this.lblDisplayName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblDisplayName.Location = new System.Drawing.Point(82, 12);
+            resources.ApplyResources(this.lblDisplayName, "lblDisplayName");
             this.lblDisplayName.Name = "lblDisplayName";
-            this.lblDisplayName.Size = new System.Drawing.Size(38, 17);
-            this.lblDisplayName.TabIndex = 1;
-            this.lblDisplayName.Text = "User";
             // 
             // lblUserString
             // 
-            this.lblUserString.AutoSize = true;
-            this.lblUserString.Location = new System.Drawing.Point(82, 35);
+            resources.ApplyResources(this.lblUserString, "lblUserString");
             this.lblUserString.Name = "lblUserString";
-            this.lblUserString.Size = new System.Drawing.Size(104, 13);
-            this.lblUserString.TabIndex = 2;
-            this.lblUserString.Text = "username@machine";
             // 
             // lblAddress
             // 
-            this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new System.Drawing.Point(82, 58);
+            resources.ApplyResources(this.lblAddress, "lblAddress");
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(97, 13);
-            this.lblAddress.TabIndex = 3;
-            this.lblAddress.Text = "192.168.1.1:42000";
             // 
             // lblStatus
             // 
-            this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblStatus.Location = new System.Drawing.Point(210, 12);
+            resources.ApplyResources(this.lblStatus, "lblStatus");
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(180, 13);
-            this.lblStatus.TabIndex = 5;
-            this.lblStatus.Text = "Status";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // flowLayoutTransfers
             // 
+            resources.ApplyResources(this.flowLayoutTransfers, "flowLayoutTransfers");
             this.flowLayoutTransfers.AllowDrop = true;
-            this.flowLayoutTransfers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutTransfers.AutoScroll = true;
-            this.flowLayoutTransfers.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutTransfers.Location = new System.Drawing.Point(12, 82);
             this.flowLayoutTransfers.Name = "flowLayoutTransfers";
-            this.flowLayoutTransfers.Size = new System.Drawing.Size(380, 291);
-            this.flowLayoutTransfers.TabIndex = 6;
-            this.flowLayoutTransfers.WrapContents = false;
             this.flowLayoutTransfers.ClientSizeChanged += new System.EventHandler(this.FlowLayoutPanel_ClientSizeChanged);
             this.flowLayoutTransfers.DragDrop += new System.Windows.Forms.DragEventHandler(this.FlowLayoutTransfers_DragDrop);
             this.flowLayoutTransfers.DragEnter += new System.Windows.Forms.DragEventHandler(this.DropTargets_DragEnter);
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBrowse.Location = new System.Drawing.Point(12, 379);
+            resources.ApplyResources(this.btnBrowse, "btnBrowse");
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowse.TabIndex = 7;
-            this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.BtnBrowse_Click);
             // 
             // btnSend
             // 
-            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSend.Location = new System.Drawing.Point(319, 379);
+            resources.ApplyResources(this.btnSend, "btnSend");
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(75, 23);
-            this.btnSend.TabIndex = 8;
-            this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.BtnSend_Click);
             // 
             // txtFile
             // 
+            resources.ApplyResources(this.txtFile, "txtFile");
             this.txtFile.AllowDrop = true;
-            this.txtFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFile.Location = new System.Drawing.Point(110, 381);
             this.txtFile.Name = "txtFile";
             this.txtFile.ReadOnly = true;
-            this.txtFile.Size = new System.Drawing.Size(203, 20);
-            this.txtFile.TabIndex = 9;
             this.txtFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.TxtFile_DragDrop);
             this.txtFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.DropTargets_DragEnter);
             // 
             // btnDlDir
             // 
-            this.btnDlDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDlDir.Location = new System.Drawing.Point(258, 53);
+            resources.ApplyResources(this.btnDlDir, "btnDlDir");
             this.btnDlDir.Name = "btnDlDir";
-            this.btnDlDir.Size = new System.Drawing.Size(134, 23);
-            this.btnDlDir.TabIndex = 10;
-            this.btnDlDir.Text = "Open download folder";
             this.btnDlDir.UseVisualStyleBackColor = true;
             this.btnDlDir.Click += new System.EventHandler(this.BtnDlDir_Click);
             // 
             // browseFilesToolStripMenuItem
             // 
+            resources.ApplyResources(this.browseFilesToolStripMenuItem, "browseFilesToolStripMenuItem");
             this.browseFilesToolStripMenuItem.Name = "browseFilesToolStripMenuItem";
-            this.browseFilesToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.browseFilesToolStripMenuItem.Text = "Browse files";
             // 
             // browseFoldersToolStripMenuItem
             // 
+            resources.ApplyResources(this.browseFoldersToolStripMenuItem, "browseFoldersToolStripMenuItem");
             this.browseFoldersToolStripMenuItem.Name = "browseFoldersToolStripMenuItem";
-            this.browseFoldersToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.browseFoldersToolStripMenuItem.Text = "Browse folders";
             // 
             // btnBrowseDir
             // 
-            this.btnBrowseDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBrowseDir.Location = new System.Drawing.Point(85, 379);
+            resources.ApplyResources(this.btnBrowseDir, "btnBrowseDir");
             this.btnBrowseDir.Name = "btnBrowseDir";
-            this.btnBrowseDir.Size = new System.Drawing.Size(19, 23);
-            this.btnBrowseDir.TabIndex = 11;
-            this.btnBrowseDir.Text = "+";
             this.btnBrowseDir.UseVisualStyleBackColor = true;
             this.btnBrowseDir.Click += new System.EventHandler(this.BtnBrowseDir_Click);
             // 
             // btnReconnect
             // 
-            this.btnReconnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReconnect.Location = new System.Drawing.Point(317, 28);
+            resources.ApplyResources(this.btnReconnect, "btnReconnect");
             this.btnReconnect.Name = "btnReconnect";
-            this.btnReconnect.Size = new System.Drawing.Size(75, 23);
-            this.btnReconnect.TabIndex = 12;
-            this.btnReconnect.Text = "Reconnect";
             this.btnReconnect.UseVisualStyleBackColor = true;
             this.btnReconnect.Click += new System.EventHandler(this.BtnReconnect_Click);
             // 
             // TransferForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 414);
             this.Controls.Add(this.btnReconnect);
             this.Controls.Add(this.btnBrowseDir);
             this.Controls.Add(this.btnDlDir);
@@ -208,9 +153,7 @@ namespace Warpinator
             this.Controls.Add(this.lblDisplayName);
             this.Controls.Add(this.pictureUser);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(360, 220);
             this.Name = "TransferForm";
-            this.Text = "TransferForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureUser)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
