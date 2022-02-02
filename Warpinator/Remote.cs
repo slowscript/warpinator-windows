@@ -49,7 +49,7 @@ namespace Warpinator
             log.Info($"Connecting to {Hostname}");
             Status = RemoteStatus.CONNECTING;
             UpdateUI();
-            if (!ReceiveCertificate())
+            if (!await Task.Run(ReceiveCertificate))
             {
                 Status = RemoteStatus.ERROR;
                 UpdateUI();

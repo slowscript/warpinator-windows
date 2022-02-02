@@ -25,7 +25,6 @@ namespace Warpinator
         public string Hostname;
         public ushort Port = 42000;
         public string UUID;
-        public string ProfilePicture;
         public bool Running = false;
         public string SelectedInterface;
 
@@ -143,6 +142,7 @@ namespace Warpinator
             serviceProfile.AddProperty("hostname", Utils.GetHostname());
             serviceProfile.AddProperty("type", flush ? "flush" : "real");
             sd.Advertise(serviceProfile);
+            sd.Announce(serviceProfile);
         }
 
         private void PingRemotes()

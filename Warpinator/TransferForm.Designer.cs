@@ -103,7 +103,7 @@ namespace Warpinator
             this.flowLayoutTransfers.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutTransfers.Location = new System.Drawing.Point(12, 82);
             this.flowLayoutTransfers.Name = "flowLayoutTransfers";
-            this.flowLayoutTransfers.Size = new System.Drawing.Size(380, 179);
+            this.flowLayoutTransfers.Size = new System.Drawing.Size(380, 291);
             this.flowLayoutTransfers.TabIndex = 6;
             this.flowLayoutTransfers.WrapContents = false;
             this.flowLayoutTransfers.ClientSizeChanged += new System.EventHandler(this.FlowLayoutPanel_ClientSizeChanged);
@@ -113,7 +113,7 @@ namespace Warpinator
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBrowse.Location = new System.Drawing.Point(12, 267);
+            this.btnBrowse.Location = new System.Drawing.Point(12, 379);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 7;
@@ -124,7 +124,7 @@ namespace Warpinator
             // btnSend
             // 
             this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSend.Location = new System.Drawing.Point(319, 267);
+            this.btnSend.Location = new System.Drawing.Point(319, 379);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 8;
@@ -137,7 +137,7 @@ namespace Warpinator
             this.txtFile.AllowDrop = true;
             this.txtFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFile.Location = new System.Drawing.Point(110, 269);
+            this.txtFile.Location = new System.Drawing.Point(110, 381);
             this.txtFile.Name = "txtFile";
             this.txtFile.ReadOnly = true;
             this.txtFile.Size = new System.Drawing.Size(203, 20);
@@ -171,7 +171,7 @@ namespace Warpinator
             // btnBrowseDir
             // 
             this.btnBrowseDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnBrowseDir.Location = new System.Drawing.Point(85, 267);
+            this.btnBrowseDir.Location = new System.Drawing.Point(85, 379);
             this.btnBrowseDir.Name = "btnBrowseDir";
             this.btnBrowseDir.Size = new System.Drawing.Size(19, 23);
             this.btnBrowseDir.TabIndex = 11;
@@ -194,7 +194,7 @@ namespace Warpinator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 302);
+            this.ClientSize = new System.Drawing.Size(404, 414);
             this.Controls.Add(this.btnReconnect);
             this.Controls.Add(this.btnBrowseDir);
             this.Controls.Add(this.btnDlDir);

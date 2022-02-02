@@ -86,6 +86,7 @@ namespace Warpinator
                 rescanTimer.Start();
             }
             lblInitializing.Visible = !server.Running;
+            this.Cursor = server.Running ? Cursors.Default : Cursors.WaitCursor;
 
             string iface = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) => i.Id == server.SelectedInterface)?.Name ?? "Selected interface unavailable";
             if (String.IsNullOrEmpty(server.SelectedInterface))
