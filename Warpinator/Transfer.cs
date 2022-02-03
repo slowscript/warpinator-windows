@@ -105,7 +105,7 @@ namespace Warpinator
             else if (seconds > 5)
                 return $"{seconds}s";
             else
-                return "a few seconds";
+                return Resources.Strings.a_few_seconds;
         }
 
         /***** SEND ******/
@@ -298,7 +298,7 @@ namespace Warpinator
                 else if (chunk.FileType == (int)FileType.SYMLINK)
                 {
                     log.Warn("Symlinks not supported");
-                    errors.Add("WARN: Symlinks not supported");
+                    errors.Add(Resources.Strings.symlinks_not_supported);
                 }
                 else
                 {
@@ -315,7 +315,7 @@ namespace Warpinator
                     } catch (Exception e)
                     {
                         log.Error($"Failed to open file for writing {currentRelativePath}", e);
-                        errors.Add($"Failed to open file for writing {currentRelativePath}");
+                        errors.Add(Resources.Strings.failed_open_file + currentRelativePath);
                         FailReceive();
                     }
                 }
@@ -330,7 +330,7 @@ namespace Warpinator
                 } catch (Exception e)
                 {
                     log.Error($"Failed to write to file {currentRelativePath}: {e.Message}");
-                    errors.Add($"Failed to write to file {currentRelativePath}: {e.Message}");
+                    errors.Add(String.Format(Resources.Strings.failed_write_file, currentFileDateTime, e.Message));
                     FailReceive();
                 }
             }
@@ -413,6 +413,21 @@ namespace Warpinator
                 }
                 catch { }
                 currentStream = null;
+            }
+        }
+
+        internal string GetStatusString()
+        {
+            switch (Status) {
+                case TransferStatus.WAITING_PERMISSION: return Resources.Strings.waiting_for_permission;
+                case TransferStatus.DECLINED: return Resources.Strings.declined;
+                case TransferStatus.TRANSFERRING: return Resources.Strings.transferring;
+                case TransferStatus.PAUSED: return Resources.Strings.paused;
+                case TransferStatus.STOPPED: return Resources.Strings.stopped;
+                case TransferStatus.FINISHED: return Resources.Strings.finished;
+                case TransferStatus.FINISHED_WITH_ERRORS: return Resources.Strings.finished_errors;
+                case TransferStatus.FAILED: return Resources.Strings.failed;
+                default: return "???";
             }
         }
     }

@@ -33,7 +33,7 @@ namespace Warpinator
 
             var ifaces = MulticastService.GetNetworkInterfaces();
             ifaceDict.Clear();
-            ifaceDict.Add("", "Any");
+            ifaceDict.Add("", Resources.Strings.any);
             string selecetedIfaceId = Properties.Settings.Default.NetworkInterface;
             int id = -1;
             int i = 1;
@@ -48,7 +48,7 @@ namespace Warpinator
                 id = 0;
             else if (id == -1)
             {
-                ifaceDict.Add(selecetedIfaceId, $"Unavailable interface: \"{selecetedIfaceId}\"");
+                ifaceDict.Add(selecetedIfaceId, String.Format(Resources.Strings.unavailable_interface, selecetedIfaceId));
                 id = i;
             }
             comboInterfaces.Items.AddRange(ifaceDict.Values.ToArray());
@@ -68,7 +68,7 @@ namespace Warpinator
             if (System.IO.Directory.Exists(txtRecvDir.Text))
                 Properties.Settings.Default.DownloadDir = txtRecvDir.Text;
             else
-                MessageBox.Show("Selected directory does not exist, therefore this setting will not change", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(Resources.Strings.directory_doesnt_exist, Resources.Strings.warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             Properties.Settings.Default.NotifyIncoming = chkNotify.Checked;
             Properties.Settings.Default.AllowOverwrite = chkOverwrite.Checked;
             Properties.Settings.Default.AutoAccept = chkAutoAccept.Checked;

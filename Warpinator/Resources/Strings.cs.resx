@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="any" xml:space="preserve">
+    <value>Jakékoliv</value>
+    <comment>Use any interface</comment>
+  </data>
+  <data name="awaiting_duplex" xml:space="preserve">
+    <value>Čeká na obousměrné připojení</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="a_few_seconds" xml:space="preserve">
+    <value>několik vteřin</value>
+    <comment>... remaining</comment>
+  </data>
+  <data name="cant_open_browser" xml:space="preserve">
+    <value>Nepodařilo se otevřít prohlížeč. Použijte toto URL: {0}</value>
+  </data>
+  <data name="connected" xml:space="preserve">
+    <value>Připojeno</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="connecting" xml:space="preserve">
+    <value>Připojování...</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="declined" xml:space="preserve">
+    <value>Odmítnuto</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="directory_doesnt_exist" xml:space="preserve">
+    <value>Vybraná složka neexistuje, tudíž toto nastavení nebude změněno</value>
+  </data>
+  <data name="disconnected" xml:space="preserve">
+    <value>Odpojeno</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Chyba</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="error_connection" xml:space="preserve">
+    <value>Chyba spojení</value>
+  </data>
+  <data name="error_groupcode" xml:space="preserve">
+    <value>Nepodařilo se dekódovat certifikát od {0}. Nesprávný kód skupiny?</value>
+  </data>
+  <data name="error_receiving" xml:space="preserve">
+    <value>Chyba během přijímání souboru: </value>
+  </data>
+  <data name="failed" xml:space="preserve">
+    <value>Selhalo</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="failed_open_file" xml:space="preserve">
+    <value>Nepodařilo se otevřít soubor pro zápis: </value>
+  </data>
+  <data name="failed_write_file" xml:space="preserve">
+    <value>Zápis do souboru {0} selhal: {1}</value>
+    <comment>filename, error message</comment>
+  </data>
+  <data name="files" xml:space="preserve">
+    <value>{0} souborů</value>
+  </data>
+  <data name="files_may_be_overwritten" xml:space="preserve">
+    <value> (Soubory mohou být přepsány!)</value>
+  </data>
+  <data name="finished" xml:space="preserve">
+    <value>Dokončeno</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="finished_errors" xml:space="preserve">
+    <value>Dokončeno s chybami</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="incoming_transfer" xml:space="preserve">
+    <value>Příchozí přenos od {0}</value>
+  </data>
+  <data name="info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="interface_unavailable" xml:space="preserve">
+    <value>Vybrané rozhraní není dostupné</value>
+  </data>
+  <data name="no_files_selected" xml:space="preserve">
+    <value>Nebyly vybrány žádné soubory</value>
+  </data>
+  <data name="paused" xml:space="preserve">
+    <value>Pozastaveno</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="pick_files" xml:space="preserve">
+    <value>Vybrat soubory k odeslání</value>
+  </data>
+  <data name="pick_folders" xml:space="preserve">
+    <value>Vybrat složky k odeslání</value>
+  </data>
+  <data name="remaining" xml:space="preserve">
+    <value>zbývá {0}</value>
+    <comment>e.g. 10s remaining</comment>
+  </data>
+  <data name="sending_failed" xml:space="preserve">
+    <value>Odesílání selhalo s chybou: </value>
+  </data>
+  <data name="service_not_running" xml:space="preserve">
+    <value>Služba neběží!</value>
+  </data>
+  <data name="service_running" xml:space="preserve">
+    <value>Služba běží</value>
+  </data>
+  <data name="stopped" xml:space="preserve">
+    <value>Zastaveno</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="symlinks_not_supported" xml:space="preserve">
+    <value>Symbolické odkazy nejsou podporovány</value>
+  </data>
+  <data name="transfer" xml:space="preserve">
+    <value>Přenos</value>
+    <comment>Message box title</comment>
+  </data>
+  <data name="transferring" xml:space="preserve">
+    <value>Přenáší se</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="unavailable" xml:space="preserve">
+    <value>, nedostaupný</value>
+    <comment>e.g. Disconnected, unavailable</comment>
+  </data>
+  <data name="unavailable_interface" xml:space="preserve">
+    <value>Nedostupné rozhraní: "{0}"</value>
+  </data>
+  <data name="waiting_for_permission" xml:space="preserve">
+    <value>Čeká na schválení</value>
+  </data>
+  <data name="warning" xml:space="preserve">
+    <value>Varování</value>
+    <comment>Message box title</comment>
+  </data>
+</root>

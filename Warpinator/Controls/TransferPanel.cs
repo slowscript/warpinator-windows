@@ -41,19 +41,19 @@ namespace Warpinator.Controls
             btnRestart.Visible = (transfer.Direction == TransferDirection.SEND) &&
                 (transfer.Status == TransferStatus.FAILED || transfer.Status == TransferStatus.STOPPED);
             
-            lblFiles.Text = (transfer.FileCount == 1 ? transfer.SingleName : transfer.FileCount + " files") + " (" + Utils.BytesToHumanReadable((long)transfer.TotalSize) + ")";
+            lblFiles.Text = (transfer.FileCount == 1 ? transfer.SingleName : String.Format(Resources.Strings.files, transfer.FileCount)) + " (" + Utils.BytesToHumanReadable((long)transfer.TotalSize) + ")";
             // Status label
             if (transfer.Status == TransferStatus.WAITING_PERMISSION)
             {
-                lblProgress.Text = "Waiting for permission";
+                lblProgress.Text = Resources.Strings.waiting_for_permission;
                 if (transfer.OverwriteWarning)
-                    lblProgress.Text += " (Files may be overwritten!)";
+                    lblProgress.Text += Resources.Strings.files_may_be_overwritten;
             }
             else if (transfer.Status == TransferStatus.TRANSFERRING)
                 lblProgress.Text = Utils.BytesToHumanReadable(transfer.BytesTransferred) + " / " + Utils.BytesToHumanReadable((long)transfer.TotalSize) + " (" +
-                Utils.BytesToHumanReadable(transfer.BytesPerSecond) + "/s, " + transfer.GetRemainingTime() + " remaining)";
+                Utils.BytesToHumanReadable(transfer.BytesPerSecond) + "/s, " + String.Format(Resources.Strings.remaining, transfer.GetRemainingTime()) + ")";
             else
-                lblProgress.Text = transfer.Status.ToString();
+                lblProgress.Text = transfer.GetStatusString();
             progressBar.Value = (int)(transfer.Progress * 100);
             btnShowDetails.Visible = (transfer.Status == TransferStatus.FINISHED_WITH_ERRORS) || (transfer.Status == TransferStatus.FAILED && transfer.errors.Count > 0);
         }
@@ -83,7 +83,7 @@ namespace Warpinator.Controls
 
         private void BtnShowDetails_Click(object sender, EventArgs e)
         {            
-            MessageBox.Show(ParentForm, String.Join("\n", transfer.errors), "Transfer");
+            MessageBox.Show(ParentForm, String.Join("\n", transfer.errors), Resources.Strings.transfer);
         }
     }
 }

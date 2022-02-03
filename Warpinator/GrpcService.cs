@@ -97,7 +97,7 @@ namespace Warpinator
                 catch (Exception e)
                 {
                     log.Error("Transfer failed with exception", e);
-                    t.errors.Add("Sending failed with exception: " + e.Message);
+                    t.errors.Add(Resources.Strings.sending_failed + e.Message);
                     t.Status = TransferStatus.FAILED;
                     t.OnTransferUpdated();
                 }

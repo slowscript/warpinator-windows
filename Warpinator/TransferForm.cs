@@ -40,9 +40,9 @@ namespace Warpinator
             lblDisplayName.Text = remote.DisplayName;
             lblUserString.Text = remote.UserName + "@" + remote.Hostname;
             lblAddress.Text = remote.Address + ":" + remote.Port;
-            lblStatus.Text = remote.Status.ToString();
+            lblStatus.Text = remote.GetStatusString();
             if ((remote.Status == RemoteStatus.DISCONNECTED || remote.Status == RemoteStatus.ERROR) && !remote.ServiceAvailable)
-                lblStatus.Text += ", unavailable";
+                lblStatus.Text += Resources.Strings.unavailable;
             btnReconnect.Visible = remote.Status == RemoteStatus.DISCONNECTED || remote.Status == RemoteStatus.ERROR;
             btnSend.Enabled = remote.Status == RemoteStatus.CONNECTED;
 
@@ -66,7 +66,7 @@ namespace Warpinator
         {
             var ofd = new OpenFileDialog
             {
-                Title = "Pick files to send",
+                Title = Resources.Strings.pick_files,
                 Multiselect = true
             };
             var res = ofd.ShowDialog();
@@ -81,7 +81,7 @@ namespace Warpinator
         {
             var d = new OpenFoldersDialog
             {
-                Title = "Pick folders to send",
+                Title = Resources.Strings.pick_folders,
                 MultiSelect = true
             };
             if (d.Show())
@@ -95,7 +95,7 @@ namespace Warpinator
         {
             if (selectedFiles == null || selectedFiles.Length == 0)
             {
-                MessageBox.Show("No files were selected");
+                MessageBox.Show(Resources.Strings.no_files_selected);
                 return;
             }
             Transfer t = new Transfer()

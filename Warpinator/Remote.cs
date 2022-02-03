@@ -227,6 +227,19 @@ namespace Warpinator
                 form.Invoke(new Action(() => form.UpdateTransfers()));
         }
 
+        public string GetStatusString()
+        {
+            switch (Status)
+            {
+                case RemoteStatus.CONNECTED: return Resources.Strings.connected;
+                case RemoteStatus.DISCONNECTED: return Resources.Strings.disconnected;
+                case RemoteStatus.CONNECTING: return Resources.Strings.connecting;
+                case RemoteStatus.AWAITING_DUPLEX: return Resources.Strings.awaiting_duplex;
+                case RemoteStatus.ERROR: return Resources.Strings.error;
+                default: return "???";
+            }
+        }
+
         private async Task<bool> WaitForDuplex()
         {
             int tries = 0;
@@ -292,7 +305,7 @@ namespace Warpinator
             byte[] decoded = Convert.FromBase64String(base64encoded);
             if (!Authenticator.SaveRemoteCertificate(decoded, UUID))
             {
-                System.Windows.Forms.MessageBox.Show($"Could not decode certificate from {Hostname}. Wrong group code?", "Connection error");
+                System.Windows.Forms.MessageBox.Show(String.Format(Resources.Strings.error_groupcode, Hostname), Resources.Strings.error_connection);
                 log.Error("Groupcode error");
                 return false;
             }

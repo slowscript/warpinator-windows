@@ -88,12 +88,12 @@ namespace Warpinator
             lblInitializing.Visible = !server.Running;
             this.Cursor = server.Running ? Cursors.Default : Cursors.WaitCursor;
 
-            string iface = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) => i.Id == server.SelectedInterface)?.Name ?? "Selected interface unavailable";
+            string iface = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) => i.Id == server.SelectedInterface)?.Name ?? Resources.Strings.interface_unavailable;
             if (String.IsNullOrEmpty(server.SelectedInterface))
-                iface = "Any";
+                iface = Resources.Strings.any;
             lblIP.Text = Utils.GetLocalIPAddress() + " | " + iface;
             
-            lblStatus.Text = server.Running ? "Service is running" : "Service not running!";
+            lblStatus.Text = server.Running ? Resources.Strings.service_running : Resources.Strings.service_not_running;
         }
 
         public static void OnIncomingTransfer(Transfer t)
@@ -106,8 +106,8 @@ namespace Warpinator
         EventHandler ballonClickHandler;
         private void ShowTransferBaloon(Transfer t)
         {
-            notifyIcon.BalloonTipTitle = "Incoming transfer from " + server.Remotes[t.RemoteUUID].Hostname;
-            notifyIcon.BalloonTipText = (t.FileCount == 1 ? t.SingleName : t.FileCount + " files") + " (" + Utils.BytesToHumanReadable((long)t.TotalSize) + ")";
+            notifyIcon.BalloonTipTitle = String.Format(Resources.Strings.incoming_transfer, server.Remotes[t.RemoteUUID].Hostname);
+            notifyIcon.BalloonTipText = (t.FileCount == 1 ? t.SingleName : String.Format(Resources.Strings.files, t.FileCount)) + " (" + Utils.BytesToHumanReadable((long)t.TotalSize) + ")";
 
             if (ballonClickHandler != null)
                 notifyIcon.BalloonTipClicked -= ballonClickHandler;
@@ -150,7 +150,7 @@ namespace Warpinator
                 Process.Start(new ProcessStartInfo("https://github.com/slowscript/warpinator-windows"));
             } catch
             {
-                MessageBox.Show("Could not open web browser. Use this URL: https://github.com/slowscript/warpinator-windows", "Info");
+                MessageBox.Show(String.Format(Resources.Strings.cant_open_browser, "https://github.com/slowscript/warpinator-windows"), Resources.Strings.info);
             }
         }
 
