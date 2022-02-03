@@ -30,6 +30,7 @@ namespace Warpinator
             chkOverwrite.Checked = Properties.Settings.Default.AllowOverwrite;
             chkAutoAccept.Checked = Properties.Settings.Default.AutoAccept;
             chkBackground.Checked = Properties.Settings.Default.RunInBackground;
+            chkUpdates.Checked = Properties.Settings.Default.CheckForUpdates;
 
             var ifaces = MulticastService.GetNetworkInterfaces();
             ifaceDict.Clear();
@@ -73,6 +74,7 @@ namespace Warpinator
             Properties.Settings.Default.AllowOverwrite = chkOverwrite.Checked;
             Properties.Settings.Default.AutoAccept = chkAutoAccept.Checked;
             Properties.Settings.Default.RunInBackground = chkBackground.Checked;
+            Properties.Settings.Default.CheckForUpdates = chkUpdates.Checked;
 
             Properties.Settings.Default.Save();
         }

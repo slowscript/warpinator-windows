@@ -151,6 +151,9 @@
     <value>Odpojeno</value>
     <comment>Connection status</comment>
   </data>
+  <data name="do_you_want_to_check_for_updates" xml:space="preserve">
+    <value>Chcete automaticky kontrolovat dostupnost aktualizací?</value>
+  </data>
   <data name="error" xml:space="preserve">
     <value>Chyba</value>
     <comment>Connection status</comment>
@@ -197,6 +200,9 @@
   </data>
   <data name="interface_unavailable" xml:space="preserve">
     <value>Vybrané rozhraní není dostupné</value>
+  </data>
+  <data name="new_version_available" xml:space="preserve">
+    <value>Nová verze je dostupná: {0} (současná: {1}). Přejete si ji stáhnout?</value>
   </data>
   <data name="no_files_selected" xml:space="preserve">
     <value>Nebyly vybrány žádné soubory</value>

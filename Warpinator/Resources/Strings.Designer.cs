@@ -142,6 +142,15 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Do you want to check for updates automatically?.
+        /// </summary>
+        internal static string do_you_want_to_check_for_updates {
+            get {
+                return ResourceManager.GetString("do_you_want_to_check_for_updates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledá lokalizovaný řetězec podobný Error.
         /// </summary>
         internal static string error {
@@ -264,6 +273,15 @@ namespace Warpinator.Resources {
         internal static string interface_unavailable {
             get {
                 return ResourceManager.GetString("interface_unavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný New version is available: {0} (current: {1}). Would you like to download it?.
+        /// </summary>
+        internal static string new_version_available {
+            get {
+                return ResourceManager.GetString("new_version_available", resourceCulture);
             }
         }
         

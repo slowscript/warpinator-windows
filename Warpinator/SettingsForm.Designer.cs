@@ -50,6 +50,7 @@ namespace Warpinator
             this.btnApply = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.chkBackground = new System.Windows.Forms.CheckBox();
+            this.chkUpdates = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
@@ -199,10 +200,17 @@ namespace Warpinator
             this.chkBackground.Name = "chkBackground";
             this.chkBackground.UseVisualStyleBackColor = true;
             // 
+            // chkUpdates
+            // 
+            resources.ApplyResources(this.chkUpdates, "chkUpdates");
+            this.chkUpdates.Name = "chkUpdates";
+            this.chkUpdates.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkUpdates);
             this.Controls.Add(this.chkBackground);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnApply);
@@ -247,5 +255,6 @@ namespace Warpinator
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.CheckBox chkBackground;
         private System.Windows.Forms.Button btnShowCode;
+        private System.Windows.Forms.CheckBox chkUpdates;
     }
 }

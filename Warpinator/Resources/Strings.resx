@@ -151,6 +151,9 @@
     <value>Disconnected</value>
     <comment>Connection status</comment>
   </data>
+  <data name="do_you_want_to_check_for_updates" xml:space="preserve">
+    <value>Do you want to check for updates automatically?</value>
+  </data>
   <data name="error" xml:space="preserve">
     <value>Error</value>
     <comment>Connection status</comment>
@@ -197,6 +200,9 @@
   </data>
   <data name="interface_unavailable" xml:space="preserve">
     <value>Selected interface unavailable</value>
+  </data>
+  <data name="new_version_available" xml:space="preserve">
+    <value>New version is available: {0} (current: {1}). Would you like to download it?</value>
   </data>
   <data name="no_files_selected" xml:space="preserve">
     <value>No files were selected</value>

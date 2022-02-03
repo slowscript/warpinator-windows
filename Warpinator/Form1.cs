@@ -5,15 +5,18 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Common.Logging;
 using Warpinator.Controls;
 
 namespace Warpinator
 {
     public partial class Form1 : Form
     {
+        readonly ILog log = Program.Log.GetLogger("Form1");
         readonly Server server;
         readonly Timer rescanTimer = new Timer();
         static Form1 current;
@@ -38,6 +41,18 @@ namespace Warpinator
             //server.Remotes.Add("a", new Remote { DisplayName = "TEST", UserName = "test", Hostname = "PC1", Address = System.Net.IPAddress.Parse("192.168.1.1"),
             //    Port = 42000, Status = RemoteStatus.DISCONNECTED });
             DoUpdateUI();
+            
+            if (Properties.Settings.Default.FirstRun)
+            {
+                var res = MessageBox.Show(Resources.Strings.do_you_want_to_check_for_updates, Resources.Strings.info, MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                    Properties.Settings.Default.CheckForUpdates = true;
+                Properties.Settings.Default.FirstRun = false;
+                Properties.Settings.Default.Save();
+            }
+            if (Properties.Settings.Default.CheckForUpdates)
+                await CheckForUpdates();
+            
             await server.Start();
         }
 
@@ -116,6 +131,49 @@ namespace Warpinator
             notifyIcon.ShowBalloonTip(5000);
         }
 
+        private async Task CheckForUpdates()
+        {
+            var handler = new HttpClientHandler() { AllowAutoRedirect = false };
+            var client = new HttpClient(handler);
+            var req = new HttpRequestMessage(HttpMethod.Head, "https://github.com/slowscript/warpinator-windows/releases/latest");
+            req.Headers.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("warpinator-windows", "1.0"));
+            try
+            {
+                var res = await client.SendAsync(req);
+                if (res.Headers.Location != null)
+                {
+                    string latest = res.Headers.Location.ToString().Split('/').Last().Substring(1);
+                    latest = System.Text.RegularExpressions.Regex.Replace(latest, @"[A-Za-z]+", "");
+                    var ver = new Version(latest);
+                    log.Debug("Latest version is " + ver);
+                    var cur = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                    if (ver > cur)
+                    {
+                        var r = MessageBox.Show(String.Format(Resources.Strings.new_version_available, ver, cur), Resources.Strings.info, MessageBoxButtons.YesNo);
+                        if (r == DialogResult.Yes)
+                            OpenWebsite(res.Headers.Location.ToString());
+                    }
+                    else log.Debug("We are up to date");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Warn("Failed to check for new version", ex);
+            }
+        }
+
+        private void OpenWebsite(string url)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo(url));
+            }
+            catch
+            {
+                MessageBox.Show(String.Format(Resources.Strings.cant_open_browser, url), Resources.Strings.info);
+            }
+        }
+
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutBox().ShowDialog();
@@ -145,13 +203,7 @@ namespace Warpinator
         private void ReannounceToolStripMenuItem_Click(object sender, EventArgs e) => server.Reannounce();
         private void GitHubToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Process.Start(new ProcessStartInfo("https://github.com/slowscript/warpinator-windows"));
-            } catch
-            {
-                MessageBox.Show(String.Format(Resources.Strings.cant_open_browser, "https://github.com/slowscript/warpinator-windows"), Resources.Strings.info);
-            }
+            OpenWebsite("https://github.com/slowscript/warpinator-windows");
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e) => this.Show();

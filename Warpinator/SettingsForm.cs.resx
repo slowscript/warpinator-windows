@@ -181,6 +181,12 @@
   <data name="chkBackground.Text" xml:space="preserve">
     <value>Běžet v oznamovací oblasti</value>
   </data>
+  <data name="chkUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 17</value>
+  </data>
+  <data name="chkUpdates.Text" xml:space="preserve">
+    <value>Kontrolovat dostupnost aktualizací při spuštění</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Nastavení</value>
   </data>
