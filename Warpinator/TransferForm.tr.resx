@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>360, 220</value>
+  </data>
+  <data name="btnDlDir.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 53</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblAddress.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="pictureUser.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="lblDisplayName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 12</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtFile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="lblUserString.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblUserString.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 13</value>
+  </data>
+  <data name="btnBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 379</value>
+  </data>
+  <data name="txtFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 381</value>
+  </data>
+  <data name="&gt;&gt;lblDisplayName.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;btnDlDir.Name" xml:space="preserve">
+    <value>btnDlDir</value>
+  </data>
+  <data name="&gt;&gt;btnReconnect.Name" xml:space="preserve">
+    <value>btnReconnect</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutTransfers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblUserString.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblUserString.Text" xml:space="preserve">
+    <value>username@machine</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TransferForm</value>
+  </data>
+  <data name="btnBrowse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;btnSend.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="pictureUser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 64</value>
+  </data>
+  <data name="&gt;&gt;lblUserString.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 12</value>
+  </data>
+  <data name="lblAddress.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnReconnect.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pictureUser.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblDisplayName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 17</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="btnSend.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="&gt;&gt;lblUserString.Name" xml:space="preserve">
+    <value>lblUserString</value>
+  </data>
+  <data name="&gt;&gt;lblAddress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSend.Name" xml:space="preserve">
+    <value>btnSend</value>
+  </data>
+  <data name="flowLayoutTransfers.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;btnSend.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="btnBrowseDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 23</value>
+  </data>
+  <data name="lblAddress.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 58</value>
+  </data>
+  <data name="flowLayoutTransfers.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;lblAddress.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;btnSend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtFile.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;txtFile.Name" xml:space="preserve">
+    <value>txtFile</value>
+  </data>
+  <data name="flowLayoutTransfers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 82</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="btnBrowse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="browseFilesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dosyalara göz atın</value>
+  </data>
+  <data name="lblDisplayName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblUserString.Location" type="System.Drawing.Point, System.Drawing">
+    <value>82, 35</value>
+  </data>
+  <data name="&gt;&gt;pictureUser.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnBrowse.Text" xml:space="preserve">
+    <value>Göz at</value>
+  </data>
+  <data name="btnReconnect.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="btnDlDir.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="browseFoldersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 22</value>
+  </data>
+  <data name="btnSend.Text" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="&gt;&gt;txtFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flowLayoutTransfers.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+    <value>TopDown</value>
+  </data>
+  <data name="btnReconnect.Text" xml:space="preserve">
+    <value>Yeniden bağlan</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutTransfers.Name" xml:space="preserve">
+    <value>flowLayoutTransfers</value>
+  </data>
+  <data name="&gt;&gt;lblDisplayName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="lblDisplayName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="txtFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 20</value>
+  </data>
+  <data name="btnBrowseDir.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="&gt;&gt;browseFoldersToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flowLayoutTransfers.WrapContents" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lblStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.Name" xml:space="preserve">
+    <value>btnBrowse</value>
+  </data>
+  <data name="flowLayoutTransfers.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;btnReconnect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="btnBrowseDir.Text" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 13</value>
+  </data>
+  <data name="btnDlDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 23</value>
+  </data>
+  <data name="btnReconnect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnBrowse.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
+    <value>lblStatus</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="pictureUser.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblDisplayName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnSend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>319, 379</value>
+  </data>
+  <data name="&gt;&gt;btnDlDir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseDir.Name" xml:space="preserve">
+    <value>btnBrowseDir</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseDir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblAddress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
+  </data>
+  <data name="pictureUser.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="btnDlDir.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;btnReconnect.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblAddress.Text" xml:space="preserve">
+    <value>192.168.1.1:42000</value>
+  </data>
+  <data name="&gt;&gt;lblUserString.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;browseFilesToolStripMenuItem.Name" xml:space="preserve">
+    <value>browseFilesToolStripMenuItem</value>
+  </data>
+  <data name="btnReconnect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>317, 28</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnDlDir.Text" xml:space="preserve">
+    <value>İndirme klasörünü aç</value>
+  </data>
+  <data name="&gt;&gt;pictureUser.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pictureUser.Name" xml:space="preserve">
+    <value>pictureUser</value>
+  </data>
+  <data name="&gt;&gt;lblAddress.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;btnDlDir.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="browseFoldersToolStripMenuItem.Text" xml:space="preserve">
+    <value>Browse folders</value>
+  </data>
+  <data name="&gt;&gt;txtFile.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblDisplayName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseDir.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAddress.Name" xml:space="preserve">
+    <value>lblAddress</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseDir.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblDisplayName.Text" xml:space="preserve">
+    <value>Kullanıcı</value>
+  </data>
+  <data name="&gt;&gt;browseFoldersToolStripMenuItem.Name" xml:space="preserve">
+    <value>browseFoldersToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutTransfers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;browseFilesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDisplayName.Name" xml:space="preserve">
+    <value>lblDisplayName</value>
+  </data>
+  <data name="btnBrowseDir.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 379</value>
+  </data>
+  <data name="&gt;&gt;txtFile.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnReconnect.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;btnDlDir.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>TransferForm</value>
+  </data>
+  <data name="browseFilesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 22</value>
+  </data>
+  <data name="btnBrowseDir.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="flowLayoutTransfers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 291</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>404, 414</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnSend.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;btnBrowse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnSend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="lblUserString.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutTransfers.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>cs</value>
+  </metadata>
+</root>
