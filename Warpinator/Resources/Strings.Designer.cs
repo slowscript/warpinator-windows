@@ -79,6 +79,15 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Available devices.
+        /// </summary>
+        internal static string available_devices {
+            get {
+                return ResourceManager.GetString("available_devices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledá lokalizovaný řetězec podobný Awaiting duplex.
         /// </summary>
         internal static string awaiting_duplex {
@@ -327,6 +336,15 @@ namespace Warpinator.Resources {
         internal static string remaining {
             get {
                 return ResourceManager.GetString("remaining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Send to.
+        /// </summary>
+        internal static string send_to {
+            get {
+                return ResourceManager.GetString("send_to", resourceCulture);
             }
         }
         

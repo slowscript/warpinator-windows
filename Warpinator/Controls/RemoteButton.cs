@@ -46,6 +46,7 @@ namespace Warpinator.Controls
 
         private void RemoteButton_Click(object sender, EventArgs e)
         {
+            remote.ProcessSendToTransfer();
             remote.OpenWindow();
         }
 

@@ -109,6 +109,17 @@ namespace Warpinator
             lblIP.Text = Utils.GetLocalIPAddress() + " | " + iface;
             
             lblStatus.Text = server.Running ? Resources.Strings.service_running : Resources.Strings.service_not_running;
+
+            if (Program.SendPath != null)
+            {
+                label1.Text = Resources.Strings.send_to;
+                label1.ForeColor = SystemColors.Highlight;
+            }
+            else
+            {
+                label1.Text = Resources.Strings.available_devices;
+                label1.ForeColor = SystemColors.ControlText;
+            }
         }
 
         public static void OnIncomingTransfer(Transfer t)

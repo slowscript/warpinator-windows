@@ -121,6 +121,9 @@
     <value>Any</value>
     <comment>Use any interface</comment>
   </data>
+  <data name="available_devices" xml:space="preserve">
+    <value>Available devices</value>
+  </data>
   <data name="awaiting_duplex" xml:space="preserve">
     <value>Awaiting duplex</value>
     <comment>Connection status</comment>
@@ -223,6 +226,9 @@
   </data>
   <data name="sending_failed" xml:space="preserve">
     <value>Sending failed with exception: </value>
+  </data>
+  <data name="send_to" xml:space="preserve">
+    <value>Send to</value>
   </data>
   <data name="service_not_running" xml:space="preserve">
     <value>Service not running!</value>

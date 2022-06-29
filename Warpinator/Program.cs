@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,8 +12,9 @@ namespace Warpinator
     static class Program
     {
         internal static ILoggerFactoryAdapter Log { get; private set; }
+        internal static string SendPath;
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             //Global logging (libraries)
             var properties = new Common.Logging.Configuration.NameValueCollection
@@ -34,6 +36,15 @@ namespace Warpinator
             
             var log = Log.GetLogger("Main");
             log.Info("Hola hej!");
+
+            if (args.Length > 0)
+            {
+                var path = args[0];
+                log.Trace("Got path to send: " + path);
+                if (File.Exists(args[0]) || Directory.Exists(args[0]))
+                    SendPath = path;
+                else log.Warn("Path does not exist");
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

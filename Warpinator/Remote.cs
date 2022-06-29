@@ -204,6 +204,24 @@ namespace Warpinator
             client.StopTransferAsync(stopInfo);
         }
 
+        public void ProcessSendToTransfer()
+        {
+            if (Program.SendPath != null)
+            {
+                log.Info($"Send To: {Hostname}");
+                Transfer t = new Transfer()
+                {
+                    FilesToSend = new string[] { Program.SendPath}.ToList(),
+                    RemoteUUID = UUID
+                };
+                Program.SendPath = null;
+                Form1.UpdateUI();
+                t.PrepareSend();
+                Transfers.Add(t);
+                StartSendTransfer(t);
+            }
+        }
+
         public void OpenWindow()
         {
             if (form == null) {
