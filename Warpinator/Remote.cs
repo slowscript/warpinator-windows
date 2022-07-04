@@ -218,6 +218,7 @@ namespace Warpinator
                 Form1.UpdateUI();
                 t.PrepareSend();
                 Transfers.Add(t);
+                UpdateTransfers();
                 StartSendTransfer(t);
             }
         }

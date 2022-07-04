@@ -158,6 +158,7 @@ namespace Warpinator
         {
             var handler = new HttpClientHandler() { AllowAutoRedirect = false };
             var client = new HttpClient(handler);
+            client.Timeout = TimeSpan.FromSeconds(1);
             var req = new HttpRequestMessage(HttpMethod.Head, "https://github.com/slowscript/warpinator-windows/releases/latest");
             req.Headers.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("warpinator-windows", "1.0"));
             try
