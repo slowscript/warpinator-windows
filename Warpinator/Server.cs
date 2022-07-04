@@ -47,7 +47,7 @@ namespace Warpinator
             UserName = Environment.UserName;
             
             //Load settings
-            settings = Properties.Settings.Default;
+            settings = (Properties.Settings)System.Configuration.SettingsBase.Synchronized(Properties.Settings.Default);
             if (!String.IsNullOrEmpty(settings.UUID))
                 UUID = settings.UUID;
             else
@@ -63,6 +63,7 @@ namespace Warpinator
 
             mdns = new MulticastService((ifaces) => ifaces.Where((iface) => SelectedInterface == null || iface.Id == SelectedInterface));
             mdns.UseIpv6 = false;
+            mdns.IgnoreDuplicateMessages = true;
             sd = new ServiceDiscovery(mdns);
             pingTimer.Elapsed += (a, b) => PingRemotes();
             pingTimer.AutoReset = true;
@@ -156,9 +157,10 @@ namespace Warpinator
 
         private void OnServiceInstanceDiscovered(object sender, ServiceInstanceDiscoveryEventArgs e)
         {
-            log.Debug($"Service discovered: '{e.ServiceInstanceName}'");
+            var srvName = String.Join(".", e.ServiceInstanceName.Labels);
+            log.Debug($"Service discovered: '{srvName}'");
             if (!mdnsServices.ContainsKey(e.ServiceInstanceName.ToCanonical().ToString()))
-                mdnsServices.TryAdd(e.ServiceInstanceName.ToCanonical().ToString(), new ServiceRecord() { FullName = e.ServiceInstanceName.ToString() });
+                mdnsServices.TryAdd(e.ServiceInstanceName.ToCanonical().ToString(), new ServiceRecord() { FullName = srvName });
         }
         
         private void OnServiceInstanceShutdown(object sender, ServiceInstanceShutdownEventArgs e)
@@ -181,9 +183,10 @@ namespace Warpinator
             var servers = answers.OfType<SRVRecord>();
             foreach (var server in servers)
             {
-                log.Debug($"  Service '{server.Name}' has hostname '{server.Target} and port {server.Port}'");
+                var srvName = String.Join(".", server.Name.Labels);
+                log.Debug($"  Service '{srvName}' has hostname '{server.Target} and port {server.Port}'");
                 if (!mdnsServices.ContainsKey(server.CanonicalName))
-                    mdnsServices.TryAdd(server.CanonicalName, new ServiceRecord { FullName = server.Name.ToString() });
+                    mdnsServices.TryAdd(server.CanonicalName, new ServiceRecord { FullName = srvName });
                 mdnsServices[server.CanonicalName].Hostname = server.Target.ToString();
                 if (hostnameDict.TryGetValue(server.Target.ToString(), out IPAddress addr))
                     mdnsServices[server.CanonicalName].Address = addr;
