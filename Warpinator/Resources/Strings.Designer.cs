@@ -340,7 +340,7 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
-        ///   Vyhledá lokalizovaný řetězec podobný Send to.
+        ///   Vyhledá lokalizovaný řetězec podobný Send {0} file(s) to.
         /// </summary>
         internal static string send_to {
             get {

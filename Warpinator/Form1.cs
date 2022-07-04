@@ -83,6 +83,18 @@ namespace Warpinator
                 current.Invoke(new Action(() => current.DoUpdateUI()));
         }
 
+        public static void OnSendTo()
+        {
+            if (current != null)
+            {
+                current.Invoke(new Action(() =>
+                {
+                    current.DoUpdateUI();
+                    current.Activate();
+                }));
+            }
+        }
+
         private void DoUpdateUI()
         {
             flowLayoutPanel.Controls.Clear();
@@ -110,9 +122,9 @@ namespace Warpinator
             
             lblStatus.Text = server.Running ? Resources.Strings.service_running : Resources.Strings.service_not_running;
 
-            if (Program.SendPath != null)
+            if (Program.SendPaths.Count != 0)
             {
-                label1.Text = Resources.Strings.send_to;
+                label1.Text = String.Format(Resources.Strings.send_to, Program.SendPaths.Count);
                 label1.ForeColor = SystemColors.Highlight;
             }
             else

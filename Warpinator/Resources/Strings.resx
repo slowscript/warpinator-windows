@@ -228,7 +228,7 @@
     <value>Sending failed with exception: </value>
   </data>
   <data name="send_to" xml:space="preserve">
-    <value>Send to</value>
+    <value>Send {0} file(s) to</value>
   </data>
   <data name="service_not_running" xml:space="preserve">
     <value>Service not running!</value>

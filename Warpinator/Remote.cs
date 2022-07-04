@@ -206,15 +206,15 @@ namespace Warpinator
 
         public void ProcessSendToTransfer()
         {
-            if (Program.SendPath != null)
+            if (Program.SendPaths.Count != 0)
             {
                 log.Info($"Send To: {Hostname}");
                 Transfer t = new Transfer()
                 {
-                    FilesToSend = new string[] { Program.SendPath}.ToList(),
+                    FilesToSend = Program.SendPaths,
                     RemoteUUID = UUID
                 };
-                Program.SendPath = null;
+                Program.SendPaths = new List<string>();
                 Form1.UpdateUI();
                 t.PrepareSend();
                 Transfers.Add(t);
