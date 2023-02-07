@@ -313,6 +313,15 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný  ({0} outside of group).
+        /// </summary>
+        internal static string outside_group {
+            get {
+                return ResourceManager.GetString("outside_group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledá lokalizovaný řetězec podobný Paused.
         /// </summary>
         internal static string paused {

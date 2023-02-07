@@ -146,7 +146,7 @@ namespace Warpinator
                 lblDevices.ForeColor = SystemColors.ControlText;
             }
             if (numOutgroup > 0)
-                lblDevices.Text += " (" + numOutgroup + " outside of group)";
+                lblDevices.Text += String.Format(Resources.Strings.outside_group, numOutgroup);
         }
 
         public static void OnIncomingTransfer(Transfer t)

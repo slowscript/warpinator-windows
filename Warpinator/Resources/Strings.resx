@@ -213,6 +213,9 @@
   <data name="no_files_selected" xml:space="preserve">
     <value>No files were selected</value>
   </data>
+  <data name="outside_group" xml:space="preserve">
+    <value> ({0} outside of group)</value>
+  </data>
   <data name="paused" xml:space="preserve">
     <value>Paused</value>
     <comment>Transfer status</comment>

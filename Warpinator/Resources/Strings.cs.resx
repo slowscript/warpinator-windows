@@ -210,6 +210,9 @@
   <data name="no_files_selected" xml:space="preserve">
     <value>Nebyly vybrány žádné soubory</value>
   </data>
+  <data name="outside_group" xml:space="preserve">
+    <value> ({0} mimo skupinu)</value>
+  </data>
   <data name="paused" xml:space="preserve">
     <value>Pozastaveno</value>
     <comment>Transfer status</comment>
