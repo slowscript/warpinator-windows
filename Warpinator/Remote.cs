@@ -24,7 +24,6 @@ namespace Warpinator
     
     public class Remote
     {
-
         public IPAddress Address;
         public int Port;
         public string ServiceName;
@@ -36,6 +35,7 @@ namespace Warpinator
         public RemoteStatus Status;
         public bool ServiceAvailable;
         public bool IncomingTransferFlag = false;
+        public bool GroupCodeError = false;
         public List<Transfer> Transfers = new List<Transfer>();
         public event EventHandler RemoteUpdated;
 
@@ -53,6 +53,7 @@ namespace Warpinator
             {
                 Status = RemoteStatus.ERROR;
                 UpdateUI();
+                Form1.UpdateUI();
                 return;
             }
             log.Trace($"Certificate for {Hostname} received and saved");
@@ -92,6 +93,7 @@ namespace Warpinator
             }
 
             UpdateUI();
+            Form1.UpdateUI();
             log.Info($"Connection established with {Hostname}");
         }
 
@@ -322,9 +324,8 @@ namespace Warpinator
             }
             string base64encoded = Encoding.ASCII.GetString(received);
             byte[] decoded = Convert.FromBase64String(base64encoded);
-            if (!Authenticator.SaveRemoteCertificate(decoded, UUID))
-            {
-                System.Windows.Forms.MessageBox.Show(String.Format(Resources.Strings.error_groupcode, Hostname), Resources.Strings.error_connection);
+            GroupCodeError = !Authenticator.SaveRemoteCertificate(decoded, UUID);
+            if (GroupCodeError) {
                 log.Error("Groupcode error");
                 return false;
             }

@@ -44,7 +44,7 @@ namespace Warpinator
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionIssuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblDevices = new System.Windows.Forms.Label();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.notifyIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -60,95 +60,95 @@ namespace Warpinator
             // 
             // statusStrip1
             // 
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblIP,
             this.lblStatus});
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             // 
             // lblIP
             // 
-            resources.ApplyResources(this.lblIP, "lblIP");
             this.lblIP.Name = "lblIP";
+            resources.ApplyResources(this.lblIP, "lblIP");
             // 
             // lblStatus
             // 
-            resources.ApplyResources(this.lblStatus, "lblStatus");
             this.lblStatus.Name = "lblStatus";
+            resources.ApplyResources(this.lblStatus, "lblStatus");
             this.lblStatus.Spring = true;
             // 
             // menuStrip1
             // 
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
-            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rescanToolStripMenuItem,
             this.reannounceToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
             // rescanToolStripMenuItem
             // 
-            resources.ApplyResources(this.rescanToolStripMenuItem, "rescanToolStripMenuItem");
             this.rescanToolStripMenuItem.Name = "rescanToolStripMenuItem";
+            resources.ApplyResources(this.rescanToolStripMenuItem, "rescanToolStripMenuItem");
             this.rescanToolStripMenuItem.Click += new System.EventHandler(this.RescanToolStripMenuItem_Click);
             // 
             // reannounceToolStripMenuItem
             // 
-            resources.ApplyResources(this.reannounceToolStripMenuItem, "reannounceToolStripMenuItem");
             this.reannounceToolStripMenuItem.Name = "reannounceToolStripMenuItem";
+            resources.ApplyResources(this.reannounceToolStripMenuItem, "reannounceToolStripMenuItem");
             this.reannounceToolStripMenuItem.Click += new System.EventHandler(this.ReannounceToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
-            resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
-            resources.ApplyResources(this.quitToolStripMenuItem, "quitToolStripMenuItem");
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            resources.ApplyResources(this.quitToolStripMenuItem, "quitToolStripMenuItem");
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
             this.connectionIssuesToolStripMenuItem,
             this.gitHubToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
             // aboutToolStripMenuItem
             // 
-            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // connectionIssuesToolStripMenuItem
             // 
-            resources.ApplyResources(this.connectionIssuesToolStripMenuItem, "connectionIssuesToolStripMenuItem");
             this.connectionIssuesToolStripMenuItem.Name = "connectionIssuesToolStripMenuItem";
+            resources.ApplyResources(this.connectionIssuesToolStripMenuItem, "connectionIssuesToolStripMenuItem");
             // 
             // gitHubToolStripMenuItem
             // 
-            resources.ApplyResources(this.gitHubToolStripMenuItem, "gitHubToolStripMenuItem");
             this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
+            resources.ApplyResources(this.gitHubToolStripMenuItem, "gitHubToolStripMenuItem");
             this.gitHubToolStripMenuItem.Click += new System.EventHandler(this.GitHubToolStripMenuItem_Click);
             // 
-            // label1
+            // lblDevices
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.lblDevices, "lblDevices");
+            this.lblDevices.Name = "lblDevices";
             // 
             // flowLayoutPanel
             // 
@@ -158,27 +158,27 @@ namespace Warpinator
             // 
             // notifyIcon
             // 
-            resources.ApplyResources(this.notifyIcon, "notifyIcon");
             this.notifyIcon.ContextMenuStrip = this.notifyIconMenu;
+            resources.ApplyResources(this.notifyIcon, "notifyIcon");
             // 
             // notifyIconMenu
             // 
-            resources.ApplyResources(this.notifyIconMenu, "notifyIconMenu");
             this.notifyIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.quitToolStripMenuItem1});
             this.notifyIconMenu.Name = "notifyIconMenu";
+            resources.ApplyResources(this.notifyIconMenu, "notifyIconMenu");
             // 
             // openToolStripMenuItem
             // 
-            resources.ApplyResources(this.openToolStripMenuItem, "openToolStripMenuItem");
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            resources.ApplyResources(this.openToolStripMenuItem, "openToolStripMenuItem");
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem1
             // 
-            resources.ApplyResources(this.quitToolStripMenuItem1, "quitToolStripMenuItem1");
             this.quitToolStripMenuItem1.Name = "quitToolStripMenuItem1";
+            resources.ApplyResources(this.quitToolStripMenuItem1, "quitToolStripMenuItem1");
             this.quitToolStripMenuItem1.Click += new System.EventHandler(this.quitToolStripMenuItem1_Click);
             // 
             // btnRescan
@@ -208,7 +208,7 @@ namespace Warpinator
             this.Controls.Add(this.lblNoDevicesFound);
             this.Controls.Add(this.btnRescan);
             this.Controls.Add(this.flowLayoutPanel);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblDevices);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -239,7 +239,7 @@ namespace Warpinator
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem connectionIssuesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gitHubToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblDevices;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
         private System.Windows.Forms.ToolStripMenuItem reannounceToolStripMenuItem;

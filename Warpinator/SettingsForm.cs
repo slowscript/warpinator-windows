@@ -89,6 +89,7 @@ namespace Warpinator
         private void BtnRestart_Click(object sender, EventArgs e)
         {
             ApplyNetwork();
+            Properties.Settings.Default.Save();
             Server.current.Restart();
         }
 

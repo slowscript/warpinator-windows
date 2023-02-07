@@ -73,6 +73,7 @@ namespace Warpinator
         {
             log.Info("-- Starting server");
             Running = true;
+            Authenticator.GroupCode = settings.GroupCode;
             if (String.IsNullOrEmpty(settings.NetworkInterface))
                 SelectedInterface = null;
             else SelectedInterface = settings.NetworkInterface;
