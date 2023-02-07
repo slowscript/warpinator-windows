@@ -52,8 +52,15 @@ namespace Warpinator
             }
             if (Properties.Settings.Default.CheckForUpdates)
                 await CheckForUpdates();
-            
-            await server.Start();
+            try
+            {
+                await server.Start();
+            }
+            catch (Exception ex)
+            {
+                log.Error("Failed to start server", ex);
+                MessageBox.Show(String.Format(Resources.Strings.failed_to_start_server, ex.Message), Resources.Strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void OnFormClosing(object sender, FormClosingEventArgs e)
@@ -98,8 +105,14 @@ namespace Warpinator
         private void DoUpdateUI()
         {
             flowLayoutPanel.Controls.Clear();
+            int numOutgroup = 0;
             foreach (var r in server.Remotes.Values)
             {
+                if (r.GroupCodeError)
+                {
+                    numOutgroup++;
+                    continue;
+                }
                 var btn = new RemoteButton(r);
                 flowLayoutPanel.Controls.Add(btn);
                 btn.Width = flowLayoutPanel.ClientSize.Width - 10;
@@ -124,14 +137,16 @@ namespace Warpinator
 
             if (Program.SendPaths.Count != 0)
             {
-                label1.Text = String.Format(Resources.Strings.send_to, Program.SendPaths.Count);
-                label1.ForeColor = SystemColors.Highlight;
+                lblDevices.Text = String.Format(Resources.Strings.send_to, Program.SendPaths.Count);
+                lblDevices.ForeColor = SystemColors.Highlight;
             }
             else
             {
-                label1.Text = Resources.Strings.available_devices;
-                label1.ForeColor = SystemColors.ControlText;
+                lblDevices.Text = Resources.Strings.available_devices;
+                lblDevices.ForeColor = SystemColors.ControlText;
             }
+            if (numOutgroup > 0)
+                lblDevices.Text += " (" + numOutgroup + " outside of group)";
         }
 
         public static void OnIncomingTransfer(Transfer t)

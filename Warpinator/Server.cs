@@ -31,7 +31,7 @@ namespace Warpinator
         public Dictionary<string, Remote> Remotes = new Dictionary<string, Remote>();
 
         Grpc.Core.Server grpcServer;
-        readonly ServiceDiscovery sd;
+        ServiceDiscovery sd;
         readonly MulticastService mdns;
         ServiceProfile serviceProfile;
         readonly ConcurrentDictionary<string, ServiceRecord> mdnsServices = new ConcurrentDictionary<string, ServiceRecord>();
@@ -64,7 +64,6 @@ namespace Warpinator
             mdns = new MulticastService((ifaces) => ifaces.Where((iface) => SelectedInterface == null || iface.Id == SelectedInterface));
             mdns.UseIpv6 = false;
             mdns.IgnoreDuplicateMessages = true;
-            sd = new ServiceDiscovery(mdns);
             pingTimer.Elapsed += (a, b) => PingRemotes();
             pingTimer.AutoReset = true;
         }
@@ -121,7 +120,7 @@ namespace Warpinator
         private void StartMDNS(bool flush = false)
         {
             log.Debug("Starting mdns");
-            
+
             foreach (var a in MulticastService.GetIPAddresses())
             {
                 log.Debug($"IP address {a}");
@@ -133,6 +132,7 @@ namespace Warpinator
                     log.Debug($"discovered NIC '{nic.Name}', id: {nic.Id}");
                 }
             };
+            sd = new ServiceDiscovery(mdns);
             sd.ServiceInstanceDiscovered += OnServiceInstanceDiscovered;
             sd.ServiceInstanceShutdown += OnServiceInstanceShutdown;
             mdns.AnswerReceived += OnAnswerReceived;
@@ -162,12 +162,17 @@ namespace Warpinator
             log.Debug($"Service discovered: '{srvName}'");
             if (!mdnsServices.ContainsKey(e.ServiceInstanceName.ToCanonical().ToString()))
                 mdnsServices.TryAdd(e.ServiceInstanceName.ToCanonical().ToString(), new ServiceRecord() { FullName = srvName });
+            else
+            {
+                mdnsServices.TryGetValue(e.ServiceInstanceName.ToCanonical().ToString(), out ServiceRecord rec);
+                rec.resolved = false;
+            }
         }
         
         private void OnServiceInstanceShutdown(object sender, ServiceInstanceShutdownEventArgs e)
         {
-            log.Debug($"Service lost: '{e.ServiceInstanceName}'");
-            string serviceId = e.ServiceInstanceName.ToString().Split('.')[0];
+            log.Debug($"Service lost: '{String.Join(".", e.ServiceInstanceName.Labels)}'");
+            string serviceId = e.ServiceInstanceName.Labels[0];
             if (Remotes.ContainsKey(serviceId))
             {
                 var r = Remotes[serviceId];
@@ -178,12 +183,14 @@ namespace Warpinator
 
         private void OnAnswerReceived(object sender, MessageEventArgs e)
         {
-            log.Debug($"-- Answer {e.Message.Id}:");
+            //log.Debug($"-- Answer {e.Message.Id}:");
             var answers = e.Message.Answers.Concat(e.Message.AdditionalRecords).Where((r)=>r.Name.IsSubdomainOf(ServiceDomain) || r is AddressRecord);
 
             var servers = answers.OfType<SRVRecord>();
             foreach (var server in servers)
             {
+                if (server.TTL == TimeSpan.Zero)
+                    continue;
                 var srvName = String.Join(".", server.Name.Labels);
                 log.Debug($"  Service '{srvName}' has hostname '{server.Target} and port {server.Port}'");
                 if (!mdnsServices.ContainsKey(server.CanonicalName))
@@ -210,6 +217,8 @@ namespace Warpinator
             var txts = answers.OfType<TXTRecord>();
             foreach (var txt in txts)
             {
+                if (txt.TTL == TimeSpan.Zero)
+                    continue;
                 log.Debug("  Got strings: " + String.Join("; ", txt.Strings));
                 mdnsServices[txt.CanonicalName].Txt = txt.Strings;
             }

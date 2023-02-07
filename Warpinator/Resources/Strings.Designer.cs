@@ -214,6 +214,15 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Failed to start server: {0}.
+        /// </summary>
+        internal static string failed_to_start_server {
+            get {
+                return ResourceManager.GetString("failed_to_start_server", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledá lokalizovaný řetězec podobný Failed to write to file {0}: {1}.
         /// </summary>
         internal static string failed_write_file {

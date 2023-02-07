@@ -29,7 +29,11 @@ namespace Warpinator.Controls
 
         private void OnTransferUpdated(object s, EventArgs a)
         {
-            Invoke(new Action(() => UpdateControls()));
+            try
+            {
+                Invoke(new Action(() => UpdateControls()));
+            }
+            catch (ObjectDisposedException) { } //Sometimes happens
         }
 
         private void UpdateControls()

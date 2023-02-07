@@ -177,6 +177,9 @@
   <data name="failed_open_file" xml:space="preserve">
     <value>Failed to open file for writing </value>
   </data>
+  <data name="failed_to_start_server" xml:space="preserve">
+    <value>Failed to start server: {0}</value>
+  </data>
   <data name="failed_write_file" xml:space="preserve">
     <value>Failed to write to file {0}: {1}</value>
     <comment>filename, error message</comment>
