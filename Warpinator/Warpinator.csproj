@@ -145,6 +145,7 @@
     <Compile Include="Controls\TransferPanel.Designer.cs">
       <DependentUpon>TransferPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileLogger.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -13,7 +13,7 @@ namespace Warpinator
 {
     static class Program
     {
-        internal static ILoggerFactoryAdapter Log { get; private set; }
+        internal static FileLoggerAdapter Log { get; private set; }
         internal static List<string> SendPaths = new List<string>(); 
         static NamedPipeServerStream pipeServer;
 
@@ -34,9 +34,10 @@ namespace Warpinator
             {
                 ["level"] = "ALL",
                 ["showLogName"] = "true",
-                ["showDateTime"] = "false",
+                ["showDateTime"] = "true",
+                ["dateTimeFormat"] = "HH:mm:ss.fff"
             };
-            Log = new ConsoleOutLoggerFactoryAdapter(properties2);
+            Log = new FileLoggerAdapter(args.Contains("-d"), properties2);
             
             var log = Log.GetLogger("Main");
             log.Info("Hola hej!");
@@ -81,6 +82,7 @@ namespace Warpinator
             }
             mutex.Dispose();
             log.Info("Exit");
+            Log.Dispose();
         }
 
         static void RunPipeServer()
