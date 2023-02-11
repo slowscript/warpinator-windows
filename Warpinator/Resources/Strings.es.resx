@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="any" xml:space="preserve">
+    <value>Cualquiera</value>
+    <comment>Use any interface</comment>
+  </data>
+  <data name="available_devices" xml:space="preserve">
+    <value>Dispositivos disponibles</value>
+  </data>
+  <data name="awaiting_duplex" xml:space="preserve">
+    <value>Esperando dúplex</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="a_few_seconds" xml:space="preserve">
+    <value>unos pocos segundos</value>
+    <comment>... remaining</comment>
+  </data>
+  <data name="cant_open_browser" xml:space="preserve">
+    <value>No se pudo abrir el navegador web. Usa esta URL: {0}</value>
+  </data>
+  <data name="connected" xml:space="preserve">
+    <value>Conectado</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="connecting" xml:space="preserve">
+    <value>Conectando</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="declined" xml:space="preserve">
+    <value>Rechazado</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="directory_doesnt_exist" xml:space="preserve">
+    <value>El directorio seleccionado no existe, por lo que esta configuración no cambiará</value>
+  </data>
+  <data name="disconnected" xml:space="preserve">
+    <value>Desconectado</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="do_you_want_to_check_for_updates" xml:space="preserve">
+    <value>¿Quieres buscar actualizaciones automáticamente?</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Error</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="error_connection" xml:space="preserve">
+    <value>Error de conexión</value>
+  </data>
+  <data name="error_groupcode" xml:space="preserve">
+    <value>No se pudo decodificar el certificado de {0}. ¿Código de grupo incorrecto?</value>
+  </data>
+  <data name="error_receiving" xml:space="preserve">
+    <value>Error al recibir:</value>
+  </data>
+  <data name="failed" xml:space="preserve">
+    <value>Fallido</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="failed_open_file" xml:space="preserve">
+    <value>No se pudo abrir el archivo para escribir</value>
+  </data>
+  <data name="failed_to_start_server" xml:space="preserve">
+    <value>No se pudo iniciar el servidor: {0}</value>
+  </data>
+  <data name="failed_write_file" xml:space="preserve">
+    <value>No se pudo escribir en el archivo {0}: {1}</value>
+    <comment>filename, error message</comment>
+  </data>
+  <data name="files" xml:space="preserve">
+    <value>{0} archivos</value>
+  </data>
+  <data name="files_may_be_overwritten" xml:space="preserve">
+    <value> (¡Los archivos se pueden sobrescribir!)</value>
+  </data>
+  <data name="finished" xml:space="preserve">
+    <value>Terminado</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="finished_errors" xml:space="preserve">
+    <value>Terminado con errores</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="incoming_transfer" xml:space="preserve">
+    <value>Transferencia entrante de {0}</value>
+  </data>
+  <data name="info" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="interface_unavailable" xml:space="preserve">
+    <value>Interfaz seleccionada no disponible</value>
+  </data>
+  <data name="new_version_available" xml:space="preserve">
+    <value>Nueva versión disponible: {0} (actual: {1}). ¿Te gustaría descargarlo?</value>
+  </data>
+  <data name="no_files_selected" xml:space="preserve">
+    <value>No se seleccionaron archivos</value>
+  </data>
+  <data name="outside_group" xml:space="preserve">
+    <value> ({0} fuera del grupo)</value>
+  </data>
+  <data name="paused" xml:space="preserve">
+    <value>en pausa</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="pick_files" xml:space="preserve">
+    <value>Seleccionar archivos a enviar</value>
+  </data>
+  <data name="pick_folders" xml:space="preserve">
+    <value>Seleccionar carpetas a enviar</value>
+  </data>
+  <data name="remaining" xml:space="preserve">
+    <value>{0} restante</value>
+    <comment>e.g. 10s remaining</comment>
+  </data>
+  <data name="sending_failed" xml:space="preserve">
+    <value>El envío falló con una excepción: </value>
+  </data>
+  <data name="send_to" xml:space="preserve">
+    <value>Enviar {0} archivo(s) a</value>
+  </data>
+  <data name="service_not_running" xml:space="preserve">
+    <value>¡El servicio no se está ejecutando!</value>
+  </data>
+  <data name="service_running" xml:space="preserve">
+    <value>El servicio se está ejecutando</value>
+  </data>
+  <data name="stopped" xml:space="preserve">
+    <value>Detenido</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="symlinks_not_supported" xml:space="preserve">
+    <value>ADVERTENCIA: Los enlaces simbólicos no son compatibles</value>
+  </data>
+  <data name="transfer" xml:space="preserve">
+    <value>Transferir</value>
+    <comment>Message box title</comment>
+  </data>
+  <data name="transferring" xml:space="preserve">
+    <value>Transferiendo</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="unavailable" xml:space="preserve">
+    <value>, no disponible</value>
+    <comment>e.g. Disconnected, unavailable</comment>
+  </data>
+  <data name="unavailable_interface" xml:space="preserve">
+    <value>Interfaz no disponible: &quot;{0}&quot;</value>
+  </data>
+  <data name="waiting_for_permission" xml:space="preserve">
+    <value>Esperando permiso</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="warning" xml:space="preserve">
+    <value>Advertencia</value>
+    <comment>Message box title</comment>
+  </data>
+</root>

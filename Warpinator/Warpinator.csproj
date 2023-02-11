@@ -209,6 +209,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Resources\Strings.cs.resx" />
+    <EmbeddedResource Include="Resources\Strings.de.resx" />
+    <EmbeddedResource Include="Resources\Strings.es.resx" />
     <EmbeddedResource Include="Resources\Strings.it.resx" />
     <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
