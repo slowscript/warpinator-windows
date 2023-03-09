@@ -97,6 +97,7 @@ namespace Warpinator
                 current.Invoke(new Action(() =>
                 {
                     current.DoUpdateUI();
+                    current.Show();
                     current.Activate();
                 }));
             }
