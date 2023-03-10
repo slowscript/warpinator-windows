@@ -89,13 +89,13 @@ namespace Warpinator
                     var addr = new IPAddress(IPAddress.NetworkToHostOrder(ipNetInt) >> 32);
                     
                     cert.CheckValidity(); //Throws if invalid
-                    if (addr != Utils.GetLocalIPAddress())
+                    if (addr != Server.current.SelectedIP)
                         throw new Org.BouncyCastle.Security.Certificates.CertificateExpiredException();
                     return pair1;
                 } catch {}
             }
 
-            KeyCertificatePair pair = CreateKeyCertificatePair(Utils.GetHostname(), Utils.GetLocalIPAddress().ToString());
+            KeyCertificatePair pair = CreateKeyCertificatePair(Utils.GetHostname(), Server.current.SelectedIP.ToString());
             log.Debug(Path.Combine(Utils.GetCertDir(), CertificateFileName));
             Directory.CreateDirectory(Utils.GetCertDir());
             File.WriteAllText(Path.Combine(Utils.GetCertDir(), CertificateFileName), pair.CertificateChain);

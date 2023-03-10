@@ -27,6 +27,7 @@ namespace Warpinator
         public string UUID;
         public bool Running = false;
         public string SelectedInterface;
+        public IPAddress SelectedIP { get; private set; }
 
         public Dictionary<string, Remote> Remotes = new Dictionary<string, Remote>();
 
@@ -60,7 +61,8 @@ namespace Warpinator
                 settings.DownloadDir = Path.Combine(Utils.GetDefaultDownloadFolder(), "Warpinator");
                 Directory.CreateDirectory(settings.DownloadDir);
             }
-
+            SelectedInterface = settings.NetworkInterface;
+            SelectedIP = Utils.GetLocalIPAddress();
             mdns = new MulticastService((ifaces) => ifaces.Where((iface) => SelectedInterface == null || iface.Id == SelectedInterface));
             mdns.UseIpv6 = false;
             mdns.IgnoreDuplicateMessages = true;
@@ -74,7 +76,7 @@ namespace Warpinator
             Running = true;
             Authenticator.GroupCode = settings.GroupCode;
             if (String.IsNullOrEmpty(settings.NetworkInterface))
-                SelectedInterface = null;
+                SelectedInterface = Utils.AutoSelectNetworkInterface();
             else SelectedInterface = settings.NetworkInterface;
             await StartGrpcServer(); //Also initializes authenticator for certserver
             CertServer.Start(Port);
@@ -109,9 +111,10 @@ namespace Warpinator
         private async Task StartGrpcServer()
         {
             KeyCertificatePair kcp = await Task.Run(Authenticator.GetKeyCertificatePair);
+            SelectedIP = Utils.GetLocalIPAddress();
             grpcServer = new Grpc.Core.Server() { 
                 Services = { Warp.BindService(new GrpcService()) },
-                Ports = { new ServerPort(Utils.GetLocalIPAddress().ToString(), Port, new SslServerCredentials(new List<KeyCertificatePair>() { kcp })) }
+                Ports = { new ServerPort(SelectedIP.ToString(), Port, new SslServerCredentials(new List<KeyCertificatePair>() { kcp })) }
             };
             grpcServer.Start();
             log.Info("GRPC started");
@@ -140,7 +143,7 @@ namespace Warpinator
             mdns.Start();
             sd.QueryServiceInstances(SERVICE_TYPE);
 
-            serviceProfile = new ServiceProfile(UUID, SERVICE_TYPE, Port, new List<IPAddress> { Utils.GetLocalIPAddress() });
+            serviceProfile = new ServiceProfile(UUID, SERVICE_TYPE, Port, new List<IPAddress> { SelectedIP });
             serviceProfile.AddProperty("hostname", Utils.GetHostname());
             serviceProfile.AddProperty("type", flush ? "flush" : "real");
             sd.Advertise(serviceProfile);
@@ -204,7 +207,7 @@ namespace Warpinator
             var addresses = answers.OfType<AddressRecord>();
             foreach (var address in addresses)
             {
-                if (address.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                if (address.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork) // is IPv4
                 {
                     log.Debug($"  Hostname '{address.Name}' resolves to {address.Address}");
                     hostnameDict.AddOrUpdate(address.Name.ToString(), address.Address, (a, b) => address.Address);

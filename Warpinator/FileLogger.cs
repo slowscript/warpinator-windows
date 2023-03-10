@@ -36,7 +36,7 @@ namespace Warpinator
         {
             if (!logToFile)
                 return;
-            string path = Utils.GetDataDir();
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Warpinator"); //Cant use utils yet
             string log1 = Path.Combine(path, "latest.log");
             string log2 = Path.Combine(path, "previous.log");
             if (File.Exists(log1) && (new FileInfo(log1).Length > 1024*1024))

@@ -132,7 +132,7 @@ namespace Warpinator
             string iface = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) => i.Id == server.SelectedInterface)?.Name ?? Resources.Strings.interface_unavailable;
             if (String.IsNullOrEmpty(server.SelectedInterface))
                 iface = Resources.Strings.any;
-            lblIP.Text = Utils.GetLocalIPAddress() + " | " + iface;
+            lblIP.Text = server.SelectedIP + " | " + iface;
             
             lblStatus.Text = server.Running ? Resources.Strings.service_running : Resources.Strings.service_not_running;
 

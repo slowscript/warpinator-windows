@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -11,6 +12,7 @@ namespace Warpinator
 {
     static class Utils
     {
+        static Common.Logging.ILog log = Program.Log.GetLogger("Utils");
         public static string GetDataDir()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Warpinator");
@@ -34,6 +36,43 @@ namespace Warpinator
                 ?? IPAddress.Loopback;
             Console.WriteLine("Got ip " + ip?.ToString());
             return ip;
+        }
+
+        public static string AutoSelectNetworkInterface()
+        {
+            // Non-virtual gateway > Any gateway > Non-virtual eth > WiFi > Any up iface > loopback
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            NetworkInterfaceType[] ethernet = { NetworkInterfaceType.Ethernet, NetworkInterfaceType.FastEthernetT, NetworkInterfaceType.FastEthernetFx,
+                NetworkInterfaceType.GigabitEthernet, NetworkInterfaceType.Ethernet3Megabit};
+            var operational = nics.Where((n) => n.OperationalStatus == OperationalStatus.Up);
+            var withGateway = operational.Where(n => n.GetIPProperties()?.GatewayAddresses?.Any((a) => a != null) ?? false);
+            var res = withGateway.FirstOrDefault((n) => !n.Description.Contains("Virtual"));
+            log.Trace($"Picked nvgw {res?.Name}");
+            if (res == null)
+                res = withGateway.FirstOrDefault();
+            log.Trace($"Picked gw {res?.Name}");
+            if (res == null)
+            {
+                res = operational.FirstOrDefault((n) => ethernet.Contains(n.NetworkInterfaceType) && !n.Description.Contains("Virtual"));
+                log.Trace($"Picked eth {res?.Name}");
+                if (res == null)
+                {
+                    var wifi = operational.Where((n) => n.NetworkInterfaceType == NetworkInterfaceType.Wireless80211);
+                    res = wifi.FirstOrDefault();
+                    log.Trace($"Picked wifi {res?.Name}");
+                    if (res == null)
+                    {
+                        res = operational.FirstOrDefault();
+                        log.Trace($"Picked up {res?.Name}");
+                        if (res == null)
+                            res = nics[NetworkInterface.LoopbackInterfaceIndex];
+                    }
+                }
+            }
+            foreach (NetworkInterface ni in nics)
+                log.Debug($"Got iface: {ni.Name} - {ni.Description}");
+            log.Debug($"Selected {res.Name} - {res.Description}");
+            return res.Id;
         }
 
         public static string BytesToHumanReadable(long _bytes)
