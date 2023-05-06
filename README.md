@@ -1,11 +1,14 @@
 # Warpinator for Windows (unofficial)
 
-This is an unofficial reimplementation of Linux Mint's file sharing tool [Warpinator](https://github.com/linuxmint/warpinator) for Windows 7-10.
+This is an unofficial reimplementation of Linux Mint's file sharing tool [Warpinator](https://github.com/linuxmint/warpinator) for Windows 7-11.
 
 Transfer files between Linux, Windows and Android devices
 
 ## Download
 Now available on the [Releases](https://github.com/slowscript/warpinator-windows/releases) page
+
+Alternatively can be installed via winget:  
+`winget install slowscript.Warpinator`
 
 ## Building
 Requires .NET SDK 4.6.2
