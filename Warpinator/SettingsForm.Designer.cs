@@ -51,6 +51,7 @@ namespace Warpinator
             this.btnOK = new System.Windows.Forms.Button();
             this.chkBackground = new System.Windows.Forms.CheckBox();
             this.chkUpdates = new System.Windows.Forms.CheckBox();
+            this.chkStartMinimized = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
@@ -85,7 +86,6 @@ namespace Warpinator
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.btnShowCode);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.numPort);
@@ -95,13 +95,14 @@ namespace Warpinator
             this.groupBox1.Controls.Add(this.btnRestart);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtGroupcode);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // btnShowCode
             // 
-            resources.ApplyResources(this.btnShowCode, "btnShowCode");
             this.btnShowCode.BackgroundImage = global::Warpinator.Properties.Resources.visible;
+            resources.ApplyResources(this.btnShowCode, "btnShowCode");
             this.btnShowCode.Name = "btnShowCode";
             this.btnShowCode.UseVisualStyleBackColor = true;
             this.btnShowCode.Click += new System.EventHandler(this.BtnShowCode_Click);
@@ -133,9 +134,9 @@ namespace Warpinator
             // 
             // comboInterfaces
             // 
-            resources.ApplyResources(this.comboInterfaces, "comboInterfaces");
             this.comboInterfaces.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboInterfaces.FormattingEnabled = true;
+            resources.ApplyResources(this.comboInterfaces, "comboInterfaces");
             this.comboInterfaces.Name = "comboInterfaces";
             // 
             // label4
@@ -199,6 +200,7 @@ namespace Warpinator
             resources.ApplyResources(this.chkBackground, "chkBackground");
             this.chkBackground.Name = "chkBackground";
             this.chkBackground.UseVisualStyleBackColor = true;
+            this.chkBackground.CheckedChanged += new System.EventHandler(this.chkBackground_CheckedChanged);
             // 
             // chkUpdates
             // 
@@ -206,10 +208,17 @@ namespace Warpinator
             this.chkUpdates.Name = "chkUpdates";
             this.chkUpdates.UseVisualStyleBackColor = true;
             // 
+            // chkStartMinimized
+            // 
+            resources.ApplyResources(this.chkStartMinimized, "chkStartMinimized");
+            this.chkStartMinimized.Name = "chkStartMinimized";
+            this.chkStartMinimized.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkStartMinimized);
             this.Controls.Add(this.chkUpdates);
             this.Controls.Add(this.chkBackground);
             this.Controls.Add(this.btnOK);
@@ -256,5 +265,6 @@ namespace Warpinator
         private System.Windows.Forms.CheckBox chkBackground;
         private System.Windows.Forms.Button btnShowCode;
         private System.Windows.Forms.CheckBox chkUpdates;
+        private System.Windows.Forms.CheckBox chkStartMinimized;
     }
 }

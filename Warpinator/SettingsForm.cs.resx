@@ -133,6 +133,9 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Kód skupiny</value>
   </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Síťová nastavení</value>
+  </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 28</value>
   </data>
@@ -147,9 +150,6 @@
   </data>
   <data name="btnRestart.Text" xml:space="preserve">
     <value>Restartovat</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Síťová nastavení</value>
   </data>
   <data name="chkNotify.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 17</value>
@@ -186,6 +186,12 @@
   </data>
   <data name="chkUpdates.Text" xml:space="preserve">
     <value>Kontrolovat dostupnost aktualizací při spuštění</value>
+  </data>
+  <data name="chkStartMinimized.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 17</value>
+  </data>
+  <data name="chkStartMinimized.Text" xml:space="preserve">
+    <value>Spouštět minimalizované</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Nastavení</value>

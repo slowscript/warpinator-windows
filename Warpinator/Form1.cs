@@ -36,7 +36,7 @@ namespace Warpinator
             server = new Server();
         }
 
-        private async void Form1_Show(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             //server.Remotes.Add("a", new Remote { DisplayName = "TEST", UserName = "test", Hostname = "PC1", Address = System.Net.IPAddress.Parse("192.168.1.1"),
             //    Port = 42000, Status = RemoteStatus.DISCONNECTED });
@@ -54,13 +54,15 @@ namespace Warpinator
                 await CheckForUpdates();
             try
             {
-                await server.Start();
+                server.Start();
             }
             catch (Exception ex)
             {
                 log.Error("Failed to start server", ex);
                 MessageBox.Show(String.Format(Resources.Strings.failed_to_start_server, ex.Message), Resources.Strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            if (Properties.Settings.Default.RunInBackground && Properties.Settings.Default.StartMinimized)
+                this.Hide();
         }
 
         private void OnFormClosing(object sender, FormClosingEventArgs e)

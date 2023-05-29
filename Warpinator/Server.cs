@@ -78,6 +78,7 @@ namespace Warpinator
             if (String.IsNullOrEmpty(settings.NetworkInterface))
                 SelectedInterface = Utils.AutoSelectNetworkInterface();
             else SelectedInterface = settings.NetworkInterface;
+            SelectedIP = Utils.GetLocalIPAddress();
             await StartGrpcServer(); //Also initializes authenticator for certserver
             CertServer.Start(Port);
             StartMDNS();
