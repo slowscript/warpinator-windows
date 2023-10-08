@@ -43,7 +43,11 @@ namespace Warpinator
         public Server()
         {
             current = this;
-            DisplayName = System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName ?? Environment.UserName;
+            try {
+                DisplayName = System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName ?? Environment.UserName;
+            } catch {
+                DisplayName = Environment.UserName;
+            }
             Hostname = Environment.MachineName;
             UserName = Environment.UserName;
             

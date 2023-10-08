@@ -47,30 +47,28 @@ namespace Warpinator
             var operational = nics.Where((n) => n.OperationalStatus == OperationalStatus.Up);
             var withGateway = operational.Where(n => n.GetIPProperties()?.GatewayAddresses?.Any((a) => a != null) ?? false);
             var res = withGateway.FirstOrDefault((n) => !n.Description.Contains("Virtual"));
-            log.Trace($"Picked nvgw {res?.Name}");
-            if (res == null)
-                res = withGateway.FirstOrDefault();
-            log.Trace($"Picked gw {res?.Name}");
             if (res == null)
             {
-                res = operational.FirstOrDefault((n) => ethernet.Contains(n.NetworkInterfaceType) && !n.Description.Contains("Virtual"));
-                log.Trace($"Picked eth {res?.Name}");
+                res = withGateway.FirstOrDefault();
                 if (res == null)
                 {
-                    var wifi = operational.Where((n) => n.NetworkInterfaceType == NetworkInterfaceType.Wireless80211);
-                    res = wifi.FirstOrDefault();
-                    log.Trace($"Picked wifi {res?.Name}");
+                    res = operational.FirstOrDefault((n) => ethernet.Contains(n.NetworkInterfaceType) && !n.Description.Contains("Virtual"));
                     if (res == null)
                     {
-                        res = operational.FirstOrDefault();
-                        log.Trace($"Picked up {res?.Name}");
+                        var wifi = operational.Where((n) => n.NetworkInterfaceType == NetworkInterfaceType.Wireless80211);
+                        res = wifi.FirstOrDefault();
                         if (res == null)
-                            res = nics[NetworkInterface.LoopbackInterfaceIndex];
-                    }
-                }
-            }
-            foreach (NetworkInterface ni in nics)
-                log.Debug($"Got iface: {ni.Name} - {ni.Description}");
+                        {
+                            res = operational.FirstOrDefault();
+
+                            if (res == null)
+                                res = nics[NetworkInterface.LoopbackInterfaceIndex];
+                            else log.Trace($"Picked first up interface {res?.Name}");
+                        } else log.Trace($"Picked wifi {res?.Name}");
+                    } else log.Trace($"Picked eth {res?.Name}");
+                } else log.Trace($"Picked gateway {res?.Name}");
+            } else log.Trace($"Picked non-virtual gateway {res?.Name}");
+            nics.ToList().ForEach((ni) => log.Debug($"Got iface: {ni.Name} - {ni.Description}"));
             log.Debug($"Selected {res.Name} - {res.Description}");
             return res.Id;
         }

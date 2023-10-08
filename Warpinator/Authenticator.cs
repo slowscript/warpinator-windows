@@ -21,7 +21,7 @@ namespace Warpinator
 {
     class Authenticator
     {
-        static readonly ILog log = LogManager.GetLogger<Authenticator>();
+        static readonly ILog log = Program.Log.GetLogger("Authenticator");
 
         public static string GroupCode = DefaultGroupCode;
         const string DefaultGroupCode = "Warpinator";
@@ -105,6 +105,7 @@ namespace Warpinator
 
         private static KeyCertificatePair CreateKeyCertificatePair(string subjectName, string ip)
         {
+            log.Debug($"New cert for IP {ip}");
             var randomGenerator = new CryptoApiRandomGenerator();
             var random = new SecureRandom(randomGenerator);
 
