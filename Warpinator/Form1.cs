@@ -52,17 +52,17 @@ namespace Warpinator
             }
             if (Properties.Settings.Default.CheckForUpdates)
                 await CheckForUpdates();
+            if (Properties.Settings.Default.RunInBackground && Properties.Settings.Default.StartMinimized)
+                this.Hide();
             try
             {
-                server.Start();
+                await server.Start();
             }
             catch (Exception ex)
             {
                 log.Error("Failed to start server", ex);
                 MessageBox.Show(String.Format(Resources.Strings.failed_to_start_server, ex.Message), Resources.Strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            if (Properties.Settings.Default.RunInBackground && Properties.Settings.Default.StartMinimized)
-                this.Hide();
         }
 
         private void OnFormClosing(object sender, FormClosingEventArgs e)
@@ -92,23 +92,30 @@ namespace Warpinator
                 current.Invoke(new Action(() => current.DoUpdateUI()));
         }
 
+        public static void UpdateLabels()
+        {
+            if (current != null)
+                current.Invoke(new Action(() => current.DoUpdateLabels()));
+        }
+
         public static void OnSendTo()
         {
             if (current != null)
             {
                 current.Invoke(new Action(() =>
                 {
-                    current.DoUpdateUI();
+                    current.DoUpdateLabels();
                     current.Show();
                     current.Activate();
                 }));
             }
         }
 
+        private int numOutgroup = 0;
         private void DoUpdateUI()
         {
             flowLayoutPanel.Controls.Clear();
-            int numOutgroup = 0;
+            numOutgroup = 0;
             foreach (var r in server.Remotes.Values)
             {
                 if (r.GroupCodeError)
@@ -121,6 +128,11 @@ namespace Warpinator
                 btn.Width = flowLayoutPanel.ClientSize.Width - 10;
                 btn.Show();
             }
+            DoUpdateLabels();
+        }
+
+        private void DoUpdateLabels()
+        {
             lblNoDevicesFound.Visible = server.Remotes.Count == 0 && server.Running;
             btnRescan.Visible = server.Remotes.Count == 0 && server.Running;
             if (lblInitializing.Visible && server.Running)
@@ -129,14 +141,13 @@ namespace Warpinator
                 rescanTimer.Start();
             }
             lblInitializing.Visible = !server.Running;
+            lblStatus.Text = server.Running ? Resources.Strings.service_running : Resources.Strings.service_not_running;
             this.Cursor = server.Running ? Cursors.Default : Cursors.WaitCursor;
 
             string iface = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) => i.Id == server.SelectedInterface)?.Name ?? Resources.Strings.interface_unavailable;
             if (String.IsNullOrEmpty(server.SelectedInterface))
                 iface = Resources.Strings.any;
             lblIP.Text = server.SelectedIP + " | " + iface;
-            
-            lblStatus.Text = server.Running ? Resources.Strings.service_running : Resources.Strings.service_not_running;
 
             if (Program.SendPaths.Count != 0)
             {
@@ -156,7 +167,6 @@ namespace Warpinator
         {
             if (Properties.Settings.Default.NotifyIncoming && current != null)
                 current.Invoke(new Action(() => current.ShowTransferBaloon(t)));
-            UpdateUI();
         }
 
         EventHandler ballonClickHandler;

@@ -89,7 +89,7 @@ namespace Warpinator
             CertServer.Start(Port);
             StartMDNS();
             pingTimer.Start();
-            Form1.UpdateUI();
+            Form1.UpdateLabels();
         }
 
         public async Task Stop()
@@ -103,7 +103,7 @@ namespace Warpinator
             NetworkChange.NetworkAddressChanged -= OnNetworkChanged;
             CertServer.Stop();
             await grpcServer.ShutdownAsync();
-            Form1.UpdateUI();
+            Form1.UpdateLabels();
             log.Info("-- Server stopped\n");
         }
 

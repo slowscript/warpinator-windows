@@ -53,7 +53,6 @@ namespace Warpinator
             {
                 Status = RemoteStatus.ERROR;
                 UpdateUI();
-                Form1.UpdateUI();
                 return;
             }
             log.Trace($"Certificate for {Hostname} received and saved");
@@ -93,7 +92,6 @@ namespace Warpinator
             }
 
             UpdateUI();
-            Form1.UpdateUI();
             log.Info($"Connection established with {Hostname}");
         }
 
@@ -217,7 +215,7 @@ namespace Warpinator
                     RemoteUUID = UUID
                 };
                 Program.SendPaths = new List<string>();
-                Form1.UpdateUI();
+                Form1.UpdateLabels(); // Revert regular UI
                 t.PrepareSend();
                 Transfers.Add(t);
                 UpdateTransfers();
@@ -246,6 +244,7 @@ namespace Warpinator
         {
             if (form != null)
                 form.Invoke(new Action(() => form.UpdateTransfers()));
+            RemoteUpdated?.Invoke(this, null); // update RemoteButton in Form1 to indicate incoming transfer
         }
 
         public string GetStatusString()
