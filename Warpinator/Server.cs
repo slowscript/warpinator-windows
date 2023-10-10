@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Timers;
 using Common.Logging;
@@ -39,13 +40,14 @@ namespace Warpinator
         readonly ConcurrentDictionary<string, IPAddress> hostnameDict = new ConcurrentDictionary<string, IPAddress>();
         internal Properties.Settings settings = Properties.Settings.Default;
         Timer pingTimer = new Timer(10_000);
+        List<NetworkInterface> knownNics = null;
 
         public Server()
         {
             current = this;
             try {
                 DisplayName = System.DirectoryServices.AccountManagement.UserPrincipal.Current.DisplayName ?? Environment.UserName;
-            } catch {
+            } catch { // Mono does not have directory services
                 DisplayName = Environment.UserName;
             }
             Hostname = Environment.MachineName;
@@ -98,14 +100,16 @@ namespace Warpinator
             pingTimer.Stop();
             sd.Unadvertise(serviceProfile);
             mdns.Stop();
+            NetworkChange.NetworkAddressChanged -= OnNetworkChanged;
             CertServer.Stop();
             await grpcServer.ShutdownAsync();
             Form1.UpdateUI();
-            log.Info("-- Server stopped");
+            log.Info("-- Server stopped\n");
         }
 
         public async void Restart()
         {
+            log.Info(">> Restarting server");
             await Stop();
             await Start();
         }
@@ -128,18 +132,9 @@ namespace Warpinator
         private void StartMDNS(bool flush = false)
         {
             log.Debug("Starting mdns");
-
-            foreach (var a in MulticastService.GetIPAddresses())
-            {
-                log.Debug($"IP address {a}");
-            }
-            mdns.NetworkInterfaceDiscovered += (s, e) =>
-            {
-                foreach (var nic in e.NetworkInterfaces)
-                {
-                    log.Debug($"discovered NIC '{nic.Name}', id: {nic.Id}");
-                }
-            };
+            if (knownNics == null)
+                knownNics = MulticastService.GetNetworkInterfaces().ToList();
+            NetworkChange.NetworkAddressChanged += OnNetworkChanged;
             sd = new ServiceDiscovery(mdns);
             sd.ServiceInstanceDiscovered += OnServiceInstanceDiscovered;
             sd.ServiceInstanceShutdown += OnServiceInstanceShutdown;
@@ -162,6 +157,31 @@ namespace Warpinator
                 if (r.Status == RemoteStatus.CONNECTED)
                     r.Ping();
             }
+        }
+
+        private void OnNetworkChanged(object s, EventArgs a)
+        {
+            var nics = MulticastService.GetNetworkInterfaces();
+            var oldNics = knownNics.Where(k => !nics.Any(n => k.Id == n.Id));
+            oldNics.ToList().ForEach((n) => log.Debug("-- Removed iface: " + n.Name));
+            var newNics = nics.Where(nic => !knownNics.Any(k => k.Id == nic.Id));
+            newNics.ToList().ForEach((n) => log.Debug("++ Added iface: " + n.Name));
+            if (newNics.Any() || oldNics.Any())
+            {
+                knownNics = nics.ToList();
+                string newBestNIC = String.IsNullOrEmpty(settings.NetworkInterface) ? Utils.AutoSelectNetworkInterface(true) : settings.NetworkInterface;
+                var newAddress = Utils.GetIPAddressForNIC(newBestNIC);
+                if (!SelectedIP.Equals(newAddress) && !newAddress.Equals(IPAddress.Loopback))
+                {
+                    log.Info($"New address: {SelectedIP} -> {newAddress}");
+                    SelectedInterface = null;
+                    SelectedIP = newAddress;
+                    Restart();
+                    return;
+                }
+            }
+            NetworkChange.NetworkAddressChanged -= OnNetworkChanged;
+            NetworkChange.NetworkAddressChanged += OnNetworkChanged;
         }
 
         private void OnServiceInstanceDiscovered(object sender, ServiceInstanceDiscoveryEventArgs e)

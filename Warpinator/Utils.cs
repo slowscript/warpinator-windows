@@ -28,20 +28,23 @@ namespace Warpinator
             return Environment.MachineName;
         }
 
-        public static IPAddress GetLocalIPAddress()
-        {
+        public static IPAddress GetLocalIPAddress() => GetIPAddressForNIC(Server.current.SelectedInterface);
+        
+        public static IPAddress GetIPAddressForNIC(string nic) {
             var ip = Makaretu.Dns.MulticastService.GetNetworkInterfaces().FirstOrDefault((i) =>
-                String.IsNullOrEmpty(Server.current.SelectedInterface) || i.Id == Server.current.SelectedInterface)?.GetIPProperties().UnicastAddresses
+                String.IsNullOrEmpty(nic) || i.Id == nic)?.GetIPProperties().UnicastAddresses
                 .FirstOrDefault((a) => a.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && a.Address.GetAddressBytes().Length == 4)?.Address
                 ?? IPAddress.Loopback;
             Console.WriteLine("Got ip " + ip?.ToString());
             return ip;
         }
 
-        public static string AutoSelectNetworkInterface()
+        public static string AutoSelectNetworkInterface(bool suppressDebug = false)
         {
             // Non-virtual gateway > Any gateway > Non-virtual eth > WiFi > Any up iface > loopback
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            if (!suppressDebug)
+                nics.ToList().ForEach((ni) => log.Trace($"Got iface: {ni.Name} - {ni.Description}"));
             NetworkInterfaceType[] ethernet = { NetworkInterfaceType.Ethernet, NetworkInterfaceType.FastEthernetT, NetworkInterfaceType.FastEthernetFx,
                 NetworkInterfaceType.GigabitEthernet, NetworkInterfaceType.Ethernet3Megabit};
             var operational = nics.Where((n) => n.OperationalStatus == OperationalStatus.Up);
@@ -63,13 +66,11 @@ namespace Warpinator
 
                             if (res == null)
                                 res = nics[NetworkInterface.LoopbackInterfaceIndex];
-                            else log.Trace($"Picked first up interface {res?.Name}");
-                        } else log.Trace($"Picked wifi {res?.Name}");
-                    } else log.Trace($"Picked eth {res?.Name}");
-                } else log.Trace($"Picked gateway {res?.Name}");
-            } else log.Trace($"Picked non-virtual gateway {res?.Name}");
-            nics.ToList().ForEach((ni) => log.Debug($"Got iface: {ni.Name} - {ni.Description}"));
-            log.Debug($"Selected {res.Name} - {res.Description}");
+                            else log.Trace($"Picked first up interface {res.Name}");
+                        } else log.Trace($"Picked wifi {res.Name}");
+                    } else log.Trace($"Picked eth {res.Name}");
+                } else log.Trace($"Picked gateway {res.Name}");
+            } else log.Trace($"Picked non-virtual gateway {res.Name}");
             return res.Id;
         }
 
