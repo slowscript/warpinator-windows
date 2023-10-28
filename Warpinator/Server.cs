@@ -220,7 +220,7 @@ namespace Warpinator
                 if (server.TTL == TimeSpan.Zero)
                     continue;
                 var srvName = String.Join(".", server.Name.Labels);
-                log.Debug($"  Service '{srvName}' has hostname '{server.Target} and port {server.Port}'");
+                //log.Debug($"  Service '{srvName}' has hostname '{server.Target} and port {server.Port}'");
                 if (!mdnsServices.ContainsKey(server.CanonicalName))
                     mdnsServices.TryAdd(server.CanonicalName, new ServiceRecord { FullName = srvName });
                 mdnsServices[server.CanonicalName].Hostname = server.Target.ToString();

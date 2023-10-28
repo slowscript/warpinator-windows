@@ -100,6 +100,7 @@ namespace Warpinator
                     t.errors.Add(Resources.Strings.sending_failed + e.Message);
                     t.Status = TransferStatus.FAILED;
                     t.OnTransferUpdated();
+                    context.Status = new Status(StatusCode.Internal, "Internal error during sending");
                 }
             }
         }
