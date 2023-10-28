@@ -190,6 +190,7 @@ namespace Warpinator
                         lastTicks = now;
                         OnTransferUpdated();
                     } while (read < length && !cancelled);
+                    fs.Close();
                 }
             }
             if (!cancelled)
