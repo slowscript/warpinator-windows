@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,10 +47,11 @@ namespace Warpinator
         public List<string> errors = new List<string>();
 
         public long BytesTransferred;
-        public long BytesPerSecond;
+        public TransferSpeed BytesPerSecond = new TransferSpeed();
         public long RealStartTime;
-        public double Progress { get { return (double)BytesTransferred / TotalSize;  } }
-        private long lastTicks;
+        public double Progress { get { return (double)BytesTransferred / TotalSize; } }
+        private long lastMillis;
+        internal Stopwatch recvWatch = new Stopwatch();
         private FileStream currentStream;
 
         /***** SEND & RECEIVE *****/
@@ -82,7 +84,7 @@ namespace Warpinator
 
         public string GetRemainingTime()
         {
-            long now = DateTime.Now.Ticks;
+            long now = DateTime.UtcNow.Ticks;
             double avgSpeed = BytesTransferred / ((double)(now - RealStartTime) / TimeSpan.TicksPerSecond);
             int secondsRemaining = (int)((TotalSize - (ulong)BytesTransferred) / avgSpeed);
             return FormatTime(secondsRemaining);
@@ -113,7 +115,7 @@ namespace Warpinator
         {
             ResolvedFiles = new List<string>();
             ResolveFiles();
-            
+
             Status = TransferStatus.WAITING_PERMISSION;
             Direction = TransferDirection.SEND;
             StartTime = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -130,10 +132,14 @@ namespace Warpinator
         public async Task StartSending(Grpc.Core.IServerStreamWriter<FileChunk> stream)
         {
             Status = TransferStatus.TRANSFERRING;
-            RealStartTime = DateTime.Now.Ticks;
+            RealStartTime = DateTime.UtcNow.Ticks;
             BytesTransferred = 0;
             cancelled = false;
             OnTransferUpdated();
+            stream.WriteOptions = new Grpc.Core.WriteOptions((Grpc.Core.WriteFlags)0x4); //Write through, but doesnt seem to be doing much
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            long lastMillis = 0;
 
             string f1 = FilesToSend[0];
             int parentLen = f1.TrimEnd(Path.DirectorySeparatorChar).LastIndexOf(Path.DirectorySeparatorChar);
@@ -146,7 +152,7 @@ namespace Warpinator
                 {
                     var chunk = new FileChunk()
                     {
-                        RelativePath = p.Remove(0,parentLen+1),
+                        RelativePath = p.Remove(0, parentLen + 1),
                         FileType = (int)FileType.DIRECTORY,
                         FileMode = 493 //0755, C# doesn't have octal literals :(
                     };
@@ -185,14 +191,17 @@ namespace Warpinator
                         await stream.WriteAsync(chunk);
                         read += r;
                         BytesTransferred += r;
-                        long now = DateTime.Now.Ticks;
-                        BytesPerSecond = (long)(r / ((double)(now - lastTicks) / TimeSpan.TicksPerSecond));
-                        lastTicks = now;
+                        long now = stopwatch.ElapsedMilliseconds;
+                        long bps = (1000 * r) / (now - lastMillis);
+                        BytesPerSecond.Add(bps);
+                        //Console.WriteLine($"{bps/1024}, avg {BytesPerSecond.GetMovingAverage()/1024} (read {r} in {now - lastMillis} ms)");
+                        lastMillis = now;
                         OnTransferUpdated();
                     } while (read < length && !cancelled);
                     fs.Close();
                 }
             }
+            stopwatch.Stop();
             if (!cancelled)
             {
                 Status = TransferStatus.FINISHED;
@@ -232,7 +241,7 @@ namespace Warpinator
             {
                 if (File.Exists(f))
                     total += (ulong)new FileInfo(f).Length;
-            }    
+            }
             return total;
         }
 
@@ -268,7 +277,9 @@ namespace Warpinator
         {
             log.Info("Transfer accepted");
             Status = TransferStatus.TRANSFERRING;
-            RealStartTime = DateTime.Now.Ticks;
+            RealStartTime = DateTime.UtcNow.Ticks;
+            lastMillis = 0;
+            BytesPerSecond.Receiving = true;
             OnTransferUpdated();
             Server.current.Remotes[RemoteUUID].StartReceiveTransfer(this);
         }
@@ -336,9 +347,11 @@ namespace Warpinator
                 }
             }
             BytesTransferred += chunkSize;
-            long now = DateTime.Now.Ticks;
-            BytesPerSecond = (long)(chunkSize / ((double)(now - lastTicks) / TimeSpan.TicksPerSecond));
-            lastTicks = now;
+            long now = recvWatch.ElapsedMilliseconds;
+            long bps = (1000 * chunkSize) / (now - lastMillis);
+            BytesPerSecond.Add(bps);
+            //Console.WriteLine($"{bps / 1024}, avg {BytesPerSecond.GetMovingAverage() / 1024} (read {chunkSize} in {now - lastMillis} ms)");
+            lastMillis = now;
             OnTransferUpdated();
             return Status == TransferStatus.TRANSFERRING;
         }
@@ -430,6 +443,42 @@ namespace Warpinator
                 case TransferStatus.FAILED: return Resources.Strings.failed;
                 default: return "???";
             }
+        }
+    }
+
+    public class TransferSpeed
+    {
+        const int HistoryLength = 24;
+
+        public bool Receiving = false;
+        int idx = 0;
+        int count = 0;
+        long[] history = new long[HistoryLength];
+
+        public void Add(long bps)
+        {
+            history[idx] = bps;
+            idx = (idx + 1) % HistoryLength;
+            if (count < HistoryLength)
+                count++;
+        }
+
+        public long GetMovingAverage()
+        {
+            if (count == 0)
+                return 0;
+            else if (count == 1)
+                return history[0];
+            if (Receiving)
+                return history.Sum() / count;
+            
+            //Calculate trimmed mean (avoid outliers when write returned immediately)
+            long[] sorted = new long[count];
+            Array.Copy(history, sorted, count);
+            Array.Sort(sorted);
+            int trimLength = (int)(count * 0.8);
+            Span<long> trimmed = new Span<long>(sorted, 0, trimLength);
+            return trimmed.ToArray().Sum() / trimLength;
         }
     }
 }

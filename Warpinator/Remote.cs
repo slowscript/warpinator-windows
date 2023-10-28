@@ -149,6 +149,7 @@ namespace Warpinator
             bool cancelled = false;
             try
             {
+                t.recvWatch.Restart();
                 using (var i = client.StartTransfer(info))
                 {
                     while (await i.ResponseStream.MoveNext() && !cancelled)
@@ -174,6 +175,10 @@ namespace Warpinator
                     t.Status = TransferStatus.FAILED;
                 }
                 t.OnTransferUpdated();
+            }
+            finally
+            {
+                t.recvWatch.Stop();
             }
         }
 

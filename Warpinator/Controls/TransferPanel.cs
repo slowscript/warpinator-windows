@@ -55,7 +55,7 @@ namespace Warpinator.Controls
             }
             else if (transfer.Status == TransferStatus.TRANSFERRING)
                 lblProgress.Text = Utils.BytesToHumanReadable(transfer.BytesTransferred) + " / " + Utils.BytesToHumanReadable((long)transfer.TotalSize) + " (" +
-                Utils.BytesToHumanReadable(transfer.BytesPerSecond) + "/s, " + String.Format(Resources.Strings.remaining, transfer.GetRemainingTime()) + ")";
+                Utils.BytesToHumanReadable(transfer.BytesPerSecond.GetMovingAverage()) + "/s, " + String.Format(Resources.Strings.remaining, transfer.GetRemainingTime()) + ")";
             else
                 lblProgress.Text = transfer.GetStatusString();
             progressBar.Value = (int)(transfer.Progress * 100);
