@@ -41,6 +41,8 @@ namespace Warpinator
         internal Properties.Settings settings = Properties.Settings.Default;
         Timer pingTimer = new Timer(10_000);
         List<NetworkInterface> knownNics = null;
+        bool restarting = false;
+        bool needsRestart = false; //Needs another restart - in case restart was initiated while previous was in progress
 
         public Server()
         {
@@ -109,9 +111,23 @@ namespace Warpinator
 
         public async void Restart()
         {
+            if (restarting)
+            {
+                log.Debug("- Restart in progress, will restart again after it finishes...");
+                needsRestart = true;
+                return;
+            }
+            restarting = true;
             log.Info(">> Restarting server");
+            needsRestart = false;
             await Stop();
             await Start();
+            restarting = false;
+            if (needsRestart)
+            {
+                log.Debug("- Executing deferred restart");
+                Restart();
+            }
         }
 
         public void Rescan() => sd.QueryServiceInstances(SERVICE_TYPE);
