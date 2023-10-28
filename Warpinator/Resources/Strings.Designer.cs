@@ -97,6 +97,15 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Download directory does not exist and cannot be created. Please try picking a different one in the settings..
+        /// </summary>
+        internal static string cannot_create_dldir {
+            get {
+                return ResourceManager.GetString("cannot_create_dldir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledá lokalizovaný řetězec podobný Could not open web browser. Use this URL: {0}.
         /// </summary>
         internal static string cant_open_browser {

@@ -129,6 +129,9 @@
     <value>několik vteřin</value>
     <comment>... remaining</comment>
   </data>
+  <data name="cannot_create_dldir" xml:space="preserve">
+    <value>Složka pro přijaté soubory neexistuje a nepodařilo se ji vytvořit. Zkuste vybrat v nastavení jinou.</value>
+  </data>
   <data name="cant_open_browser" xml:space="preserve">
     <value>Nepodařilo se otevřít prohlížeč. Použijte toto URL: {0}</value>
   </data>

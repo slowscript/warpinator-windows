@@ -132,6 +132,9 @@
     <value>a few seconds</value>
     <comment>... remaining</comment>
   </data>
+  <data name="cannot_create_dldir" xml:space="preserve">
+    <value>Download directory does not exist and cannot be created. Please try picking a different one in the settings.</value>
+  </data>
   <data name="cant_open_browser" xml:space="preserve">
     <value>Could not open web browser. Use this URL: {0}</value>
   </data>
