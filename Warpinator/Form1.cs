@@ -21,6 +21,7 @@ namespace Warpinator
         readonly Timer rescanTimer = new Timer();
         static Form1 current;
         bool quit = false;
+        bool firstShow = true;
 
         public Form1()
         {
@@ -55,9 +56,7 @@ namespace Warpinator
                 Properties.Settings.Default.Save();
             }
             if (Properties.Settings.Default.CheckForUpdates)
-                await CheckForUpdates();
-            if (Properties.Settings.Default.RunInBackground && Properties.Settings.Default.StartMinimized)
-                this.Hide();
+                await CheckForUpdates();   
             try
             {
                 await server.Start();
@@ -66,6 +65,16 @@ namespace Warpinator
             {
                 log.Error("Failed to start server", ex);
                 MessageBox.Show(String.Format(Resources.Strings.failed_to_start_server, ex.Message), Resources.Strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            if (firstShow)
+            {
+                firstShow = false;
+                if (Properties.Settings.Default.RunInBackground && Properties.Settings.Default.StartMinimized)
+                    this.Hide(); //This is said to work better in Shown rather than Load
             }
         }
 
