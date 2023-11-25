@@ -259,6 +259,12 @@ namespace Warpinator
             RemoteUpdated?.Invoke(this, null); // update RemoteButton in Form1 to indicate incoming transfer
         }
 
+        public void ClearTransfers()
+        {
+            Transfers.RemoveAll((t) => (t.Status == TransferStatus.FINISHED) || (t.Status == TransferStatus.FINISHED_WITH_ERRORS) ||
+              (t.Status == TransferStatus.DECLINED) || (t.Status == TransferStatus.FAILED) || (t.Status == TransferStatus.STOPPED));
+        }
+
         public string GetStatusString()
         {
             switch (Status)

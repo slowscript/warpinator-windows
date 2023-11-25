@@ -60,6 +60,7 @@ namespace Warpinator
                 p.Width = flowLayoutTransfers.ClientSize.Width - 10;
                 p.Show();
             }
+            btnClear.Enabled = remote.Transfers.Count > 0;
         }
      
         private void BtnBrowse_Click(object sender, EventArgs e)
@@ -154,6 +155,12 @@ namespace Warpinator
                 selectedFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
                 txtFile.Text = String.Join("; ", selectedFiles.Select((f) => Path.GetFileName(f)));
             }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            remote.ClearTransfers();
+            UpdateTransfers();
         }
     }
 }

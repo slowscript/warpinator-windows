@@ -29,6 +29,7 @@ namespace Warpinator
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransferForm));
             this.pictureUser = new System.Windows.Forms.PictureBox();
             this.lblDisplayName = new System.Windows.Forms.Label();
@@ -44,6 +45,8 @@ namespace Warpinator
             this.browseFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnBrowseDir = new System.Windows.Forms.Button();
             this.btnReconnect = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureUser)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,8 +78,8 @@ namespace Warpinator
             // 
             // flowLayoutTransfers
             // 
-            resources.ApplyResources(this.flowLayoutTransfers, "flowLayoutTransfers");
             this.flowLayoutTransfers.AllowDrop = true;
+            resources.ApplyResources(this.flowLayoutTransfers, "flowLayoutTransfers");
             this.flowLayoutTransfers.Name = "flowLayoutTransfers";
             this.flowLayoutTransfers.ClientSizeChanged += new System.EventHandler(this.FlowLayoutPanel_ClientSizeChanged);
             this.flowLayoutTransfers.DragDrop += new System.Windows.Forms.DragEventHandler(this.FlowLayoutTransfers_DragDrop);
@@ -98,8 +101,8 @@ namespace Warpinator
             // 
             // txtFile
             // 
-            resources.ApplyResources(this.txtFile, "txtFile");
             this.txtFile.AllowDrop = true;
+            resources.ApplyResources(this.txtFile, "txtFile");
             this.txtFile.Name = "txtFile";
             this.txtFile.ReadOnly = true;
             this.txtFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.TxtFile_DragDrop);
@@ -114,13 +117,13 @@ namespace Warpinator
             // 
             // browseFilesToolStripMenuItem
             // 
-            resources.ApplyResources(this.browseFilesToolStripMenuItem, "browseFilesToolStripMenuItem");
             this.browseFilesToolStripMenuItem.Name = "browseFilesToolStripMenuItem";
+            resources.ApplyResources(this.browseFilesToolStripMenuItem, "browseFilesToolStripMenuItem");
             // 
             // browseFoldersToolStripMenuItem
             // 
-            resources.ApplyResources(this.browseFoldersToolStripMenuItem, "browseFoldersToolStripMenuItem");
             this.browseFoldersToolStripMenuItem.Name = "browseFoldersToolStripMenuItem";
+            resources.ApplyResources(this.browseFoldersToolStripMenuItem, "browseFoldersToolStripMenuItem");
             // 
             // btnBrowseDir
             // 
@@ -136,10 +139,20 @@ namespace Warpinator
             this.btnReconnect.UseVisualStyleBackColor = true;
             this.btnReconnect.Click += new System.EventHandler(this.BtnReconnect_Click);
             // 
+            // btnClear
+            // 
+            resources.ApplyResources(this.btnClear, "btnClear");
+            this.btnClear.BackgroundImage = global::Warpinator.Properties.Resources.trashcan;
+            this.btnClear.Name = "btnClear";
+            this.toolTip.SetToolTip(this.btnClear, resources.GetString("btnClear.ToolTip"));
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // TransferForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnReconnect);
             this.Controls.Add(this.btnBrowseDir);
             this.Controls.Add(this.btnDlDir);
@@ -176,5 +189,7 @@ namespace Warpinator
         private System.Windows.Forms.ToolStripMenuItem browseFoldersToolStripMenuItem;
         private System.Windows.Forms.Button btnBrowseDir;
         private System.Windows.Forms.Button btnReconnect;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

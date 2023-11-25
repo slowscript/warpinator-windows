@@ -117,11 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="pictureUser.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblDisplayName.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblUserString.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblAddress.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblStatus.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="flowLayoutTransfers.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnBrowse.Text" xml:space="preserve">
     <value>Procházet</value>
   </data>
+  <data name="btnBrowse.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnSend.Text" xml:space="preserve">
     <value>Odeslat</value>
+  </data>
+  <data name="btnSend.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtFile.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnDlDir.Location" type="System.Drawing.Point, System.Drawing">
@@ -133,6 +160,12 @@
   <data name="btnDlDir.Text" xml:space="preserve">
     <value>Otevřít složku se soubory</value>
   </data>
+  <data name="btnDlDir.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnBrowseDir.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="btnReconnect.Location" type="System.Drawing.Point, System.Drawing">
     <value>300, 28</value>
   </data>
@@ -141,5 +174,14 @@
   </data>
   <data name="btnReconnect.Text" xml:space="preserve">
     <value>Znovu připojit</value>
+  </data>
+  <data name="btnReconnect.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnClear.ToolTip" xml:space="preserve">
+    <value>Odstranit dokončené přenosy ze seznamu</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>
