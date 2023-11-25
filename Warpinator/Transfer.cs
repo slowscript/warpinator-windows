@@ -174,9 +174,10 @@ namespace Warpinator
                         if (firstChunk)
                         {
                             firstChunk = false;
+                            DateTime mtime = File.GetLastWriteTime(p);
                             ftime = new FileTime() {
-                                Mtime = (ulong)new DateTimeOffset(File.GetLastWriteTime(p)).ToUnixTimeSeconds(),
-                                MtimeUsec = (uint)File.GetLastWriteTime(p).Millisecond * 1000
+                                Mtime = (ulong)new DateTimeOffset(mtime).ToUnixTimeSeconds(),
+                                MtimeUsec = (uint)mtime.Millisecond * 1000
                             };
                         }
 

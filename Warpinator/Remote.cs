@@ -170,10 +170,17 @@ namespace Warpinator
                 }
                 else
                 {
-                    log.Error("Error while receiving", e);
-                    t.errors.Add("Error while receiving: " + e.Status.Detail);
+                    log.Error("RPC error while receiving", e);
+                    t.errors.Add("Error while receiving. Remote status: " + e.Status.Detail);
                     t.Status = TransferStatus.FAILED;
                 }
+                t.OnTransferUpdated();
+            }
+            catch (Exception e)
+            {
+                log.Error("Fatal error while receiving", e);
+                t.errors.Add("Error while receiving: " + e.Message);
+                t.Status = TransferStatus.FAILED;
                 t.OnTransferUpdated();
             }
             finally

@@ -53,7 +53,7 @@ namespace Warpinator
                         SendPaths.Add(path);
                     else log.Warn("Path does not exist");
                 }
-                if (!created)
+                if (!created && SendPaths.Count > 0)
                 {
                     log.Debug("Passing paths to main process...");
                     using (var pipeClient = new NamedPipeClientStream(".", "warpsendto", PipeDirection.Out))
