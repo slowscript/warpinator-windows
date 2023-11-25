@@ -50,7 +50,7 @@ namespace Warpinator
         public TransferSpeed BytesPerSecond = new TransferSpeed();
         public long RealStartTime;
         public double Progress { get { return (double)BytesTransferred / TotalSize; } }
-        private long lastMillis;
+        private double lastMillis;
         internal Stopwatch recvWatch = new Stopwatch();
         private FileStream currentStream;
 
@@ -139,7 +139,7 @@ namespace Warpinator
             stream.WriteOptions = new Grpc.Core.WriteOptions((Grpc.Core.WriteFlags)0x4); //Write through, but doesnt seem to be doing much
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            long lastMillis = 0;
+            double lastMillis = 0;
 
             string f1 = FilesToSend[0];
             int parentLen = f1.TrimEnd(Path.DirectorySeparatorChar).LastIndexOf(Path.DirectorySeparatorChar);
@@ -192,9 +192,9 @@ namespace Warpinator
                         await stream.WriteAsync(chunk);
                         read += r;
                         BytesTransferred += r;
-                        long now = stopwatch.ElapsedMilliseconds;
-                        long bps = (1000 * r) / (now - lastMillis);
-                        BytesPerSecond.Add(bps);
+                        double now = stopwatch.Elapsed.TotalMilliseconds;
+                        double bps = (1000 * r) / (now - lastMillis);
+                        BytesPerSecond.Add((long)bps);
                         //Console.WriteLine($"{bps/1024}, avg {BytesPerSecond.GetMovingAverage()/1024} (read {r} in {now - lastMillis} ms)");
                         lastMillis = now;
                         OnTransferUpdated();
@@ -348,9 +348,9 @@ namespace Warpinator
                 }
             }
             BytesTransferred += chunkSize;
-            long now = recvWatch.ElapsedMilliseconds;
-            long bps = (1000 * chunkSize) / (now - lastMillis);
-            BytesPerSecond.Add(bps);
+            double now = recvWatch.Elapsed.TotalMilliseconds;
+            double bps = (1000 * chunkSize) / (now - lastMillis);
+            BytesPerSecond.Add((long)bps);
             //Console.WriteLine($"{bps / 1024}, avg {BytesPerSecond.GetMovingAverage() / 1024} (read {chunkSize} in {now - lastMillis} ms)");
             lastMillis = now;
             OnTransferUpdated();
