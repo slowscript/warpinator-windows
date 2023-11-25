@@ -44,10 +44,14 @@ namespace Warpinator
             
             if (Properties.Settings.Default.FirstRun)
             {
-                var res = MessageBox.Show(Resources.Strings.do_you_want_to_check_for_updates, Resources.Strings.info, MessageBoxButtons.YesNo);
-                if (res == DialogResult.Yes)
-                    Properties.Settings.Default.CheckForUpdates = true;
-                Properties.Settings.Default.FirstRun = false;
+                Properties.Settings.Default.Upgrade();
+                if (Properties.Settings.Default.FirstRun)
+                {
+                    var res = MessageBox.Show(Resources.Strings.do_you_want_to_check_for_updates, Resources.Strings.info, MessageBoxButtons.YesNo);
+                    if (res == DialogResult.Yes)
+                        Properties.Settings.Default.CheckForUpdates = true;
+                    Properties.Settings.Default.FirstRun = false;
+                }
                 Properties.Settings.Default.Save();
             }
             if (Properties.Settings.Default.CheckForUpdates)
