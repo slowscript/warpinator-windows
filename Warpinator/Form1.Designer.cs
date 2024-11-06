@@ -60,89 +60,91 @@ namespace Warpinator
             // 
             // statusStrip1
             // 
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblIP,
             this.lblStatus});
-            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
             // 
             // lblIP
             // 
-            this.lblIP.Name = "lblIP";
             resources.ApplyResources(this.lblIP, "lblIP");
+            this.lblIP.Name = "lblIP";
             // 
             // lblStatus
             // 
-            this.lblStatus.Name = "lblStatus";
             resources.ApplyResources(this.lblStatus, "lblStatus");
+            this.lblStatus.Name = "lblStatus";
             this.lblStatus.Spring = true;
             // 
             // menuStrip1
             // 
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rescanToolStripMenuItem,
             this.reannounceToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
             // rescanToolStripMenuItem
             // 
-            this.rescanToolStripMenuItem.Name = "rescanToolStripMenuItem";
             resources.ApplyResources(this.rescanToolStripMenuItem, "rescanToolStripMenuItem");
+            this.rescanToolStripMenuItem.Name = "rescanToolStripMenuItem";
             this.rescanToolStripMenuItem.Click += new System.EventHandler(this.RescanToolStripMenuItem_Click);
             // 
             // reannounceToolStripMenuItem
             // 
-            this.reannounceToolStripMenuItem.Name = "reannounceToolStripMenuItem";
             resources.ApplyResources(this.reannounceToolStripMenuItem, "reannounceToolStripMenuItem");
+            this.reannounceToolStripMenuItem.Name = "reannounceToolStripMenuItem";
             this.reannounceToolStripMenuItem.Click += new System.EventHandler(this.ReannounceToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
-            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             resources.ApplyResources(this.quitToolStripMenuItem, "quitToolStripMenuItem");
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
             this.connectionIssuesToolStripMenuItem,
             this.gitHubToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // connectionIssuesToolStripMenuItem
             // 
-            this.connectionIssuesToolStripMenuItem.Name = "connectionIssuesToolStripMenuItem";
             resources.ApplyResources(this.connectionIssuesToolStripMenuItem, "connectionIssuesToolStripMenuItem");
+            this.connectionIssuesToolStripMenuItem.Name = "connectionIssuesToolStripMenuItem";
             // 
             // gitHubToolStripMenuItem
             // 
-            this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
             resources.ApplyResources(this.gitHubToolStripMenuItem, "gitHubToolStripMenuItem");
+            this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
             this.gitHubToolStripMenuItem.Click += new System.EventHandler(this.GitHubToolStripMenuItem_Click);
             // 
             // lblDevices
@@ -153,32 +155,33 @@ namespace Warpinator
             // flowLayoutPanel
             // 
             resources.ApplyResources(this.flowLayoutPanel, "flowLayoutPanel");
-            this.flowLayoutPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.flowLayoutPanel.BackColor = System.Drawing.SystemColors.Control;
             this.flowLayoutPanel.Name = "flowLayoutPanel";
             // 
             // notifyIcon
             // 
-            this.notifyIcon.ContextMenuStrip = this.notifyIconMenu;
             resources.ApplyResources(this.notifyIcon, "notifyIcon");
+            this.notifyIcon.ContextMenuStrip = this.notifyIconMenu;
             // 
             // notifyIconMenu
             // 
+            resources.ApplyResources(this.notifyIconMenu, "notifyIconMenu");
+            this.notifyIconMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.notifyIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.quitToolStripMenuItem1});
             this.notifyIconMenu.Name = "notifyIconMenu";
-            resources.ApplyResources(this.notifyIconMenu, "notifyIconMenu");
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             resources.ApplyResources(this.openToolStripMenuItem, "openToolStripMenuItem");
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem1
             // 
-            this.quitToolStripMenuItem1.Name = "quitToolStripMenuItem1";
             resources.ApplyResources(this.quitToolStripMenuItem1, "quitToolStripMenuItem1");
+            this.quitToolStripMenuItem1.Name = "quitToolStripMenuItem1";
             this.quitToolStripMenuItem1.Click += new System.EventHandler(this.quitToolStripMenuItem1_Click);
             // 
             // btnRescan
@@ -191,13 +194,13 @@ namespace Warpinator
             // lblNoDevicesFound
             // 
             resources.ApplyResources(this.lblNoDevicesFound, "lblNoDevicesFound");
-            this.lblNoDevicesFound.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblNoDevicesFound.BackColor = System.Drawing.Color.Transparent;
             this.lblNoDevicesFound.Name = "lblNoDevicesFound";
             // 
             // lblInitializing
             // 
             resources.ApplyResources(this.lblInitializing, "lblInitializing");
-            this.lblInitializing.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblInitializing.BackColor = System.Drawing.Color.Transparent;
             this.lblInitializing.Name = "lblInitializing";
             // 
             // Form1

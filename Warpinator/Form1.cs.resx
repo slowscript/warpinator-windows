@@ -143,10 +143,10 @@
     <value>Ukončit</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 20</value>
+    <value>68, 20</value>
   </data>
   <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hlavní</value>
+    <value>Možnosti</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 22</value>
@@ -169,10 +169,10 @@
   <data name="helpToolStripMenuItem.Text" xml:space="preserve">
     <value>Nápověda</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblDevices.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 17</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="lblDevices.Text" xml:space="preserve">
     <value>Dostupná zařízení</value>
   </data>
   <data name="btnRescan.Size" type="System.Drawing.Size, System.Drawing">
