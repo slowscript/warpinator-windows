@@ -28,6 +28,7 @@ namespace Warpinator
             current = this;
             InitializeComponent();
             flowLayoutPanel.ClientSizeChanged += FlowLayoutPanel_ClientSizeChanged;
+            flowLayoutPanel.HorizontalScroll.Maximum = 0;
             notifyIcon.DoubleClick += (s, e) => Show();
             notifyIcon.Icon = Properties.Resources.warplogo;
             rescanTimer.Interval = 2000;
@@ -124,6 +125,14 @@ namespace Warpinator
             }
         }
 
+        private SizeF scale = new SizeF(1f, 1f);
+        protected override void ScaleControl(SizeF factor, BoundsSpecified specified)
+        {
+            base.ScaleControl(factor, specified);
+            scale = factor;
+            log.Debug($"scale {scale.Width}, {scale.Height}");
+        }
+
         private int numOutgroup = 0;
         private void DoUpdateUI()
         {
@@ -138,6 +147,7 @@ namespace Warpinator
                 }
                 var btn = new RemoteButton(r);
                 flowLayoutPanel.Controls.Add(btn);
+                btn.Scale(scale);
                 btn.Width = flowLayoutPanel.ClientSize.Width - 10;
                 btn.Show();
             }

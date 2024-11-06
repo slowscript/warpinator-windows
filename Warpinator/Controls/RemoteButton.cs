@@ -4,11 +4,12 @@ using System.Windows.Forms;
 
 namespace Warpinator.Controls
 {
-    public class RemoteButton : Button
+    public class RemoteButton : UserControl
     {
         private readonly Remote remote;
         private bool mouseHover = false;
         private bool mouseDown = false;
+        public SizeF scale = new SizeF(1f, 1f);
 
         public RemoteButton(Remote r)
         {
@@ -22,6 +23,7 @@ namespace Warpinator.Controls
             this.MouseDown += RemoteButton_MouseDown;
             this.MouseUp += RemoteButton_MouseUp;
             this.Click += RemoteButton_Click;
+            this.AutoScaleMode = AutoScaleMode.Inherit;
             
             remote = r ?? throw new ArgumentNullException("Remote cannot be null");
             remote.RemoteUpdated += UpdateInfo;
@@ -34,10 +36,16 @@ namespace Warpinator.Controls
             remote.RemoteUpdated -= UpdateInfo;
         }
 
+        protected override void ScaleControl(SizeF factor, BoundsSpecified specified)
+        {
+            base.ScaleControl(factor, specified);
+            scale = factor;
+        }
+
         private void RemoteButton_MouseDown(object sender, MouseEventArgs e) => mouseDown = true;
         private void RemoteButton_MouseUp(object sender, MouseEventArgs e) => mouseDown = false;
-        private void RemoteButton_MouseEnter(object sender, EventArgs e) => mouseHover = true;
-        private void RemoteButton_MouseLeave(object sender, EventArgs e) => mouseHover = false;
+        private void RemoteButton_MouseEnter(object sender, EventArgs e) { mouseHover = true; Invalidate();  }
+        private void RemoteButton_MouseLeave(object sender, EventArgs e) { mouseHover = false; Invalidate(); }
 
         public void UpdateInfo(object s, EventArgs a)
         {
@@ -53,6 +61,8 @@ namespace Warpinator.Controls
         private void DrawButton(object sender, PaintEventArgs e)
         {
             var g = e.Graphics;
+            float sw = scale.Width;
+            float sh = scale.Height;
             var border = new Pen(SystemColors.ControlDark, 2);
             Brush clr = remote.IncomingTransferFlag ? Brushes.CornflowerBlue : SystemBrushes.ControlLight;
             if (mouseDown) clr = Brushes.LightGray;
@@ -60,10 +70,10 @@ namespace Warpinator.Controls
             g.FillRectangle(clr, e.ClipRectangle);
             g.DrawRectangle(border, e.ClipRectangle);
             if (remote.Picture != null)
-                g.DrawImage(remote.Picture, 8, 8, 48, 48);
-            g.DrawString(remote.DisplayName, SystemFonts.DefaultFont, SystemBrushes.ControlText, 68, 8);
-            g.DrawString(remote.UserName + "@" + remote.Hostname, SystemFonts.DefaultFont, SystemBrushes.ControlText, 68, 28);
-            g.DrawString(remote.Address + ":" + remote.Port, SystemFonts.DefaultFont, SystemBrushes.ControlText, 68, 48);
+                g.DrawImage(remote.Picture, 8 * sw, 8 * sh, 48 * sw, 48 * sh);
+            g.DrawString(remote.DisplayName, SystemFonts.DefaultFont, SystemBrushes.ControlText, 68 * sw, 8 * sh);
+            g.DrawString(remote.UserName + "@" + remote.Hostname, SystemFonts.DefaultFont, SystemBrushes.ControlText, 68 * sw, 28 * sh);
+            g.DrawString(remote.Address + ":" + remote.Port, SystemFonts.DefaultFont, SystemBrushes.ControlText, 68 * sw, 48 * sh);
             Image statusImg = null;
             switch (remote.Status)
             {
@@ -81,7 +91,7 @@ namespace Warpinator.Controls
             if ((remote.Status == RemoteStatus.DISCONNECTED || remote.Status == RemoteStatus.ERROR) && !remote.ServiceAvailable)
                 statusImg = Properties.Resources.invisible;
             if (statusImg != null)
-                g.DrawImage(statusImg, e.ClipRectangle.Width - 48, 16, 32, 32);
+                g.DrawImage(statusImg, e.ClipRectangle.Width - 48 * sw, 16 * sh, 32 * sw, 32 * sh);
         }
     }
 }
