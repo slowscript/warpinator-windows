@@ -62,9 +62,9 @@ namespace Warpinator.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("42000")]
-        public int Port {
+        public ushort Port {
             get {
-                return ((int)(this["Port"]));
+                return ((ushort)(this["Port"]));
             }
             set {
                 this["Port"] = value;
@@ -164,6 +164,18 @@ namespace Warpinator.Properties {
             }
             set {
                 this["StartMinimized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("42001")]
+        public ushort AuthPort {
+            get {
+                return ((ushort)(this["AuthPort"]));
+            }
+            set {
+                this["AuthPort"] = value;
             }
         }
     }

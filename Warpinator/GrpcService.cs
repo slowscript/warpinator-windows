@@ -10,6 +10,7 @@ namespace Warpinator
     class GrpcService : Warp.WarpBase
     {
         private static readonly Common.Logging.ILog log = Program.Log.GetLogger(typeof(GrpcService));
+        private const int MaxTriesForDuplex = 20;
 
         public override Task<HaveDuplex> CheckDuplexConnection(LookupName request, ServerCallContext context)
         {
@@ -26,6 +27,34 @@ namespace Warpinator
                 }
             }
             return Task.FromResult (new HaveDuplex() { Response = result });
+        }
+
+        public override async Task<HaveDuplex> WaitingForDuplex(LookupName request, ServerCallContext context)
+        {
+            log.Debug($"{request.ReadableName} is waiting on duplex...");
+            Remote r;
+            Server.current.Remotes.TryGetValue(request.Id, out r);
+            if (r != null && (r.Status == RemoteStatus.ERROR || r.Status == RemoteStatus.DISCONNECTED))
+                r.Connect();
+
+            int i = 0;
+            bool response = false;
+            while (i < MaxTriesForDuplex)
+            {
+                Server.current.Remotes.TryGetValue(request.Id, out r);
+                if (r != null)
+                    response = r.Status == RemoteStatus.AWAITING_DUPLEX || r.Status == RemoteStatus.CONNECTED;
+                if (response)
+                    break;
+                i++;
+                if (i == MaxTriesForDuplex)
+                {
+                    log.Debug($"{request.ReadableName} failed to establish duplex");
+                    throw new RpcException(new Status(StatusCode.DeadlineExceeded, "Duplex was not established within deadline"));
+                }
+                await Task.Delay(250);
+            }
+            return new HaveDuplex { Response = response };
         }
 
         public override Task<RemoteMachineInfo> GetRemoteMachineInfo(LookupName request, ServerCallContext context)
@@ -129,5 +158,18 @@ namespace Warpinator
         }
 
         private Task<VoidType> Void { get { return Task.FromResult(new VoidType()); } }
+    }
+
+    class RegistrationService : WarpRegistration.WarpRegistrationBase
+    {
+        private static readonly Common.Logging.ILog log = Program.Log.GetLogger(typeof(RegistrationService));
+
+        public override Task<RegResponse> RequestCertificate(RegRequest request, ServerCallContext context)
+        {
+            byte[] sendData = Authenticator.GetBoxedCertificate();
+            string certString = Convert.ToBase64String(sendData);
+            log.Debug($"Sending certificate to {request.Hostname} on {request.Ip}");
+            return Task.FromResult(new RegResponse { LockedCert = certString });
+        }
     }
 }

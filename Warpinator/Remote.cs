@@ -26,6 +26,8 @@ namespace Warpinator
     {
         public IPAddress Address;
         public int Port;
+        public int AuthPort;
+        public uint APIVersion;
         public string ServiceName;
         public string UserName;
         public string Hostname;

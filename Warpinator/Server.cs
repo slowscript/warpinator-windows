@@ -25,6 +25,7 @@ namespace Warpinator
         public string UserName;
         public string Hostname;
         public ushort Port = 42000;
+        public ushort AuthPort = 42001;
         public string UUID;
         public bool Running = false;
         public string SelectedInterface;
@@ -33,6 +34,7 @@ namespace Warpinator
         public Dictionary<string, Remote> Remotes = new Dictionary<string, Remote>();
 
         Grpc.Core.Server grpcServer;
+        Grpc.Core.Server regServer;
         ServiceDiscovery sd;
         readonly MulticastService mdns;
         ServiceProfile serviceProfile;
@@ -41,6 +43,7 @@ namespace Warpinator
         internal Properties.Settings settings = Properties.Settings.Default;
         Timer pingTimer = new Timer(10_000);
         List<NetworkInterface> knownNics = null;
+        private uint APIVersion = 2;
         bool restarting = false;
         bool needsRestart = false; //Needs another restart - in case restart was initiated while previous was in progress
 
@@ -83,6 +86,8 @@ namespace Warpinator
             log.Info("-- Starting server");
             Running = true;
             Authenticator.GroupCode = settings.GroupCode;
+            Port = settings.Port;
+            AuthPort = settings.AuthPort;
             if (String.IsNullOrEmpty(settings.NetworkInterface))
                 SelectedInterface = Utils.AutoSelectNetworkInterface();
             else SelectedInterface = settings.NetworkInterface;
@@ -104,7 +109,8 @@ namespace Warpinator
             mdns.Stop();
             NetworkChange.NetworkAddressChanged -= OnNetworkChanged;
             CertServer.Stop();
-            await grpcServer.ShutdownAsync();
+            await grpcServer.KillAsync();
+            await regServer.KillAsync();
             Form1.UpdateLabels();
             log.Info("-- Server stopped\n");
         }
@@ -137,11 +143,29 @@ namespace Warpinator
         {
             KeyCertificatePair kcp = await Task.Run(Authenticator.GetKeyCertificatePair);
             SelectedIP = Utils.GetLocalIPAddress();
-            grpcServer = new Grpc.Core.Server() { 
+            var options = new ChannelOption[] { // As per Linux Warpinator source
+                new ChannelOption("grpc.keepalive_time_ms", 10 * 1000),
+                new ChannelOption("grpc.keepalive_timeout_ms", 5 * 1000),
+                new ChannelOption("grpc.keepalive_permit_without_calls", 1),
+                new ChannelOption("grpc.http2.max_pings_without_data", 0),
+                new ChannelOption("grpc.http2.min_time_between_pings_ms", 10 * 1000),
+                new ChannelOption("grpc.http2.min_ping_interval_without_data_ms",  5 * 1000)
+            };
+            grpcServer = new Grpc.Core.Server(options) {
                 Services = { Warp.BindService(new GrpcService()) },
                 Ports = { new ServerPort(SelectedIP.ToString(), Port, new SslServerCredentials(new List<KeyCertificatePair>() { kcp })) }
             };
             grpcServer.Start();
+            try {
+                regServer = new Grpc.Core.Server() {
+                    Services = { WarpRegistration.BindService(new RegistrationService()) },
+                    Ports = { new ServerPort(SelectedIP.ToString(), AuthPort, ServerCredentials.Insecure) }
+                };
+                regServer.Start();
+            } catch (Exception e) {
+                APIVersion = 1; // Fall back
+                log.Warn("Failed to start V2 registration service, only V1 will be available", e);
+            }
             log.Info("GRPC started");
         }
 
@@ -162,6 +186,8 @@ namespace Warpinator
             serviceProfile = new ServiceProfile(UUID, SERVICE_TYPE, Port, new List<IPAddress> { SelectedIP });
             serviceProfile.AddProperty("hostname", Utils.GetHostname());
             serviceProfile.AddProperty("type", flush ? "flush" : "real");
+            serviceProfile.AddProperty("api-version", APIVersion.ToString());
+            serviceProfile.AddProperty("auth-port", AuthPort.ToString());
             sd.Advertise(serviceProfile);
             sd.Announce(serviceProfile);
         }
@@ -315,6 +341,12 @@ namespace Warpinator
             if (txt.ContainsKey("hostname"))
                 remote.Hostname = txt["hostname"];
             remote.Port = svc.Port;
+            if (txt.ContainsKey("api-version"))
+                if (!uint.TryParse(txt["api-version"], out remote.APIVersion))
+                    log.Warn("Invalid API version in TXT record");
+            if (txt.ContainsKey("auth-port"))
+                if (!int.TryParse(txt["auth-port"], out remote.AuthPort))
+                    log.Warn("Invalid auth port in TXT record");
             remote.ServiceName = name;
             remote.UUID = name;
             remote.ServiceAvailable = true;

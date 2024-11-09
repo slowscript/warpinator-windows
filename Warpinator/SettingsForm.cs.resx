@@ -136,6 +136,15 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Síťová nastavení</value>
   </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 73</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Port pro registraci</value>
+  </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 28</value>
   </data>
@@ -147,6 +156,15 @@
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Rozhraní</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 47</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Port pro přenosy</value>
   </data>
   <data name="btnRestart.Text" xml:space="preserve">
     <value>Restartovat</value>

@@ -134,10 +134,16 @@
     <value>Codice gruppo</value>
   </data>
   <data name="txtGroupcode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 19</value>
+    <value>120, 19</value>
+  </data>
+  <data name="numAuthPort.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 71</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 73</value>
   </data>
   <data name="btnShowCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 17</value>
+    <value>254, 17</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 28</value>
@@ -146,13 +152,13 @@
     <value>La modifica di queste impostazioni richiede un riavvio del servizio (i trasferimenti in corso falliranno)</value>
   </data>
   <data name="numPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 45</value>
+    <value>120, 45</value>
   </data>
   <data name="comboInterfaces.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 71</value>
+    <value>118, 97</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 74</value>
+    <value>57, 100</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -161,7 +167,7 @@
     <value>Interfaccia</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 47</value>
+    <value>82, 47</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -182,7 +188,7 @@
     <value>Notifica i trasferimenti in ingresso</value>
   </data>
   <data name="chkOverwrite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>527, 17</value>
+    <value>440, 17</value>
   </data>
   <data name="chkOverwrite.Text" xml:space="preserve">
     <value>Sovrascrivi file (chiede conferma prima di procedere), altrimenti rinomina i file già esistenti</value>
@@ -200,7 +206,7 @@
     <value>Applica</value>
   </data>
   <data name="chkBackground.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 17</value>
+    <value>212, 17</value>
   </data>
   <data name="chkBackground.Text" xml:space="preserve">
     <value>Resta in esecuzione nell'area di notifica</value>

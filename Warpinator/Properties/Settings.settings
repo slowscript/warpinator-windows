@@ -11,7 +11,7 @@
     <Setting Name="NetworkInterface" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Port" Type="System.Int32" Scope="User">
+    <Setting Name="Port" Type="System.UInt16" Scope="User">
       <Value Profile="(Default)">42000</Value>
     </Setting>
     <Setting Name="GroupCode" Type="System.String" Scope="User">
@@ -37,6 +37,9 @@
     </Setting>
     <Setting Name="StartMinimized" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AuthPort" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">42001</Value>
     </Setting>
   </Settings>
 </SettingsFile>

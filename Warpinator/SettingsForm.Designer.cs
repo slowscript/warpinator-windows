@@ -36,6 +36,8 @@ namespace Warpinator
             this.label2 = new System.Windows.Forms.Label();
             this.txtGroupcode = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numAuthPort = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnShowCode = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.numPort = new System.Windows.Forms.NumericUpDown();
@@ -53,6 +55,7 @@ namespace Warpinator
             this.chkUpdates = new System.Windows.Forms.CheckBox();
             this.chkStartMinimized = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAuthPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,6 +89,9 @@ namespace Warpinator
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.numAuthPort);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnShowCode);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.numPort);
@@ -95,14 +101,38 @@ namespace Warpinator
             this.groupBox1.Controls.Add(this.btnRestart);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtGroupcode);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
+            // numAuthPort
+            // 
+            resources.ApplyResources(this.numAuthPort, "numAuthPort");
+            this.numAuthPort.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.numAuthPort.Minimum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.numAuthPort.Name = "numAuthPort";
+            this.numAuthPort.Value = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
             // btnShowCode
             // 
-            this.btnShowCode.BackgroundImage = global::Warpinator.Properties.Resources.visible;
             resources.ApplyResources(this.btnShowCode, "btnShowCode");
+            this.btnShowCode.BackgroundImage = global::Warpinator.Properties.Resources.visible;
             this.btnShowCode.Name = "btnShowCode";
             this.btnShowCode.UseVisualStyleBackColor = true;
             this.btnShowCode.Click += new System.EventHandler(this.BtnShowCode_Click);
@@ -134,9 +164,9 @@ namespace Warpinator
             // 
             // comboInterfaces
             // 
+            resources.ApplyResources(this.comboInterfaces, "comboInterfaces");
             this.comboInterfaces.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboInterfaces.FormattingEnabled = true;
-            resources.ApplyResources(this.comboInterfaces, "comboInterfaces");
             this.comboInterfaces.Name = "comboInterfaces";
             // 
             // label4
@@ -236,6 +266,7 @@ namespace Warpinator
             this.Name = "SettingsForm";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAuthPort)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -266,5 +297,7 @@ namespace Warpinator
         private System.Windows.Forms.Button btnShowCode;
         private System.Windows.Forms.CheckBox chkUpdates;
         private System.Windows.Forms.CheckBox chkStartMinimized;
+        private System.Windows.Forms.NumericUpDown numAuthPort;
+        private System.Windows.Forms.Label label6;
     }
 }

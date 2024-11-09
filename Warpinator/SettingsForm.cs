@@ -26,6 +26,7 @@ namespace Warpinator
             txtRecvDir.Text = Properties.Settings.Default.DownloadDir;
             txtGroupcode.Text = Properties.Settings.Default.GroupCode;
             numPort.Value = Properties.Settings.Default.Port;
+            numAuthPort.Value = Properties.Settings.Default.AuthPort;
             chkNotify.Checked = Properties.Settings.Default.NotifyIncoming;
             chkOverwrite.Checked = Properties.Settings.Default.AllowOverwrite;
             chkAutoAccept.Checked = Properties.Settings.Default.AutoAccept;
@@ -63,7 +64,8 @@ namespace Warpinator
         private void ApplyNetwork()
         {
             Properties.Settings.Default.NetworkInterface = ifaceDict.Keys.ToArray()[comboInterfaces.SelectedIndex];
-            Properties.Settings.Default.Port = (int)numPort.Value;
+            Properties.Settings.Default.Port = (ushort)numPort.Value;
+            Properties.Settings.Default.AuthPort = (ushort)numAuthPort.Value;
             Properties.Settings.Default.GroupCode = txtGroupcode.Text;
         }
 
