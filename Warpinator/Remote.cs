@@ -139,11 +139,13 @@ namespace Warpinator
 
         public void StartSendTransfer(Transfer t)
         {
+            t.UseCompression = Server.current.settings.UseCompression;
             var opInfo = new OpInfo()
             {
                 Ident = Server.current.UUID,
                 Timestamp = t.StartTime,
-                ReadableName = Server.current.Hostname
+                ReadableName = Server.current.Hostname,
+                UseCompression = t.UseCompression
             };
             var req = new TransferOpRequest()
             {
@@ -165,7 +167,8 @@ namespace Warpinator
             {
                 Ident = Server.current.UUID,
                 Timestamp = t.StartTime,
-                ReadableName = Server.current.Hostname
+                ReadableName = Server.current.Hostname,
+                UseCompression = t.UseCompression
             };
             bool cancelled = false;
             try

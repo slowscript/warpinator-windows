@@ -96,7 +96,8 @@ namespace Warpinator
                 FileCount = request.Count,
                 SingleMIME = request.MimeIfSingle,
                 SingleName = request.NameIfSingle,
-                TopDirBaseNames = request.TopDirBasenames.ToList()
+                TopDirBaseNames = request.TopDirBasenames.ToList(),
+                UseCompression = request.Info.UseCompression && Properties.Settings.Default.UseCompression
             };
             r.Transfers.Add(t);
             t.PrepareReceive();
@@ -119,6 +120,7 @@ namespace Warpinator
             var t = GetTransfer(request);
             if (t != null)
             {
+                t.UseCompression &= request.UseCompression;
                 try
                 {
                     await t.StartSending(responseStream);

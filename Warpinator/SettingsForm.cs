@@ -36,6 +36,7 @@ namespace Warpinator
             else
                 chkStartMinimized.Checked = Properties.Settings.Default.StartMinimized;
             chkUpdates.Checked = Properties.Settings.Default.CheckForUpdates;
+            chkCompression.Checked = Properties.Settings.Default.UseCompression;
 
             var ifaces = MulticastService.GetNetworkInterfaces();
             ifaceDict.Clear();
@@ -82,6 +83,7 @@ namespace Warpinator
             Properties.Settings.Default.RunInBackground = chkBackground.Checked;
             Properties.Settings.Default.StartMinimized = chkStartMinimized.Checked;
             Properties.Settings.Default.CheckForUpdates = chkUpdates.Checked;
+            Properties.Settings.Default.UseCompression = chkCompression.Checked;
 
             Properties.Settings.Default.Save();
         }

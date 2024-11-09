@@ -41,5 +41,8 @@
     <Setting Name="AuthPort" Type="System.UInt16" Scope="User">
       <Value Profile="(Default)">42001</Value>
     </Setting>
+    <Setting Name="UseCompression" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

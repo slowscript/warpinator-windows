@@ -178,5 +178,17 @@ namespace Warpinator.Properties {
                 this["AuthPort"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseCompression {
+            get {
+                return ((bool)(this["UseCompression"]));
+            }
+            set {
+                this["UseCompression"] = value;
+            }
+        }
     }
 }

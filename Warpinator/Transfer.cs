@@ -35,6 +35,7 @@ namespace Warpinator
         public string SingleName = "";
         public string SingleMIME = "";
         public List<string> TopDirBaseNames;
+        public bool UseCompression = false;
 
         public bool OverwriteWarning = false;
         public List<string> FilesToSend;
@@ -141,6 +142,7 @@ namespace Warpinator
             stopwatch.Start();
             double lastMillis = 0;
 
+            log.Trace($"Compression enabled: {UseCompression}");
             string f1 = FilesToSend[0];
             int parentLen = f1.TrimEnd(Path.DirectorySeparatorChar).LastIndexOf(Path.DirectorySeparatorChar);
             foreach (var f in ResolvedFiles)
@@ -170,6 +172,12 @@ namespace Warpinator
                     do //Send at least one chunk for empty files
                     {
                         int r = fs.Read(buf, 0, CHUNK_SIZE);
+                        byte[] chunkData = buf;
+                        int chunkLen = r;
+                        if (UseCompression) {
+                            chunkData = ZLibCompressor.Compress(buf);
+                            chunkLen = chunkData.Length;
+                        }
                         FileTime ftime = null;
                         if (firstChunk)
                         {
@@ -186,7 +194,7 @@ namespace Warpinator
                             RelativePath = relPath,
                             FileType = (int)FileType.FILE,
                             FileMode = 420, //0644, C# doesn't have octal literals :(
-                            Chunk = Google.Protobuf.ByteString.CopyFrom(buf, 0, r),
+                            Chunk = Google.Protobuf.ByteString.CopyFrom(chunkData, 0, chunkLen),
                             Time = ftime
                         };
                         await stream.WriteAsync(chunk);
@@ -277,6 +285,7 @@ namespace Warpinator
         public void StartReceiving()
         {
             log.Info("Transfer accepted");
+            log.Trace($"Compression enabled: {UseCompression}");
             Status = TransferStatus.TRANSFERRING;
             RealStartTime = DateTime.UtcNow.Ticks;
             lastMillis = 0;
@@ -323,6 +332,8 @@ namespace Warpinator
                     {
                         currentStream = File.Create(currentPath);
                         var bytes = chunk.Chunk.ToByteArray();
+                        if (UseCompression)
+                            bytes = ZLibCompressor.Decompress(bytes);
                         await currentStream.WriteAsync(bytes, 0, bytes.Length);
                         chunkSize = bytes.Length;
                     } catch (Exception e)
@@ -338,6 +349,8 @@ namespace Warpinator
                 try
                 {
                     var bytes = chunk.Chunk.ToByteArray();
+                    if (UseCompression)
+                        bytes = ZLibCompressor.Decompress(bytes);
                     await currentStream.WriteAsync(bytes, 0, bytes.Length);
                     chunkSize = bytes.Length;
                 } catch (Exception e)
