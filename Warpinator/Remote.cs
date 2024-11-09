@@ -26,8 +26,8 @@ namespace Warpinator
     {
         public IPAddress Address;
         public int Port;
-        public int AuthPort;
-        public uint APIVersion;
+        public int AuthPort = 42001;
+        public uint APIVersion = 1;
         public string ServiceName;
         public string UserName;
         public string Hostname;
@@ -48,10 +48,10 @@ namespace Warpinator
 
         public async void Connect()
         {
-            log.Info($"Connecting to {Hostname}");
+            log.Info($"Connecting to {Hostname}, API {APIVersion}");
             Status = RemoteStatus.CONNECTING;
             UpdateUI();
-            if (!await Task.Run(ReceiveCertificate))
+            if (!await ReceiveCertificate())
             {
                 Status = RemoteStatus.ERROR;
                 UpdateUI();
@@ -60,7 +60,15 @@ namespace Warpinator
             log.Trace($"Certificate for {Hostname} received and saved");
 
             SslCredentials cred = new SslCredentials(Authenticator.GetRemoteCertificate(UUID));
-            channel = new Channel(Address.ToString(), Port, cred);
+            var options = APIVersion >= 2 ? new ChannelOption[] {
+                new ChannelOption("grpc.keepalive_time_ms", 10000),
+                new ChannelOption("grpc.keepalive_timeout_ms", 5000),
+                new ChannelOption("grpc.keepalive_permit_without_calls", 1),
+                new ChannelOption("grpc.http2.max_pings_without_data", 0),
+                new ChannelOption("grpc.http2.min_time_between_pings_ms", 10000),
+                new ChannelOption("grpc.http2.min_ping_interval_without_data_ms", 5000)
+            } : new ChannelOption[0];
+            channel = new Channel(Address.ToString(), Port, cred, options);
             client = new Warp.WarpClient(channel);
 
             Status = RemoteStatus.AWAITING_DUPLEX;
@@ -113,6 +121,17 @@ namespace Warpinator
             catch (RpcException)
             {
                 log.Debug($"Ping to {Hostname} failed");
+                Status = RemoteStatus.DISCONNECTED;
+                UpdateUI();
+            }
+        }
+
+        public void CheckChannelState()
+        {
+            var s = channel?.State;
+            if (s != ChannelState.Ready)
+            {
+                log.Debug($"Connection to {Hostname} changed state to {s}");
                 Status = RemoteStatus.DISCONNECTED;
                 UpdateUI();
             }
@@ -282,6 +301,13 @@ namespace Warpinator
 
         private async Task<bool> WaitForDuplex()
         {
+            if (APIVersion == 1)
+                return await WaitForDuplexV1();
+            else
+                return await WaitForDuplexV2();
+        }
+        private async Task<bool> WaitForDuplexV1()
+        {
             int tries = 0;
             while (tries < 10)
             {
@@ -306,8 +332,29 @@ namespace Warpinator
             }
             return false;
         }
+        private async Task<bool> WaitForDuplexV2()
+        {
+            try
+            {
+                return (await client.WaitingForDuplexAsync(
+                        new LookupName { Id = Server.current.UUID, ReadableName = Server.current.Hostname },
+                        deadline: DateTime.UtcNow.AddSeconds(10))
+                    ).Response;
+            }
+            catch (Exception e)
+            {
+                log.Debug($"Cannot establish duplex: {e.Message}");
+                return false;
+            }
+        }
 
-        private bool ReceiveCertificate()
+        private async Task<bool> ReceiveCertificate()
+        {
+            if (APIVersion == 1)
+                return await Task.Run(ReceiveCertificateV1);
+            return await ReceiveCertificateV2();
+        }
+        private bool ReceiveCertificateV1()
         {
             int tryCount = 0;
             byte[] received = null;
@@ -324,10 +371,7 @@ namespace Warpinator
                     IPEndPoint recvEP = new IPEndPoint(0, 0);
                     received = udp.Receive(ref recvEP);
                     if (recvEP.Equals(endPoint))
-                    {
-                        udp.Close();
                         break;
-                    }
                 }
                 catch (Exception e)
                 {
@@ -336,6 +380,7 @@ namespace Warpinator
                     Thread.Sleep(1000);
                 }
             }
+            udp.Close();
             if (tryCount == 3)
             {
                 log.Error($"Failed to receive certificate from {Hostname}");
@@ -345,6 +390,25 @@ namespace Warpinator
             byte[] decoded = Convert.FromBase64String(base64encoded);
             GroupCodeError = !Authenticator.SaveRemoteCertificate(decoded, UUID);
             if (GroupCodeError) {
+                log.Error("Groupcode error");
+                return false;
+            }
+            return true;
+        }
+        private async Task<bool> ReceiveCertificateV2()
+        {
+            log.Trace($"Receiving certificate from {Hostname} (APIv2)");
+            var authChannel = new Channel(Address.ToString(), AuthPort, ChannelCredentials.Insecure);
+            var regClient = new WarpRegistration.WarpRegistrationClient(authChannel);
+            var certResp = await regClient.RequestCertificateAsync(
+                new RegRequest { Hostname = Server.current.Hostname, Ip = Server.current.SelectedIP.ToString() },
+                deadline: DateTime.UtcNow.AddSeconds(20)
+            );
+            _ = authChannel.ShutdownAsync();
+            byte[] decoded = Convert.FromBase64String(certResp.LockedCert);
+            GroupCodeError = !Authenticator.SaveRemoteCertificate(decoded, UUID);
+            if (GroupCodeError)
+            {
                 log.Error("Groupcode error");
                 return false;
             }

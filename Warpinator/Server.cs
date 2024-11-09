@@ -197,7 +197,11 @@ namespace Warpinator
             foreach (var r in Remotes.Values)
             {
                 if (r.Status == RemoteStatus.CONNECTED)
-                    r.Ping();
+                    if (r.APIVersion == 1)
+                        r.Ping();
+                    else
+                        r.CheckChannelState();
+
             }
         }
 
