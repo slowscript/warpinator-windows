@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Warpinator
 {
@@ -85,6 +86,21 @@ namespace Warpinator
                 bytes /= 1024;
             }
             return String.Format("{0:0.00} {1}", bytes, suffixes[order]);
+        }
+
+        public static string StartupShortcut {
+            get {
+                string startupFolder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+                return Path.Combine(startupFolder, AboutBox.AssemblyTitle + ".lnk");
+            }
+        }
+        public static void CreateStartupShortcut()
+        {
+            var shell = new IWshRuntimeLibrary.WshShell();
+            var shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(StartupShortcut);
+            shortcut.TargetPath = Application.ExecutablePath;
+            shortcut.WorkingDirectory = Application.StartupPath;
+            shortcut.Save();
         }
 
         public static string SanitizePath(string name)

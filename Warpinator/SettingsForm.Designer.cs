@@ -55,6 +55,7 @@ namespace Warpinator
             this.chkUpdates = new System.Windows.Forms.CheckBox();
             this.chkStartMinimized = new System.Windows.Forms.CheckBox();
             this.chkCompression = new System.Windows.Forms.CheckBox();
+            this.chkRunOnStartup = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAuthPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
@@ -90,6 +91,7 @@ namespace Warpinator
             // 
             // groupBox1
             // 
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.numAuthPort);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnShowCode);
@@ -101,7 +103,6 @@ namespace Warpinator
             this.groupBox1.Controls.Add(this.btnRestart);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtGroupcode);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -132,8 +133,8 @@ namespace Warpinator
             // 
             // btnShowCode
             // 
-            this.btnShowCode.BackgroundImage = global::Warpinator.Properties.Resources.visible;
             resources.ApplyResources(this.btnShowCode, "btnShowCode");
+            this.btnShowCode.BackgroundImage = global::Warpinator.Properties.Resources.visible;
             this.btnShowCode.Name = "btnShowCode";
             this.btnShowCode.UseVisualStyleBackColor = true;
             this.btnShowCode.Click += new System.EventHandler(this.BtnShowCode_Click);
@@ -165,9 +166,9 @@ namespace Warpinator
             // 
             // comboInterfaces
             // 
+            resources.ApplyResources(this.comboInterfaces, "comboInterfaces");
             this.comboInterfaces.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboInterfaces.FormattingEnabled = true;
-            resources.ApplyResources(this.comboInterfaces, "comboInterfaces");
             this.comboInterfaces.Name = "comboInterfaces";
             // 
             // label4
@@ -251,10 +252,17 @@ namespace Warpinator
             this.chkCompression.Name = "chkCompression";
             this.chkCompression.UseVisualStyleBackColor = true;
             // 
+            // chkRunOnStartup
+            // 
+            resources.ApplyResources(this.chkRunOnStartup, "chkRunOnStartup");
+            this.chkRunOnStartup.Name = "chkRunOnStartup";
+            this.chkRunOnStartup.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkRunOnStartup);
             this.Controls.Add(this.chkCompression);
             this.Controls.Add(this.chkStartMinimized);
             this.Controls.Add(this.chkUpdates);
@@ -308,5 +316,6 @@ namespace Warpinator
         private System.Windows.Forms.NumericUpDown numAuthPort;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chkCompression;
+        private System.Windows.Forms.CheckBox chkRunOnStartup;
     }
 }

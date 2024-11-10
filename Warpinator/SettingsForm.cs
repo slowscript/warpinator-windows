@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace Warpinator
                 chkStartMinimized.Enabled = false;
             else
                 chkStartMinimized.Checked = Properties.Settings.Default.StartMinimized;
+            chkRunOnStartup.Checked = File.Exists(Utils.StartupShortcut);
             chkUpdates.Checked = Properties.Settings.Default.CheckForUpdates;
             chkCompression.Checked = Properties.Settings.Default.UseCompression;
 
@@ -73,7 +75,7 @@ namespace Warpinator
         private void Apply()
         {
             ApplyNetwork();
-            if (System.IO.Directory.Exists(txtRecvDir.Text))
+            if (Directory.Exists(txtRecvDir.Text))
                 Properties.Settings.Default.DownloadDir = txtRecvDir.Text;
             else
                 MessageBox.Show(Resources.Strings.directory_doesnt_exist, Resources.Strings.warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -82,6 +84,13 @@ namespace Warpinator
             Properties.Settings.Default.AutoAccept = chkAutoAccept.Checked;
             Properties.Settings.Default.RunInBackground = chkBackground.Checked;
             Properties.Settings.Default.StartMinimized = chkStartMinimized.Checked;
+            if (chkRunOnStartup.Checked)
+            {
+                if (!File.Exists(Utils.StartupShortcut))
+                    Utils.CreateStartupShortcut();
+            }
+            else if (File.Exists(Utils.StartupShortcut))
+                File.Delete(Utils.StartupShortcut);
             Properties.Settings.Default.CheckForUpdates = chkUpdates.Checked;
             Properties.Settings.Default.UseCompression = chkCompression.Checked;
 

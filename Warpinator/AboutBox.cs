@@ -24,7 +24,7 @@ namespace Warpinator
 
         #region Přístup k atributům sestavení
 
-        public string AssemblyTitle
+        public static string AssemblyTitle
         {
             get
             {
