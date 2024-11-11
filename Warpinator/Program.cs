@@ -14,7 +14,8 @@ namespace Warpinator
     static class Program
     {
         internal static FileLoggerAdapter Log { get; private set; }
-        internal static List<string> SendPaths = new List<string>(); 
+        internal static List<string> SendPaths = new List<string>();
+        internal static bool IsRunningOnWine { get; private set; } = false;
         static NamedPipeServerStream pipeServer;
 
         [STAThread]
@@ -73,7 +74,10 @@ namespace Warpinator
             {
                 log.Debug("Starting application...");
                 Task.Run(RunPipeServer);
-                
+
+                var wineReg = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("Software\\Wine", false);
+                IsRunningOnWine = wineReg != null;
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Form1());

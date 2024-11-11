@@ -64,6 +64,8 @@ namespace Warpinator
 
         public override async Task GetRemoteMachineAvatar(LookupName request, IServerStreamWriter<RemoteMachineAvatar> responseStream, ServerCallContext context)
         {
+            if (Program.IsRunningOnWine)
+                throw new RpcException(new Status(StatusCode.NotFound, "Profile picture unavailable"));
             var avatar = new RemoteMachineAvatar()
             {
                 AvatarChunk = Google.Protobuf.ByteString.CopyFrom(System.IO.File.ReadAllBytes(Utils.GetUserPicturePath()))
