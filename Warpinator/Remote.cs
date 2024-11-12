@@ -139,7 +139,7 @@ namespace Warpinator
 
         public void StartSendTransfer(Transfer t)
         {
-            t.UseCompression = Server.current.settings.UseCompression;
+            t.UseCompression = Properties.Settings.Default.UseCompression;
             var opInfo = new OpInfo()
             {
                 Ident = Server.current.UUID,

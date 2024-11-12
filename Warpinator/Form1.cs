@@ -56,8 +56,6 @@ namespace Warpinator
                 }
                 Properties.Settings.Default.Save();
             }
-            if (Properties.Settings.Default.CheckForUpdates)
-                await CheckForUpdates();   
             try
             {
                 await server.Start();
@@ -69,13 +67,15 @@ namespace Warpinator
             }
         }
 
-        private void Form1_Shown(object sender, EventArgs e)
+        private async void Form1_Shown(object sender, EventArgs e)
         {
             if (firstShow)
             {
                 firstShow = false;
                 if (Properties.Settings.Default.RunInBackground && Properties.Settings.Default.StartMinimized)
                     this.Hide(); //This is said to work better in Shown rather than Load
+                if (Properties.Settings.Default.CheckForUpdates)
+                    await CheckForUpdates();
             }
         }
 
@@ -209,7 +209,7 @@ namespace Warpinator
         {
             var handler = new HttpClientHandler() { AllowAutoRedirect = false };
             var client = new HttpClient(handler);
-            client.Timeout = TimeSpan.FromSeconds(1);
+            client.Timeout = TimeSpan.FromSeconds(5);
             var req = new HttpRequestMessage(HttpMethod.Head, "https://github.com/slowscript/warpinator-windows/releases/latest");
             req.Headers.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("warpinator-windows", "1.0"));
             try
@@ -233,7 +233,7 @@ namespace Warpinator
             }
             catch (Exception ex)
             {
-                log.Warn("Failed to check for new version", ex);
+                log.Warn($"Failed to check for new version: {ex.Message}");
             }
         }
 
@@ -279,6 +279,10 @@ namespace Warpinator
         private void GitHubToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenWebsite("https://github.com/slowscript/warpinator-windows");
+        }
+        private void ConnectionIssuesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenWebsite("https://slowscript.xyz/warpinator-windows/troubleshooting");
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e) => this.Show();

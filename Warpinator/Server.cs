@@ -41,7 +41,7 @@ namespace Warpinator
         ServiceProfile serviceProfile;
         readonly ConcurrentDictionary<string, ServiceRecord> mdnsServices = new ConcurrentDictionary<string, ServiceRecord>();
         readonly ConcurrentDictionary<string, IPAddress> hostnameDict = new ConcurrentDictionary<string, IPAddress>();
-        internal Properties.Settings settings = Properties.Settings.Default;
+        Properties.Settings settings;
         Timer pingTimer = new Timer(10_000);
         List<NetworkInterface> knownNics = null;
         private readonly Regex hostRegex = new Regex("(warpinator://)?(\\d{1,3}(\\.\\d{1,3}){3}):(\\d{1,6})/?$");
@@ -61,13 +61,14 @@ namespace Warpinator
             UserName = Environment.UserName;
             
             //Load settings
-            settings = (Properties.Settings)System.Configuration.SettingsBase.Synchronized(Properties.Settings.Default);
+            settings = Properties.Settings.Default;
             if (!String.IsNullOrEmpty(settings.UUID))
                 UUID = settings.UUID;
             else
             {
                 UUID = Hostname.ToUpper() + "-" + String.Format("{0:X6}", new Random().Next(0x1000000));
                 settings.UUID = UUID;
+                settings.Save();
             }
             if (String.IsNullOrEmpty(settings.DownloadDir))
             {

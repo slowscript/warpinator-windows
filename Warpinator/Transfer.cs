@@ -314,7 +314,7 @@ namespace Warpinator
                 // Begin new file
                 currentRelativePath = chunk.RelativePath;
                 string sanitizedPath = Utils.SanitizePath(currentRelativePath);
-                currentPath = Path.Combine(Server.current.settings.DownloadDir, sanitizedPath);
+                currentPath = Path.Combine(Properties.Settings.Default.DownloadDir, sanitizedPath);
                 if (chunk.FileType == (int)FileType.DIRECTORY)
                     Directory.CreateDirectory(currentPath);
                 else if (chunk.FileType == (int)FileType.SYMLINK)

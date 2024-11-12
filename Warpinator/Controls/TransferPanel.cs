@@ -66,10 +66,10 @@ namespace Warpinator.Controls
         private void BtnAccept_Click(object sender, EventArgs e)
         {
             // Create download dir if it doesn't exist
-            if (!Directory.Exists(Server.current.settings.DownloadDir))
+            if (!Directory.Exists(Properties.Settings.Default.DownloadDir))
             {
                 try {
-                    Directory.CreateDirectory(Server.current.settings.DownloadDir);
+                    Directory.CreateDirectory(Properties.Settings.Default.DownloadDir);
                 } catch {
                     MessageBox.Show(Resources.Strings.cannot_create_dldir, Resources.Strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
