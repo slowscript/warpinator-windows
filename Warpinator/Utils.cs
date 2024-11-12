@@ -111,6 +111,12 @@ namespace Warpinator
             return System.Text.RegularExpressions.Regex.Replace(name, invalidRegStr, "_");
         }
 
+        public static string NormalizePath(string path)
+        {
+            return Path.GetFullPath(new Uri(path).LocalPath)
+                       .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        }
+
         private const string DownloadsGUID = "{374DE290-123F-4565-9164-39C4925E467B}";
         public static string GetDefaultDownloadFolder()
         {

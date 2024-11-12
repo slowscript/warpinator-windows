@@ -88,6 +88,11 @@ namespace Warpinator
                 return Void;
             }
             log.Info($"Incoming transfer from {r.UserName}");
+            if (r.GroupCodeError)
+            {
+                log.Warn("Sending user has wrong group code, transfer ignored");
+                return Void;
+            }
 
             var t = new Transfer() {
                 Direction = TransferDirection.RECEIVE,

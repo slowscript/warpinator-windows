@@ -313,8 +313,10 @@ namespace Warpinator
                 currentFileDateTime = null;
                 // Begin new file
                 currentRelativePath = chunk.RelativePath;
-                string sanitizedPath = Utils.SanitizePath(currentRelativePath);
+                string sanitizedPath = "../"+Utils.SanitizePath(currentRelativePath);
                 currentPath = Path.Combine(Properties.Settings.Default.DownloadDir, sanitizedPath);
+                if (!ValidatePath(currentPath))
+                    throw new ArgumentException("Path leads outside download dir");
                 if (chunk.FileType == (int)FileType.DIRECTORY)
                     Directory.CreateDirectory(currentPath);
                 else if (chunk.FileType == (int)FileType.SYMLINK)
@@ -429,6 +431,11 @@ namespace Warpinator
                 log.Trace("New path: " + path);
             }
             return path;
+        }
+
+        private bool ValidatePath(string path)
+        {
+            return Utils.NormalizePath(path).StartsWith(Utils.NormalizePath(Properties.Settings.Default.DownloadDir));
         }
 
         private void CloseStream()
