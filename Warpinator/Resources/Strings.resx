@@ -216,11 +216,17 @@
   <data name="invalid_address" xml:space="preserve">
     <value>The specified address is not in a valid format</value>
   </data>
+  <data name="manual_connection" xml:space="preserve">
+    <value>Manual connection</value>
+  </data>
   <data name="manual_connection_failed" xml:space="preserve">
     <value>Manual connection failed</value>
   </data>
   <data name="manual_connect_error" xml:space="preserve">
     <value>Could not connect to device: {0}</value>
+  </data>
+  <data name="manual_connect_to" xml:space="preserve">
+    <value>Do you want to connect to "{0}"?</value>
   </data>
   <data name="manual_connect_unavailable" xml:space="preserve">
     <value>Warpinator is not running on the given address, the running version does not yet support manual connection, or the device could not be reached on the network</value>

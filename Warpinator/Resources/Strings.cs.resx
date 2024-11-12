@@ -216,11 +216,17 @@
   <data name="invalid_address" xml:space="preserve">
     <value>Zadaná adresa není v platném formátu</value>
   </data>
+  <data name="manual_connection" xml:space="preserve">
+    <value>Ruční spojení</value>
+  </data>
   <data name="manual_connection_failed" xml:space="preserve">
     <value>Ruční spojení selhalo</value>
   </data>
   <data name="manual_connect_error" xml:space="preserve">
     <value>Nepodařilo se připojit k zařízení: {0}</value>
+  </data>
+  <data name="manual_connect_to" xml:space="preserve">
+    <value>Chcete se připojit k "{0}"?</value>
   </data>
   <data name="manual_connect_unavailable" xml:space="preserve">
     <value>Warpinator na zadané adrese neběží, nebo je ve verzi která ruční spojení nepodporuje, nebo zařízení není po síti dosažitelné</value>

@@ -65,6 +65,7 @@ namespace Warpinator
                 log.Error("Failed to start server", ex);
                 MessageBox.Show(String.Format(Resources.Strings.failed_to_start_server, ex.Message), Resources.Strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            HandleConnectTo();
         }
 
         private async void Form1_Shown(object sender, EventArgs e)
@@ -121,7 +122,26 @@ namespace Warpinator
                     current.DoUpdateLabels();
                     current.Show();
                     current.Activate();
+                    current.HandleConnectTo();
                 }));
+            }
+        }
+        public async void HandleConnectTo()
+        {
+            if (Program.ConnectTo != null)
+            {
+                var uri = Program.ConnectTo;
+                Program.ConnectTo = null;
+                var res = MessageBox.Show(String.Format(Resources.Strings.manual_connect_to, uri),
+                    Resources.Strings.manual_connection, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    Cursor = Cursors.WaitCursor;
+                    var errorMsg = await Server.current.RegisterWithHost(uri);
+                    Cursor = Cursors.Default;
+                    if (errorMsg != null)
+                        MessageBox.Show(errorMsg, Resources.Strings.manual_connection_failed, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

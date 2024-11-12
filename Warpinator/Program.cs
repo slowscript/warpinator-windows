@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,9 @@ namespace Warpinator
     {
         internal static FileLoggerAdapter Log { get; private set; }
         internal static List<string> SendPaths = new List<string>();
+        internal static string ConnectTo = null;
+        const string ConnectUriPrefix = "warpinator://";
+
         internal static bool IsRunningOnWine { get; private set; } = false;
         static NamedPipeServerStream pipeServer;
 
@@ -47,11 +51,31 @@ namespace Warpinator
             // Process arguments
             if (args.Length > 0)
             {
-                foreach (var path in args)
+                bool argsDone = false;
+                for (int i = 0; i < args.Length; i++)
                 {
-                    log.Debug("Got path to send: " + path);
-                    if (File.Exists(path) || Directory.Exists(path))
-                        SendPaths.Add(path);
+                    var arg = args[i];
+                    if (!argsDone)
+                    {
+                        if (arg == "-ConnectTo" && args.Length > i + 1)
+                        {
+                            ConnectTo = args[++i];
+                            if (!ConnectTo.StartsWith(ConnectUriPrefix))
+                                ConnectTo = ConnectUriPrefix + ConnectTo;
+                            log.Debug($"Will try to connect to {ConnectTo}");
+                            continue;
+                        }
+                        else if (arg == "-d")
+                            continue;
+                        else
+                        {
+                            argsDone = true; // Proceed with paths
+                            if (arg == "--") continue;
+                        }
+                    }
+                    log.Debug("Got path to send: " + arg);
+                    if (File.Exists(arg) || Directory.Exists(arg))
+                        SendPaths.Add(arg);
                     else log.Warn("Path does not exist");
                 }
                 if (!created && SendPaths.Count > 0)
@@ -67,7 +91,17 @@ namespace Warpinator
                                 sw.WriteLine(path);
                         }
                     }
-                }   
+                }
+                if (!created && ConnectTo != null)
+                {
+                    using (var pipeClient = new NamedPipeClientStream(".", "warpsendto", PipeDirection.Out))
+                    {
+                        pipeClient.Connect();
+                        var payload = Encoding.ASCII.GetBytes(ConnectTo);
+                        pipeClient.Write(payload, 0, payload.Length);
+                        pipeClient.Flush();
+                    }
+                }
             }
             // Run application if not yet running
             if (created)
@@ -103,6 +137,13 @@ namespace Warpinator
                         while (pipeServer.IsConnected)
                         {
                             var path = sr.ReadLine();
+                            if (path == null) break;
+                            if (path.StartsWith(ConnectUriPrefix))
+                            {
+                                ConnectTo = path;
+                                log.Debug($"Got connect uri {ConnectTo}");
+                                continue;
+                            }
                             if (!(File.Exists(path) || Directory.Exists(path)))
                                 continue;
                             SendPaths.Add(path);

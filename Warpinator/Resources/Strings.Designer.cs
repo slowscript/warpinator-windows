@@ -331,6 +331,15 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Do you want to connect to &quot;{0}&quot;?.
+        /// </summary>
+        internal static string manual_connect_to {
+            get {
+                return ResourceManager.GetString("manual_connect_to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledá lokalizovaný řetězec podobný Warpinator is not running on the given address, the running version does not yet support manual connection, or the device could not be reached on the network.
         /// </summary>
         internal static string manual_connect_unavailable {
@@ -345,6 +354,15 @@ namespace Warpinator.Resources {
         internal static string manual_connect_unsupported {
             get {
                 return ResourceManager.GetString("manual_connect_unsupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Manual connection.
+        /// </summary>
+        internal static string manual_connection {
+            get {
+                return ResourceManager.GetString("manual_connection", resourceCulture);
             }
         }
         
