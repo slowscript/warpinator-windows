@@ -205,6 +205,18 @@ namespace Warpinator
             }
         }
 
+        public ServiceRegistration GetServiceRegistrationMsg()
+        {
+            return new ServiceRegistration {
+                ServiceId = UUID,
+                Ip = SelectedIP.ToString(),
+                Port = Port,
+                AuthPort = AuthPort,
+                Hostname = Hostname,
+                ApiVersion = APIVersion
+            };
+        }
+
         private void OnNetworkChanged(object s, EventArgs a)
         {
             var nics = MulticastService.GetNetworkInterfaces();
@@ -355,10 +367,15 @@ namespace Warpinator
             remote.UUID = name;
             remote.ServiceAvailable = true;
 
+            AddRemote(remote);
+        }
+
+        public void AddRemote(Remote remote)
+        {
             lock (Remotes)
             {
-                if (!Remotes.ContainsKey(name))
-                    Remotes.Add(name, remote);
+                if (!Remotes.ContainsKey(remote.UUID))
+                    Remotes.Add(remote.UUID, remote);
             }
             Form1.UpdateUI();
             remote.Connect();

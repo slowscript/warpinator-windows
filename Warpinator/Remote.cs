@@ -302,6 +302,16 @@ namespace Warpinator
             }
         }
 
+        public void UpdateFromServiceRegistration(ServiceRegistration reg)
+        {
+            Address = IPAddress.Parse(reg.Ip);
+            Port = (int)reg.Port;
+            AuthPort = (int)reg.AuthPort;
+            Hostname = reg.Hostname;
+            ServiceName = reg.ServiceId;
+            APIVersion = reg.ApiVersion;
+        }
+
         private async Task<bool> WaitForDuplex()
         {
             if (APIVersion == 1)

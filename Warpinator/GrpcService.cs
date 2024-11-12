@@ -175,5 +175,33 @@ namespace Warpinator
             log.Debug($"Sending certificate to {request.Hostname} on {request.Ip}");
             return Task.FromResult(new RegResponse { LockedCert = certString });
         }
+
+        public override Task<ServiceRegistration> RegisterService(ServiceRegistration request, ServerCallContext context)
+        {
+            log.Info($"Manual registration from {request.ServiceId} at {request.Ip}:{request.AuthPort}");
+            Remote r;
+            Server.current.Remotes.TryGetValue(request.ServiceId, out r);
+            if (r != null)
+            {
+                if (r.Status != RemoteStatus.CONNECTED)
+                {
+                    r.UpdateFromServiceRegistration(request);
+                    if (r.Status == RemoteStatus.DISCONNECTED || r.Status == RemoteStatus.ERROR)
+                        r.Connect();
+                    else
+                        r.UpdateUI();
+                }
+                else log.Warn("Attempted registration from already connected remote");
+            }
+            else
+            {
+                r = new Remote();
+                r.UUID = request.ServiceId;
+                r.UpdateFromServiceRegistration(request);
+                Server.current.AddRemote(r);
+
+            }
+            return Task.FromResult(Server.current.GetServiceRegistrationMsg());
+        }
     }
 }
