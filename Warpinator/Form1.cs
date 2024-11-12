@@ -156,8 +156,8 @@ namespace Warpinator
 
         private void DoUpdateLabels()
         {
-            lblNoDevicesFound.Visible = server.Remotes.Count == 0 && server.Running;
-            btnRescan.Visible = server.Remotes.Count == 0 && server.Running;
+            bool noDevices = server.Remotes.Count == 0 && server.Running;
+            lblNoDevicesFound.Visible = btnConnectManually.Visible = btnRescan.Visible = noDevices;
             if (lblInitializing.Visible && server.Running)
             {
                 btnRescan.Enabled = false;
@@ -283,5 +283,10 @@ namespace Warpinator
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e) => this.Show();
         private void quitToolStripMenuItem1_Click(object sender, EventArgs e) => Quit();
+
+        private void ManualConnection_Click(object sender, EventArgs e)
+        {
+            new ManualConnectDialog().ShowDialog();
+        }
     }
 }

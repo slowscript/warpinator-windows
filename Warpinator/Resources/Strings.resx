@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="already_connected" xml:space="preserve">
+    <value>Device already connected</value>
+  </data>
   <data name="any" xml:space="preserve">
     <value>Any</value>
     <comment>Use any interface</comment>
@@ -209,6 +212,21 @@
   </data>
   <data name="interface_unavailable" xml:space="preserve">
     <value>Selected interface unavailable</value>
+  </data>
+  <data name="invalid_address" xml:space="preserve">
+    <value>The specified address is not in a valid format</value>
+  </data>
+  <data name="manual_connection_failed" xml:space="preserve">
+    <value>Manual connection failed</value>
+  </data>
+  <data name="manual_connect_error" xml:space="preserve">
+    <value>Could not connect to device: {0}</value>
+  </data>
+  <data name="manual_connect_unavailable" xml:space="preserve">
+    <value>Warpinator is not running on the given address, the running version does not yet support manual connection, or the device could not be reached on the network</value>
+  </data>
+  <data name="manual_connect_unsupported" xml:space="preserve">
+    <value>Warpinator on this device does not support manual connection</value>
   </data>
   <data name="new_version_available" xml:space="preserve">
     <value>New version is available: {0} (current: {1}). Would you like to download it?</value>

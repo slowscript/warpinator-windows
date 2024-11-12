@@ -117,9 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="already_connected" xml:space="preserve">
+    <value>Toto zařízení již je připojeno</value>
+  </data>
   <data name="any" xml:space="preserve">
     <value>Jakékoliv</value>
     <comment>Use any interface</comment>
+  </data>
+  <data name="available_devices" xml:space="preserve">
+    <value>Dostupná zařízení</value>
   </data>
   <data name="awaiting_duplex" xml:space="preserve">
     <value>Čeká na obousměrné připojení</value>
@@ -206,6 +212,21 @@
   </data>
   <data name="interface_unavailable" xml:space="preserve">
     <value>Vybrané rozhraní není dostupné</value>
+  </data>
+  <data name="invalid_address" xml:space="preserve">
+    <value>Zadaná adresa není v platném formátu</value>
+  </data>
+  <data name="manual_connection_failed" xml:space="preserve">
+    <value>Ruční spojení selhalo</value>
+  </data>
+  <data name="manual_connect_error" xml:space="preserve">
+    <value>Nepodařilo se připojit k zařízení: {0}</value>
+  </data>
+  <data name="manual_connect_unavailable" xml:space="preserve">
+    <value>Warpinator na zadané adrese neběží, nebo je ve verzi která ruční spojení nepodporuje, nebo zařízení není po síti dosažitelné</value>
+  </data>
+  <data name="manual_connect_unsupported" xml:space="preserve">
+    <value>Warpinator na tomto zařízení nepodporuje ruční spojení</value>
   </data>
   <data name="new_version_available" xml:space="preserve">
     <value>Nová verze je dostupná: {0} (současná: {1}). Přejete si ji stáhnout?</value>

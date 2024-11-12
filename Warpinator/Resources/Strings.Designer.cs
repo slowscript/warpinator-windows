@@ -70,6 +70,15 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Device already connected.
+        /// </summary>
+        internal static string already_connected {
+            get {
+                return ResourceManager.GetString("already_connected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledá lokalizovaný řetězec podobný Any.
         /// </summary>
         internal static string any {
@@ -300,6 +309,51 @@ namespace Warpinator.Resources {
         internal static string interface_unavailable {
             get {
                 return ResourceManager.GetString("interface_unavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný The specified address is not in a valid format.
+        /// </summary>
+        internal static string invalid_address {
+            get {
+                return ResourceManager.GetString("invalid_address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Could not connect to device: {0}.
+        /// </summary>
+        internal static string manual_connect_error {
+            get {
+                return ResourceManager.GetString("manual_connect_error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Warpinator is not running on the given address, the running version does not yet support manual connection, or the device could not be reached on the network.
+        /// </summary>
+        internal static string manual_connect_unavailable {
+            get {
+                return ResourceManager.GetString("manual_connect_unavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Warpinator on this device does not support manual connection.
+        /// </summary>
+        internal static string manual_connect_unsupported {
+            get {
+                return ResourceManager.GetString("manual_connect_unsupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Manual connection failed.
+        /// </summary>
+        internal static string manual_connection_failed {
+            get {
+                return ResourceManager.GetString("manual_connection_failed", resourceCulture);
             }
         }
         

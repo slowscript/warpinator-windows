@@ -36,6 +36,7 @@ namespace Warpinator
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manualConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rescanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reannounceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +54,7 @@ namespace Warpinator
             this.btnRescan = new System.Windows.Forms.Button();
             this.lblNoDevicesFound = new System.Windows.Forms.Label();
             this.lblInitializing = new System.Windows.Forms.Label();
+            this.btnConnectManually = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.notifyIconMenu.SuspendLayout();
@@ -91,11 +93,18 @@ namespace Warpinator
             // 
             resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manualConnectionToolStripMenuItem,
             this.rescanToolStripMenuItem,
             this.reannounceToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            // 
+            // manualConnectionToolStripMenuItem
+            // 
+            resources.ApplyResources(this.manualConnectionToolStripMenuItem, "manualConnectionToolStripMenuItem");
+            this.manualConnectionToolStripMenuItem.Name = "manualConnectionToolStripMenuItem";
+            this.manualConnectionToolStripMenuItem.Click += new System.EventHandler(this.ManualConnection_Click);
             // 
             // rescanToolStripMenuItem
             // 
@@ -203,10 +212,18 @@ namespace Warpinator
             this.lblInitializing.BackColor = System.Drawing.Color.Transparent;
             this.lblInitializing.Name = "lblInitializing";
             // 
+            // btnConnectManually
+            // 
+            resources.ApplyResources(this.btnConnectManually, "btnConnectManually");
+            this.btnConnectManually.Name = "btnConnectManually";
+            this.btnConnectManually.UseVisualStyleBackColor = true;
+            this.btnConnectManually.Click += new System.EventHandler(this.ManualConnection_Click);
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnConnectManually);
             this.Controls.Add(this.lblInitializing);
             this.Controls.Add(this.lblNoDevicesFound);
             this.Controls.Add(this.btnRescan);
@@ -254,6 +271,8 @@ namespace Warpinator
         private System.Windows.Forms.Button btnRescan;
         private System.Windows.Forms.Label lblNoDevicesFound;
         private System.Windows.Forms.Label lblInitializing;
+        private System.Windows.Forms.ToolStripMenuItem manualConnectionToolStripMenuItem;
+        private System.Windows.Forms.Button btnConnectManually;
     }
 }
 

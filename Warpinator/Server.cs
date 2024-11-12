@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
 using Common.Logging;
@@ -43,6 +44,7 @@ namespace Warpinator
         internal Properties.Settings settings = Properties.Settings.Default;
         Timer pingTimer = new Timer(10_000);
         List<NetworkInterface> knownNics = null;
+        private readonly Regex hostRegex = new Regex("(warpinator://)?(\\d{1,3}(\\.\\d{1,3}){3}):(\\d{1,6})/?$");
         private uint APIVersion = 2;
         bool restarting = false;
         bool needsRestart = false; //Needs another restart - in case restart was initiated while previous was in progress
@@ -203,6 +205,64 @@ namespace Warpinator
                         r.CheckChannelState();
 
             }
+        }
+
+        public async Task<string> RegisterWithHost(string host)
+        {
+            log.Info($"Registering with host {host}");
+            var match = hostRegex.Match(host);
+            if (!match.Success)
+                return Resources.Strings.invalid_address;
+            string ip = match.Groups[2].Value;
+            int authport = int.Parse(match.Groups[4].Value);
+            try
+            {
+                var regChannel = new Channel(ip, authport, ChannelCredentials.Insecure);
+                var regClient = new WarpRegistration.WarpRegistrationClient(regChannel);
+                var resp = await regClient.RegisterServiceAsync(GetServiceRegistrationMsg(), deadline: DateTime.UtcNow.AddSeconds(10));
+            
+                Remote r;
+                bool newRemote = !Remotes.TryGetValue(resp.ServiceId, out r);
+                if (newRemote)
+                {
+                    r = new Remote();
+                    r.UUID = resp.ServiceId;
+                }
+                else if (r.Status == RemoteStatus.CONNECTED)
+                {
+                    log.Warn("Remote already connected");
+                    return Resources.Strings.already_connected;
+                }
+                r.UpdateFromServiceRegistration(resp);
+                // Keep what the user specified
+                r.Address = IPAddress.Parse(ip);
+                r.AuthPort = authport;
+                if (newRemote)
+                    AddRemote(r);
+                else
+                {
+                    if (r.Status == RemoteStatus.DISCONNECTED || r.Status == RemoteStatus.ERROR)
+                        r.Connect();
+                    else
+                        r.UpdateUI();
+                }
+            }
+            catch (RpcException e)
+            {
+                log.Error($"Manual connection failed with RpcException: {e.StatusCode} - {e.Status.Detail}");
+                if (e.StatusCode == StatusCode.Unimplemented)
+                    return Resources.Strings.manual_connect_unsupported;
+                else if (e.StatusCode == StatusCode.Unavailable || e.StatusCode == StatusCode.DeadlineExceeded)
+                    return Resources.Strings.manual_connect_unavailable;
+                else
+                    return String.Format(Resources.Strings.manual_connect_error, e.StatusCode);
+            }
+            catch (Exception e) //Are other exceptions exepcted?
+            {
+                log.Error("Manual connect failed", e);
+                return String.Format(Resources.Strings.manual_connect_error, e.Message);
+            }
+            return null;
         }
 
         public ServiceRegistration GetServiceRegistrationMsg()

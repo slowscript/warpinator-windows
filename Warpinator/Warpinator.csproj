@@ -88,6 +88,9 @@
     <Reference Include="NaCl, Version=0.1.13.0, Culture=neutral, PublicKeyToken=827c20e50a9775fa, processorArchitecture=MSIL">
       <HintPath>..\packages\NaCl.Net.0.1.13\lib\net45\NaCl.dll</HintPath>
     </Reference>
+    <Reference Include="QRCoder, Version=1.6.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.6.0\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleBase, Version=1.6.0.0, Culture=neutral, PublicKeyToken=eb1df8ff9aee2c6f, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleBase.1.6.1\lib\net45\SimpleBase.dll</HintPath>
     </Reference>
@@ -159,6 +162,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GrpcService.cs" />
+    <Compile Include="ManualConnectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManualConnectDialog.Designer.cs">
+      <DependentUpon>ManualConnectDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="OpenFoldersDialog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,6 +218,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManualConnectDialog.cs.resx">
+      <DependentUpon>ManualConnectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManualConnectDialog.resx">
+      <DependentUpon>ManualConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
