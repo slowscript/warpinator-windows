@@ -83,7 +83,7 @@ namespace Warpinator
                     log.Debug("Passing paths to main process...");
                     using (var pipeClient = new NamedPipeClientStream(".", "warpsendto", PipeDirection.Out))
                     {
-                        pipeClient.Connect();
+                        pipeClient.Connect(30000);
                         using (var sw = new StreamWriter(pipeClient))
                         {
                             sw.AutoFlush = true;
@@ -96,7 +96,7 @@ namespace Warpinator
                 {
                     using (var pipeClient = new NamedPipeClientStream(".", "warpsendto", PipeDirection.Out))
                     {
-                        pipeClient.Connect();
+                        pipeClient.Connect(30000);
                         var payload = Encoding.ASCII.GetBytes(ConnectTo);
                         pipeClient.Write(payload, 0, payload.Length);
                         pipeClient.Flush();
@@ -156,7 +156,7 @@ namespace Warpinator
             }
             catch (Exception e)
             {
-                log.Info($"Pipe server quit ({e.GetType()})");
+                log.Info($"Pipe server quit ({e.GetType()} - {e.Message})");
             }
         }
     }

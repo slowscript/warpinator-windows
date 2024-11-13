@@ -22,6 +22,7 @@ namespace Warpinator
         static Form1 current;
         bool quit = false;
         bool firstShow = true;
+        internal bool initialized = false;
 
         public Form1()
         {
@@ -31,7 +32,7 @@ namespace Warpinator
             flowLayoutPanel.HorizontalScroll.Maximum = 0;
             notifyIcon.DoubleClick += (s, e) => Show();
             notifyIcon.Icon = Properties.Resources.warplogo;
-            rescanTimer.Interval = 2000;
+            rescanTimer.Interval = 5000;
             rescanTimer.Tick += (s, e) => {
                 btnRescan.Enabled = true; rescanToolStripMenuItem.Enabled = true; rescanTimer.Stop();
             };
@@ -65,6 +66,7 @@ namespace Warpinator
                 log.Error("Failed to start server", ex);
                 MessageBox.Show(String.Format(Resources.Strings.failed_to_start_server, ex.Message), Resources.Strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            initialized = true;
             HandleConnectTo();
         }
 
@@ -115,7 +117,7 @@ namespace Warpinator
 
         public static void OnSendTo()
         {
-            if (current != null)
+            if (current != null && current.initialized)
             {
                 current.Invoke(new Action(() =>
                 {
@@ -196,11 +198,13 @@ namespace Warpinator
             {
                 lblDevices.Text = String.Format(Resources.Strings.send_to, Program.SendPaths.Count);
                 lblDevices.ForeColor = SystemColors.Highlight;
+                btnCancelShare.Visible = true;
             }
             else
             {
                 lblDevices.Text = Resources.Strings.available_devices;
                 lblDevices.ForeColor = SystemColors.ControlText;
+                btnCancelShare.Visible = false;
             }
             if (numOutgroup > 0)
                 lblDevices.Text += String.Format(Resources.Strings.outside_group, numOutgroup);
@@ -311,6 +315,12 @@ namespace Warpinator
         private void ManualConnection_Click(object sender, EventArgs e)
         {
             new ManualConnectDialog().ShowDialog();
+        }
+
+        private void btnCancelShare_Click(object sender, EventArgs e)
+        {
+            Program.SendPaths.Clear();
+            DoUpdateLabels();
         }
     }
 }

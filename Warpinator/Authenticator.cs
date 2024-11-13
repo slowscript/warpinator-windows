@@ -82,8 +82,8 @@ namespace Warpinator
                 var cert = new X509CertificateParser().ReadCertificate(serverCertificate);
                 try
                 {
-                    var l = (ArrayList)cert.GetSubjectAlternativeNames();
-                    var ipHexStr = (string)((ArrayList)l[0])[1];
+                    var l = cert.GetSubjectAlternativeNames();
+                    var ipHexStr = (string)(l[0])[1];
                     long ipNetInt = Convert.ToInt64(ipHexStr.Substring(1), 16);
                     var addr = new IPAddress(IPAddress.NetworkToHostOrder(ipNetInt) >> 32);
                     
