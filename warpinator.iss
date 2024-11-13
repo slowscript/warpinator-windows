@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Warpinator"
-#define MyAppVersion "0.4.1"
+#define MyAppVersion "1.0"
 #define MyAppPublisher "slowscript"
 #define MyAppURL "https://github.com/slowscript/warpinator-windows"
 #define MyAppExeName "Warpinator.exe"
