@@ -148,7 +148,7 @@
     <value>193, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Naskenujte QR kód libovolnou aplikací</value>
+    <value>Naskenujte QR kód libovolnou aplikací a otevřete odkaz</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Ruční spojení</value>

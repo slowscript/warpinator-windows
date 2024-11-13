@@ -313,7 +313,7 @@ namespace Warpinator
                 currentFileDateTime = null;
                 // Begin new file
                 currentRelativePath = chunk.RelativePath;
-                string sanitizedPath = "../"+Utils.SanitizePath(currentRelativePath);
+                string sanitizedPath = Utils.SanitizePath(currentRelativePath);
                 currentPath = Path.Combine(Properties.Settings.Default.DownloadDir, sanitizedPath);
                 if (!ValidatePath(currentPath))
                     throw new ArgumentException("Path leads outside download dir");

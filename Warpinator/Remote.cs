@@ -131,7 +131,7 @@ namespace Warpinator
             var s = channel?.State;
             if (s != ChannelState.Ready)
             {
-                log.Debug($"Connection to {Hostname} changed state to {s}");
+                log.Debug($"Connection to {Hostname} was lost. Channel state: {s}");
                 Status = RemoteStatus.DISCONNECTED;
                 UpdateUI();
             }
@@ -411,13 +411,25 @@ namespace Warpinator
         private async Task<bool> ReceiveCertificateV2()
         {
             log.Trace($"Receiving certificate from {Hostname} (APIv2)");
-            var authChannel = new Channel(Address.ToString(), AuthPort, ChannelCredentials.Insecure);
-            var regClient = new WarpRegistration.WarpRegistrationClient(authChannel);
-            var certResp = await regClient.RequestCertificateAsync(
-                new RegRequest { Hostname = Server.current.Hostname, Ip = Server.current.SelectedIP.ToString() },
-                deadline: DateTime.UtcNow.AddSeconds(20)
-            );
-            _ = authChannel.ShutdownAsync();
+            RegResponse certResp;
+            try
+            {
+                var authChannel = new Channel(Address.ToString(), AuthPort, ChannelCredentials.Insecure);
+                var regClient = new WarpRegistration.WarpRegistrationClient(authChannel);
+                certResp = await regClient.RequestCertificateAsync(
+                    new RegRequest { Hostname = Server.current.Hostname, Ip = Server.current.SelectedIP.ToString() },
+                    deadline: DateTime.UtcNow.AddSeconds(20)
+                );
+                _ = authChannel.ShutdownAsync();
+            }
+            catch (Exception e)
+            {
+                if (e is RpcException)                 {
+                    var er = (RpcException)e;
+                    log.Error($"Could not receive certificate. Status {er.StatusCode} - {er.Status.Detail}");
+                }else log.Error("Unknown error when receiving certificate", e);
+                return false;
+            }
             byte[] decoded = Convert.FromBase64String(certResp.LockedCert);
             GroupCodeError = !Authenticator.SaveRemoteCertificate(decoded, UUID);
             if (GroupCodeError)
