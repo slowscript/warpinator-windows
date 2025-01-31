@@ -5,12 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
 using Common.Logging;
 using Grpc.Core;
 using Makaretu.Dns;
+using Org.BouncyCastle.Utilities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Warpinator
 {
@@ -187,7 +190,8 @@ namespace Warpinator
             sd.QueryServiceInstances(SERVICE_TYPE);
 
             serviceProfile = new ServiceProfile(UUID, SERVICE_TYPE, Port, new List<IPAddress> { SelectedIP });
-            serviceProfile.AddProperty("hostname", Utils.GetHostname());
+            byte[] Hostname_Bytes = Encoding.UTF8.GetBytes(Utils.GetHostname());
+            serviceProfile.AddProperty("hostname", Encoding.ASCII.GetString(Hostname_Bytes));
             serviceProfile.AddProperty("type", flush ? "flush" : "real");
             serviceProfile.AddProperty("api-version", APIVersion.ToString());
             serviceProfile.AddProperty("auth-port", AuthPort.ToString());
