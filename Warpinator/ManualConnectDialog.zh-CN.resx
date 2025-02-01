@@ -389,7 +389,7 @@
     <value>2</value>
   </data>
   <data name="groupBox2.Text" xml:space="preserve">
-    <value>或在其他电脑上</value>
+    <value>在其他电脑上</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -398,7 +398,7 @@
     <value />
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>或者使用以下地址连接这台电脑</value>
+    <value>或者使用以下地址连接到这台电脑</value>
   </data>
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
