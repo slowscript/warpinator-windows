@@ -190,8 +190,7 @@ namespace Warpinator
             sd.QueryServiceInstances(SERVICE_TYPE);
 
             serviceProfile = new ServiceProfile(UUID, SERVICE_TYPE, Port, new List<IPAddress> { SelectedIP });
-            byte[] Hostname_Bytes = Encoding.UTF8.GetBytes(Utils.GetHostname());
-            serviceProfile.AddProperty("hostname", Encoding.ASCII.GetString(Hostname_Bytes));
+            serviceProfile.AddProperty("hostname", Encoding.ASCII.GetString(Encoding.Default.GetBytes(Utils.GetHostname())));
             serviceProfile.AddProperty("type", flush ? "flush" : "real");
             serviceProfile.AddProperty("api-version", APIVersion.ToString());
             serviceProfile.AddProperty("auth-port", AuthPort.ToString());
