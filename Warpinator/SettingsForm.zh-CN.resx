@@ -295,7 +295,7 @@
     <value>10</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>更改这些设置需要服务重启（正在进行的传输会失败）</value>
+    <value>更改这些设置需要重启服务（正在进行的传输会失败）</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
