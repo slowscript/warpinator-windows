@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
@@ -187,7 +188,8 @@ namespace Warpinator
             sd.QueryServiceInstances(SERVICE_TYPE);
 
             serviceProfile = new ServiceProfile(UUID, SERVICE_TYPE, Port, new List<IPAddress> { SelectedIP });
-            serviceProfile.AddProperty("hostname", Utils.GetHostname());
+            // Only ASCII allowed, will replace other chars with '?'
+            serviceProfile.AddProperty("hostname", Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(Utils.GetHostname())));
             serviceProfile.AddProperty("type", flush ? "flush" : "real");
             serviceProfile.AddProperty("api-version", APIVersion.ToString());
             serviceProfile.AddProperty("auth-port", AuthPort.ToString());
