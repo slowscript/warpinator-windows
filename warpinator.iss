@@ -37,6 +37,7 @@ Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
 Name: "german"; MessagesFile: "compiler:Languages\German.isl"
 Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "chinesesimplified"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -69,6 +70,7 @@ Source: "Warpinator\bin\Release\cs\Warpinator.resources.dll"; DestDir: "{app}\cs
 Source: "Warpinator\bin\Release\de\Warpinator.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
 Source: "Warpinator\bin\Release\es\Warpinator.resources.dll"; DestDir: "{app}\es"; Flags: ignoreversion
 Source: "Warpinator\bin\Release\it\Warpinator.resources.dll"; DestDir: "{app}\it"; Flags: ignoreversion
+Source: "Warpinator\bin\Release\zh-CN\Warpinator.resources.dll"; DestDir: "{app}\zh-CN"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
@@ -84,4 +86,3 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-
