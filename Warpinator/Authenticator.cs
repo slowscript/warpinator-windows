@@ -83,12 +83,11 @@ namespace Warpinator
                 try
                 {
                     var l = cert.GetSubjectAlternativeNames();
-                    var ipHexStr = (string)(l[0])[1];
-                    long ipNetInt = Convert.ToInt64(ipHexStr.Substring(1), 16);
-                    var addr = new IPAddress(IPAddress.NetworkToHostOrder(ipNetInt) >> 32);
+                    var ipStr = (string)(l[0])[1];
+                    var addr = IPAddress.Parse(ipStr);
                     
                     cert.CheckValidity(); //Throws if invalid
-                    if (addr != Server.current.SelectedIP)
+                    if (!addr.Equals(Server.current.SelectedIP))
                         throw new Org.BouncyCastle.Security.Certificates.CertificateExpiredException("IP address changed");
                     return pair1;
                 } catch (Exception e) {
