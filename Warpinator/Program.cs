@@ -47,6 +47,8 @@ namespace Warpinator
             var log = Log.GetLogger("Main");
             log.Info("Hola hej!");
 
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+
             var mutex = new Mutex(true, "warpinator", out bool created);
             // Process arguments
             if (args.Length > 0)
@@ -157,6 +159,22 @@ namespace Warpinator
             catch (Exception e)
             {
                 log.Info($"Pipe server quit ({e.GetType()} - {e.Message})");
+            }
+        }
+
+        private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var log = Log.GetLogger("ErrorHandler");
+            try
+            {
+                Exception ex = (Exception)e.ExceptionObject;
+                log.Fatal("Unhandled exception", ex);
+                MessageBox.Show("Unhandled exception, application will terminate. Please\n\n" + ex.ToString(),
+                    "Fatal error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch
+            {
+                log.Fatal("Unknown exception occured and was not properly handled");
             }
         }
     }

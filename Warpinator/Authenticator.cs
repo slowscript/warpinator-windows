@@ -89,9 +89,11 @@ namespace Warpinator
                     
                     cert.CheckValidity(); //Throws if invalid
                     if (addr != Server.current.SelectedIP)
-                        throw new Org.BouncyCastle.Security.Certificates.CertificateExpiredException();
+                        throw new Org.BouncyCastle.Security.Certificates.CertificateExpiredException("IP address changed");
                     return pair1;
-                } catch {}
+                } catch (Exception e) {
+                    log.Warn($"Certificate was not loaded, new one will be created ({e.Message})");
+                }
             }
 
             KeyCertificatePair pair = CreateKeyCertificatePair(Utils.GetHostname(), Server.current.SelectedIP.ToString());

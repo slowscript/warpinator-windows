@@ -399,11 +399,18 @@ namespace Warpinator
                 log.Error($"Failed to receive certificate from {Hostname}");
                 return false;
             }
-            string base64encoded = Encoding.ASCII.GetString(received);
-            byte[] decoded = Convert.FromBase64String(base64encoded);
-            GroupCodeError = !Authenticator.SaveRemoteCertificate(decoded, UUID);
-            if (GroupCodeError) {
-                log.Error("Groupcode error");
+
+            try {
+                string base64encoded = Encoding.ASCII.GetString(received);
+                byte[] decoded = Convert.FromBase64String(base64encoded);
+                GroupCodeError = !Authenticator.SaveRemoteCertificate(decoded, UUID);
+                if (GroupCodeError)
+                {
+                    log.Error("Groupcode error");
+                    return false;
+                }
+            } catch (Exception e) {
+                log.Error("Error processing certificate: " + e.ToString());
                 return false;
             }
             return true;
@@ -424,17 +431,23 @@ namespace Warpinator
             }
             catch (Exception e)
             {
-                if (e is RpcException)                 {
+                if (e is RpcException) {
                     var er = (RpcException)e;
                     log.Error($"Could not receive certificate. Status {er.StatusCode} - {er.Status.Detail}");
-                }else log.Error("Unknown error when receiving certificate", e);
+                } else log.Error("Unknown error when receiving certificate", e);
                 return false;
             }
-            byte[] decoded = Convert.FromBase64String(certResp.LockedCert);
-            GroupCodeError = !Authenticator.SaveRemoteCertificate(decoded, UUID);
-            if (GroupCodeError)
-            {
-                log.Error("Groupcode error");
+
+            try {
+                byte[] decoded = Convert.FromBase64String(certResp.LockedCert);
+                GroupCodeError = !Authenticator.SaveRemoteCertificate(decoded, UUID);
+                if (GroupCodeError)
+                {
+                    log.Error("Groupcode error");
+                    return false;
+                }
+            } catch (Exception e) {
+                log.Error("Error processing certificate: " + e.ToString());
                 return false;
             }
             return true;
