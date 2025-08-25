@@ -190,5 +190,17 @@ namespace Warpinator.Properties {
                 this["UseCompression"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WriteLog {
+            get {
+                return ((bool)(this["WriteLog"]));
+            }
+            set {
+                this["WriteLog"] = value;
+            }
+        }
     }
 }

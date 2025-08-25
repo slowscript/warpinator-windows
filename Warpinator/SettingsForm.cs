@@ -39,6 +39,7 @@ namespace Warpinator
             chkRunOnStartup.Checked = File.Exists(Utils.StartupShortcut);
             chkUpdates.Checked = Properties.Settings.Default.CheckForUpdates;
             chkCompression.Checked = Properties.Settings.Default.UseCompression;
+            chkWriteLog.Checked = Properties.Settings.Default.WriteLog;
 
             var ifaces = MulticastService.GetNetworkInterfaces();
             ifaceDict.Clear();
@@ -93,6 +94,7 @@ namespace Warpinator
                 File.Delete(Utils.StartupShortcut);
             Properties.Settings.Default.CheckForUpdates = chkUpdates.Checked;
             Properties.Settings.Default.UseCompression = chkCompression.Checked;
+            Properties.Settings.Default.WriteLog = chkWriteLog.Checked;
 
             Properties.Settings.Default.Save();
         }

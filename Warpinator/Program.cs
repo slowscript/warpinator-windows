@@ -42,7 +42,7 @@ namespace Warpinator
                 ["showDateTime"] = "true",
                 ["dateTimeFormat"] = "HH:mm:ss.fff"
             };
-            Log = new FileLoggerAdapter(args.Contains("-d"), properties2);
+            Log = new FileLoggerAdapter(args.Contains("-d") || Properties.Settings.Default.WriteLog, properties2);
             
             var log = Log.GetLogger("Main");
             log.Info("Hola hej!");

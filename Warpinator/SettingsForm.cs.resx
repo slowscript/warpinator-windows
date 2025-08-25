@@ -211,11 +211,23 @@
   <data name="chkStartMinimized.Text" xml:space="preserve">
     <value>Spouštět minimalizované</value>
   </data>
+  <data name="chkCompression.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 17</value>
+  </data>
+  <data name="chkCompression.Text" xml:space="preserve">
+    <value>Pokusit se použít kompresi</value>
+  </data>
   <data name="chkRunOnStartup.Size" type="System.Drawing.Size, System.Drawing">
     <value>310, 17</value>
   </data>
   <data name="chkRunOnStartup.Text" xml:space="preserve">
     <value>Spustit při přihlášení (pokud povoleno v nastavení systému)</value>
+  </data>
+  <data name="chkWriteLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 17</value>
+  </data>
+  <data name="chkWriteLog.Text" xml:space="preserve">
+    <value>Psát ladící záznamy do souboru (v AppData, vyžaduje restart)</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Nastavení</value>

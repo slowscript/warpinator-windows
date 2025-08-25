@@ -56,6 +56,7 @@ namespace Warpinator
             this.chkStartMinimized = new System.Windows.Forms.CheckBox();
             this.chkCompression = new System.Windows.Forms.CheckBox();
             this.chkRunOnStartup = new System.Windows.Forms.CheckBox();
+            this.chkWriteLog = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAuthPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPort)).BeginInit();
@@ -258,10 +259,17 @@ namespace Warpinator
             this.chkRunOnStartup.Name = "chkRunOnStartup";
             this.chkRunOnStartup.UseVisualStyleBackColor = true;
             // 
+            // chkWriteLog
+            // 
+            resources.ApplyResources(this.chkWriteLog, "chkWriteLog");
+            this.chkWriteLog.Name = "chkWriteLog";
+            this.chkWriteLog.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkWriteLog);
             this.Controls.Add(this.chkRunOnStartup);
             this.Controls.Add(this.chkCompression);
             this.Controls.Add(this.chkStartMinimized);
@@ -317,5 +325,6 @@ namespace Warpinator
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chkCompression;
         private System.Windows.Forms.CheckBox chkRunOnStartup;
+        private System.Windows.Forms.CheckBox chkWriteLog;
     }
 }
