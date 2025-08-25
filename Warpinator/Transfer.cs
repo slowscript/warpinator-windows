@@ -50,7 +50,7 @@ namespace Warpinator
         public long BytesTransferred;
         public TransferSpeed BytesPerSecond = new TransferSpeed();
         public long RealStartTime;
-        public double Progress { get { return (double)BytesTransferred / TotalSize; } }
+        public double Progress { get { return TotalSize == 0 ? 0.0 : (double)BytesTransferred / TotalSize; } }
         private double lastMillis;
         internal Stopwatch recvWatch = new Stopwatch();
         private FileStream currentStream;

@@ -105,10 +105,7 @@ namespace Warpinator
 
         public static string SanitizePath(string name)
         {
-            string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(Path.GetInvalidPathChars()));
-            string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
-
-            return System.Text.RegularExpressions.Regex.Replace(name, invalidRegStr, "_");
+            return System.Text.RegularExpressions.Regex.Replace(name, "(\\.+$)|([\\p{Cc}<>:\"\\|\\?\\*])", "_");
         }
 
         public static string NormalizePath(string path)
