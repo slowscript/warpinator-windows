@@ -34,7 +34,10 @@ namespace Warpinator
         {
             Cursor = Cursors.WaitCursor;
             btnConnect.Enabled = false;
-            string result = await Server.current.RegisterWithHost(txtIP.Text);
+            string hostUri = txtIP.Text;
+            if (!hostUri.StartsWith("warpinator://"))
+                hostUri = "warpinator://" + hostUri;
+            string result = await Server.current.RegisterWithHost(hostUri);
             btnConnect.Enabled = true;
             Cursor = Cursors.Default;
             if (result == null)

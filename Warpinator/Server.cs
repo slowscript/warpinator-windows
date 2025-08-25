@@ -213,11 +213,14 @@ namespace Warpinator
         public async Task<string> RegisterWithHost(string host)
         {
             log.Info($"Registering with host {host}");
-            var match = hostRegex.Match(host);
-            if (!match.Success)
+            Uri uri;
+            try {
+                uri = new Uri(host);
+            } catch (UriFormatException) {
                 return Resources.Strings.invalid_address;
-            string ip = match.Groups[2].Value;
-            int authport = int.Parse(match.Groups[4].Value);
+            }
+            string ip = uri.Host;
+            int authport = uri.Port;
             try
             {
                 var regChannel = new Channel(ip, authport, ChannelCredentials.Insecure);
