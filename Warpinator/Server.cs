@@ -33,7 +33,7 @@ namespace Warpinator
         public string SelectedInterface;
         public IPAddress SelectedIP { get; private set; }
 
-        public Dictionary<string, Remote> Remotes = new Dictionary<string, Remote>();
+        public ConcurrentDictionary<string, Remote> Remotes = new ConcurrentDictionary<string, Remote>();
 
         Grpc.Core.Server grpcServer;
         Grpc.Core.Server regServer;
@@ -403,7 +403,7 @@ namespace Warpinator
             }
 
             svc.resolved = true; //TODO: support svc being updated
-            if (Remotes.ContainsKey(name))
+            if (!Remotes.TryAdd(name, new Remote()))
             {
                 Remote r = Remotes[name];
                 log.Debug($"Service already known, status: {r.Status}");
@@ -418,7 +418,7 @@ namespace Warpinator
                 return;
             }
 
-            Remote remote = new Remote();
+            Remote remote = Remotes[name];
             remote.Address = svc.Address;
             if (txt.ContainsKey("hostname"))
                 remote.Hostname = txt["hostname"];
@@ -438,11 +438,6 @@ namespace Warpinator
 
         public void AddRemote(Remote remote)
         {
-            lock (Remotes)
-            {
-                if (!Remotes.ContainsKey(remote.UUID))
-                    Remotes.Add(remote.UUID, remote);
-            }
             Form1.UpdateUI();
             remote.Connect();
         }
