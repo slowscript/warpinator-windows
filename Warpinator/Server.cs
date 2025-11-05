@@ -403,37 +403,40 @@ namespace Warpinator
             }
 
             svc.resolved = true; //TODO: support svc being updated
-            if (Remotes.ContainsKey(name))
+            lock (Remotes)
             {
-                Remote r = Remotes[name];
-                log.Debug($"Service already known, status: {r.Status}");
-                if (txt.ContainsKey("hostname"))
-                    r.Hostname = txt["hostname"];
-                r.ServiceAvailable = true;
-                if (r.Status == RemoteStatus.DISCONNECTED || r.Status == RemoteStatus.ERROR)
+                if (Remotes.ContainsKey(name))
                 {
-                    //TODO: Update and reconnect
+                    Remote r = Remotes[name];
+                    log.Debug($"Service already known, status: {r.Status}");
+                    if (txt.ContainsKey("hostname"))
+                        r.Hostname = txt["hostname"];
+                    r.ServiceAvailable = true;
+                    if (r.Status == RemoteStatus.DISCONNECTED || r.Status == RemoteStatus.ERROR)
+                    {
+                        //TODO: Update and reconnect
+                    }
+                    else r.UpdateUI();
+                    return;
                 }
-                else r.UpdateUI();
-                return;
+
+                Remote remote = new Remote();
+                remote.Address = svc.Address;
+                if (txt.ContainsKey("hostname"))
+                    remote.Hostname = txt["hostname"];
+                remote.Port = svc.Port;
+                if (txt.ContainsKey("api-version"))
+                    if (!uint.TryParse(txt["api-version"], out remote.APIVersion))
+                        log.Warn("Invalid API version in TXT record");
+                if (txt.ContainsKey("auth-port"))
+                    if (!int.TryParse(txt["auth-port"], out remote.AuthPort))
+                        log.Warn("Invalid auth port in TXT record");
+                remote.ServiceName = name;
+                remote.UUID = name;
+                remote.ServiceAvailable = true;
+
+                AddRemote(remote);
             }
-
-            Remote remote = new Remote();
-            remote.Address = svc.Address;
-            if (txt.ContainsKey("hostname"))
-                remote.Hostname = txt["hostname"];
-            remote.Port = svc.Port;
-            if (txt.ContainsKey("api-version"))
-                if (!uint.TryParse(txt["api-version"], out remote.APIVersion))
-                    log.Warn("Invalid API version in TXT record");
-            if (txt.ContainsKey("auth-port"))
-                if (!int.TryParse(txt["auth-port"], out remote.AuthPort))
-                    log.Warn("Invalid auth port in TXT record");
-            remote.ServiceName = name;
-            remote.UUID = name;
-            remote.ServiceAvailable = true;
-
-            AddRemote(remote);
         }
 
         public void AddRemote(Remote remote)
