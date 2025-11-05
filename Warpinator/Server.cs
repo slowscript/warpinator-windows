@@ -33,7 +33,7 @@ namespace Warpinator
         public string SelectedInterface;
         public IPAddress SelectedIP { get; private set; }
 
-        public ConcurrentDictionary<string, Remote> Remotes = new ConcurrentDictionary<string, Remote>();
+        public Dictionary<string, Remote> Remotes = new Dictionary<string, Remote>();
 
         Grpc.Core.Server grpcServer;
         Grpc.Core.Server regServer;
@@ -441,6 +441,11 @@ namespace Warpinator
 
         public void AddRemote(Remote remote)
         {
+            lock (Remotes)
+            {
+                if (!Remotes.ContainsKey(remote.UUID))
+                    Remotes.Add(remote.UUID, remote);
+            }
             Form1.UpdateUI();
             remote.Connect();
         }
