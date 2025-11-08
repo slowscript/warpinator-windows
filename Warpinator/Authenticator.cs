@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Security.Cryptography;
@@ -29,6 +29,7 @@ namespace Warpinator
         const string KeyFileName = ".self.pem_key";
         
         static byte[] serverCertificate;
+        static Dictionary<string, string> remoteCertificates = new Dictionary<string, string>();
 
         public static byte[] GetBoxedCertificate()
         {
@@ -65,13 +66,14 @@ namespace Warpinator
             if (!box.TryDecrypt(message, 0, data, 24, data.Length - 24, data, 0))
                 return false;
 
-            File.WriteAllBytes(Path.Combine(Utils.GetCertDir(), name + ".pem"), message);
+            string pemString = Encoding.ASCII.GetString(message);
+            remoteCertificates.Add(name, pemString);
             return true;
         }
 
         public static string GetRemoteCertificate(string name)
         {
-            return File.ReadAllText(Path.Combine(Utils.GetCertDir(), name + ".pem"));
+            return remoteCertificates[name];
         }
 
         public static KeyCertificatePair GetKeyCertificatePair()
