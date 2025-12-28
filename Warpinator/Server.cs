@@ -63,19 +63,23 @@ namespace Warpinator
             
             //Load settings
             settings = Properties.Settings.Default;
+            bool needsSave = false;
             if (!String.IsNullOrEmpty(settings.UUID))
                 UUID = settings.UUID;
             else
             {
                 UUID = Hostname.ToUpper() + "-" + String.Format("{0:X6}", new Random().Next(0x1000000));
                 settings.UUID = UUID;
-                settings.Save();
+                needsSave = true;
             }
             if (String.IsNullOrEmpty(settings.DownloadDir))
             {
                 settings.DownloadDir = Path.Combine(Utils.GetDefaultDownloadFolder(), "Warpinator");
                 Directory.CreateDirectory(settings.DownloadDir);
+                needsSave = true;
             }
+            if (needsSave)
+                settings.Save();
             SelectedInterface = settings.NetworkInterface;
             SelectedIP = Utils.GetLocalIPAddress();
             mdns = new MulticastService((ifaces) => ifaces.Where((iface) => SelectedInterface == null || iface.Id == SelectedInterface));
