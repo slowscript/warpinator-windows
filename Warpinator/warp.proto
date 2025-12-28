@@ -18,6 +18,7 @@ service Warp {
     rpc GetRemoteMachineAvatar(LookupName) returns (stream RemoteMachineAvatar) {}
     rpc ProcessTransferOpRequest(TransferOpRequest) returns (VoidType) {}
     rpc PauseTransferOp(OpInfo) returns (VoidType) {}
+    rpc SendTextMessage(TextMessage) returns (VoidType) {}
 
     // Receiver methods
     rpc StartTransfer(OpInfo) returns (stream FileChunk) {}
@@ -32,6 +33,7 @@ service Warp {
 message RemoteMachineInfo {
     string display_name = 1;
     string user_name = 2;
+    uint32 feature_flags = 3;
 }
 
 message RemoteMachineAvatar {
@@ -97,6 +99,7 @@ service WarpRegistration {
 message RegRequest {
     string ip = 1;
     string hostname = 2;
+    string ipv6 = 3;
 }
 
 message RegResponse {
@@ -110,4 +113,11 @@ message ServiceRegistration {
     string hostname = 4;
     uint32 api_version = 5;
     uint32 auth_port = 6;
+    string ipv6 = 7;
+}
+
+message TextMessage {
+    string ident = 1;
+    uint64 timestamp = 2;
+    string message = 3;
 }
