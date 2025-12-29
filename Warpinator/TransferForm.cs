@@ -52,10 +52,9 @@ namespace Warpinator
         internal void UpdateTransfers()
         {
             flowLayoutTransfers.Controls.Clear();
-            foreach (var t in remote.Transfers)
+            foreach (var t in remote.Transfers.Reverse<Transfer>())
             {
                 var p = new TransferPanel(t);
-                //p.;
                 flowLayoutTransfers.Controls.Add(p);
                 p.Width = flowLayoutTransfers.ClientSize.Width - 10;
                 p.Show();
@@ -111,6 +110,12 @@ namespace Warpinator
             }
             else // Text message
             {
+                if (!remote.SupportsMessages)
+                {
+                    MessageBox.Show("Text messages are not supported by the remote. Make sure it uses the latest version of the application.",
+                        Resources.Strings.warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 t.Direction = TransferDirection.SEND;
                 t.Status = TransferStatus.TRANSFERRING;
                 t.StartTime = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds();

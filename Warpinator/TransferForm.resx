@@ -351,6 +351,9 @@
   <data name="txtFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>110, 381</value>
   </data>
+  <data name="txtFile.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="txtFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 20</value>
   </data>

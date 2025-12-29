@@ -67,7 +67,7 @@ namespace Warpinator
                 return false;
 
             string pemString = Encoding.ASCII.GetString(message);
-            remoteCertificates.Add(name, pemString);
+            remoteCertificates[name] = pemString;
             return true;
         }
 
