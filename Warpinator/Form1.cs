@@ -66,6 +66,7 @@ namespace Warpinator
                 log.Error("Failed to start server", ex);
                 MessageBox.Show(String.Format(Resources.Strings.failed_to_start_server, ex.Message), Resources.Strings.error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            Microsoft.Win32.SystemEvents.PowerModeChanged += OnPowerChange;
             initialized = true;
             HandleConnectTo();
         }
@@ -95,12 +96,23 @@ namespace Warpinator
         {
             current = null;
             await server.Stop();
+            Microsoft.Win32.SystemEvents.PowerModeChanged -= OnPowerChange;
         }
 
         private void Quit()
         {
             quit = true;
             Close();
+        }
+
+        private void OnPowerChange(object s, Microsoft.Win32.PowerModeChangedEventArgs args)
+        {
+            log.Debug($"Power change: {args.Mode}");
+            if (args.Mode == Microsoft.Win32.PowerModes.Resume)
+            {
+                server.Rescan();
+                server.Reannounce();
+            }
         }
 
         public static void UpdateUI()
