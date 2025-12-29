@@ -104,9 +104,9 @@ namespace Warpinator
             this.txtFile.AllowDrop = true;
             resources.ApplyResources(this.txtFile, "txtFile");
             this.txtFile.Name = "txtFile";
-            this.txtFile.ReadOnly = true;
             this.txtFile.DragDrop += new System.Windows.Forms.DragEventHandler(this.TxtFile_DragDrop);
             this.txtFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.DropTargets_DragEnter);
+            this.txtFile.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFile_KeyDown);
             // 
             // btnDlDir
             // 

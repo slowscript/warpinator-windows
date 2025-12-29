@@ -224,6 +224,29 @@ namespace Warpinator
             }
         }
 
+        public async void SendTextMessage(Transfer t)
+        {
+            log.Debug("Sending text message: " + t.Message);
+            try
+            {
+                await client.SendTextMessageAsync(new TextMessage()
+                {
+                    Ident = Server.current.UUID,
+                    Timestamp = t.StartTime,
+                    Message = t.Message
+                });
+                t.Status = TransferStatus.FINISHED;
+                t.OnTransferUpdated();
+            }
+            catch (Exception e)
+            {
+                log.Error("Error sending text message", e);
+                t.errors.Add("Error sending message: " + e.Message);
+                t.Status = TransferStatus.FAILED;
+                t.OnTransferUpdated();
+            }
+        }
+
         public void DeclineTransfer(Transfer t)
         {
             var info = new OpInfo()

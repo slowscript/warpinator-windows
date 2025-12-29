@@ -51,7 +51,7 @@ namespace Warpinator.Controls
             btnCopy.Visible = isTextMessage && (transfer.Status == TransferStatus.FINISHED && transfer.Direction == TransferDirection.RECEIVE);
 
             txtTransfer.Text = transfer.Message?.Replace("\n", "\r\n") ?? (transfer.FileCount == 1 ? transfer.SingleName : String.Format(Resources.Strings.files, transfer.FileCount)) + " (" + Utils.BytesToHumanReadable((long)transfer.TotalSize) + ")";
-            txtTransfer.Multiline = isTextMessage;
+            txtTransfer.Multiline = isTextMessage && transfer.Status == TransferStatus.FINISHED;
             txtTransfer.Enabled = isTextMessage; //Disable scrolling for non-message transfer
             txtTransfer.Select(0, 0); //Unselect autoselected text
             // Status label
@@ -65,7 +65,7 @@ namespace Warpinator.Controls
                 lblProgress.Text = Utils.BytesToHumanReadable(transfer.BytesTransferred) + " / " + Utils.BytesToHumanReadable((long)transfer.TotalSize) + " (" +
                     Utils.BytesToHumanReadable(transfer.BytesPerSecond.GetMovingAverage()) + "/s, " + String.Format(Resources.Strings.remaining, transfer.GetRemainingTime()) + ")";
             else
-                lblProgress.Text = isTextMessage ? "" :  transfer.GetStatusString();
+                lblProgress.Text = (isTextMessage && transfer.Status == TransferStatus.FINISHED) ? "" :  transfer.GetStatusString();
             progressBar.Value = (int)(transfer.Progress * 100);
             btnShowDetails.Visible = (transfer.Status == TransferStatus.FINISHED_WITH_ERRORS) || (transfer.Status == TransferStatus.FAILED && transfer.errors.Count > 0);
         }
@@ -93,10 +93,18 @@ namespace Warpinator.Controls
 
         private void BtnRestart_Click(object sender, EventArgs e)
         {
-            transfer.Status = TransferStatus.WAITING_PERMISSION;
             transfer.errors.Clear();
+            if (transfer.Message != null)
+            {
+                transfer.Status = TransferStatus.TRANSFERRING;
+                Server.current.Remotes[transfer.RemoteUUID].SendTextMessage(transfer);
+            }
+            else
+            {
+                transfer.Status = TransferStatus.WAITING_PERMISSION;
+                Server.current.Remotes[transfer.RemoteUUID].StartSendTransfer(transfer);
+            }
             UpdateControls();
-            Server.current.Remotes[transfer.RemoteUUID].StartSendTransfer(transfer);
         }
 
         private void BtnStop_Click(object sender, EventArgs e)

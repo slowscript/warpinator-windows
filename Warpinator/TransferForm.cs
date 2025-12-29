@@ -77,6 +77,7 @@ namespace Warpinator
             {
                 selectedFiles = ofd.FileNames;
                 txtFile.Text = String.Join("; ", selectedFiles.Select((f) => Path.GetFileName(f)));
+                txtFile.ReadOnly = true;
             }
         }
 
@@ -91,26 +92,36 @@ namespace Warpinator
             {
                 selectedFiles = d.FileNames;
                 txtFile.Text = String.Join("; ", selectedFiles.Select((f) => Path.GetFileName(f)));
+                txtFile.ReadOnly = true;
             }
         }
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
-            if (selectedFiles == null || selectedFiles.Length == 0)
-            {
-                MessageBox.Show(Resources.Strings.no_files_selected);
+            if (txtFile.Text == "")
                 return;
-            }
-            Transfer t = new Transfer()
+            Transfer t = new Transfer();
+            t.RemoteUUID = remote.UUID;
+            if (selectedFiles != null)
             {
-                FilesToSend = selectedFiles.ToList(),
-                RemoteUUID = remote.UUID
-            };
-            t.PrepareSend();
+                t.FilesToSend = selectedFiles.ToList();
+                t.PrepareSend();
+                remote.StartSendTransfer(t);
+                selectedFiles = null;
+            }
+            else // Text message
+            {
+                t.Direction = TransferDirection.SEND;
+                t.Status = TransferStatus.TRANSFERRING;
+                t.StartTime = (ulong)DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                t.Message = txtFile.Text;
+                remote.SendTextMessage(t);
+            }
+
+            txtFile.Text = "";
+            txtFile.ReadOnly = false;
             remote.Transfers.Add(t);
             UpdateTransfers();
-
-            remote.StartSendTransfer(t);
         }
 
         private void FlowLayoutPanel_ClientSizeChanged(object sender, EventArgs e)
@@ -163,6 +174,15 @@ namespace Warpinator
         {
             remote.ClearTransfers();
             UpdateTransfers();
+        }
+
+        private void txtFile_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnSend.PerformClick();
+            }
         }
     }
 }
