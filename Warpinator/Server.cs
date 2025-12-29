@@ -20,6 +20,7 @@ namespace Warpinator
         readonly ILog log = Program.Log.GetLogger("Server");
         const string SERVICE_TYPE = "_warpinator._tcp";
         readonly DomainName ServiceDomain = new DomainName(SERVICE_TYPE+".local");
+        public const RemoteFeatures ServerFeatures = RemoteFeatures.TextMessages;
 
         public static Server current;
 

@@ -204,6 +204,9 @@
     <value>Finished with errors</value>
     <comment>Transfer status</comment>
   </data>
+  <data name="incoming_message" xml:space="preserve">
+    <value>New message from {0}</value>
+  </data>
   <data name="incoming_transfer" xml:space="preserve">
     <value>Incoming transfer from {0}</value>
   </data>

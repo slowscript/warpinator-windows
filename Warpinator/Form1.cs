@@ -219,8 +219,10 @@ namespace Warpinator
         EventHandler ballonClickHandler;
         private void ShowTransferBaloon(Transfer t)
         {
-            notifyIcon.BalloonTipTitle = String.Format(Resources.Strings.incoming_transfer, server.Remotes[t.RemoteUUID].Hostname);
-            notifyIcon.BalloonTipText = (t.FileCount == 1 ? t.SingleName : String.Format(Resources.Strings.files, t.FileCount)) + " (" + Utils.BytesToHumanReadable((long)t.TotalSize) + ")";
+            notifyIcon.BalloonTipTitle = String.Format(t.Message != null ? Resources.Strings.incoming_message : Resources.Strings.incoming_transfer,
+                server.Remotes[t.RemoteUUID].Hostname);
+            notifyIcon.BalloonTipText = t.Message ??
+                (t.FileCount == 1 ? t.SingleName : String.Format(Resources.Strings.files, t.FileCount)) + " (" + Utils.BytesToHumanReadable((long)t.TotalSize) + ")";
 
             if (ballonClickHandler != null)
                 notifyIcon.BalloonTipClicked -= ballonClickHandler;

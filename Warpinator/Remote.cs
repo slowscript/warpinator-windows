@@ -21,6 +21,13 @@ namespace Warpinator
         ERROR,
         AWAITING_DUPLEX
     }
+
+    [Flags]
+    public enum RemoteFeatures : uint
+    {
+        None = 0,
+        TextMessages = 1
+    }
     
     public class Remote
     {
@@ -36,6 +43,7 @@ namespace Warpinator
         public Bitmap Picture = Properties.Resources.profile;
         public RemoteStatus Status;
         public bool ServiceAvailable;
+        public bool SupportsMessages = false;
         public bool IncomingTransferFlag = false;
         public bool GroupCodeError = false;
         public List<Transfer> Transfers = new List<Transfer>();
@@ -88,6 +96,9 @@ namespace Warpinator
             var info = await client.GetRemoteMachineInfoAsync(new LookupName());
             DisplayName = info.DisplayName;
             UserName = info.UserName;
+            RemoteFeatures features = (RemoteFeatures)info.FeatureFlags;
+            log.Debug($"Features: {features}");
+            SupportsMessages = features.HasFlag(RemoteFeatures.TextMessages);
 
             // Get avatar
             try

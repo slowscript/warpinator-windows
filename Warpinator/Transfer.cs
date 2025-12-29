@@ -36,6 +36,7 @@ namespace Warpinator
         public string SingleMIME = "";
         public List<string> TopDirBaseNames;
         public bool UseCompression = false;
+        public string Message;
 
         public bool OverwriteWarning = false;
         public List<string> FilesToSend;
@@ -274,12 +275,17 @@ namespace Warpinator
                 }
             }
 
-            Server.current.Remotes[RemoteUUID].IncomingTransferFlag = true;
-            Server.current.Remotes[RemoteUUID].UpdateTransfers();
-            Form1.OnIncomingTransfer(this);
+            ShowNewReceiveTransfer();
 
             if (Properties.Settings.Default.AutoAccept)
                 StartReceiving();
+        }
+
+        public void ShowNewReceiveTransfer()
+        {
+            Server.current.Remotes[RemoteUUID].IncomingTransferFlag = true;
+            Server.current.Remotes[RemoteUUID].UpdateTransfers();
+            Form1.OnIncomingTransfer(this);
         }
 
         public void StartReceiving()

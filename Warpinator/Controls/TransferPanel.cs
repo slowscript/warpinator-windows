@@ -15,6 +15,8 @@ namespace Warpinator.Controls
             transfer = t;
             if (t.FileCount == 1)
                 imgFile.Image = Utils.GetFileIcon(t.SingleName, true).ToBitmap();
+            else if (t.Message != null)
+                imgFile.Image = t.Direction == TransferDirection.SEND ? Properties.Resources.message_sent : Properties.Resources.message_received;
             else
                 imgFile.Image = Properties.Resources.files;
             UpdateControls();
@@ -39,14 +41,19 @@ namespace Warpinator.Controls
 
         private void UpdateControls()
         {
+            bool isTextMessage = transfer.Message != null;
             btnAccept.Visible = (transfer.Status == TransferStatus.WAITING_PERMISSION) && (transfer.Direction == TransferDirection.RECEIVE);
             btnDecline.Visible = transfer.Status == TransferStatus.WAITING_PERMISSION;
             btnStop.Visible = transfer.Status == TransferStatus.TRANSFERRING;
             progressBar.Visible = transfer.Status == TransferStatus.TRANSFERRING;
             btnRestart.Visible = (transfer.Direction == TransferDirection.SEND) &&
                 (transfer.Status == TransferStatus.FAILED || transfer.Status == TransferStatus.STOPPED);
-            
-            lblFiles.Text = (transfer.FileCount == 1 ? transfer.SingleName : String.Format(Resources.Strings.files, transfer.FileCount)) + " (" + Utils.BytesToHumanReadable((long)transfer.TotalSize) + ")";
+            btnCopy.Visible = isTextMessage && (transfer.Status == TransferStatus.FINISHED && transfer.Direction == TransferDirection.RECEIVE);
+
+            txtTransfer.Text = transfer.Message?.Replace("\n", "\r\n") ?? (transfer.FileCount == 1 ? transfer.SingleName : String.Format(Resources.Strings.files, transfer.FileCount)) + " (" + Utils.BytesToHumanReadable((long)transfer.TotalSize) + ")";
+            txtTransfer.Multiline = isTextMessage;
+            txtTransfer.Enabled = isTextMessage; //Disable scrolling for non-message transfer
+            txtTransfer.Select(0, 0); //Unselect autoselected text
             // Status label
             if (transfer.Status == TransferStatus.WAITING_PERMISSION)
             {
@@ -56,9 +63,9 @@ namespace Warpinator.Controls
             }
             else if (transfer.Status == TransferStatus.TRANSFERRING)
                 lblProgress.Text = Utils.BytesToHumanReadable(transfer.BytesTransferred) + " / " + Utils.BytesToHumanReadable((long)transfer.TotalSize) + " (" +
-                Utils.BytesToHumanReadable(transfer.BytesPerSecond.GetMovingAverage()) + "/s, " + String.Format(Resources.Strings.remaining, transfer.GetRemainingTime()) + ")";
+                    Utils.BytesToHumanReadable(transfer.BytesPerSecond.GetMovingAverage()) + "/s, " + String.Format(Resources.Strings.remaining, transfer.GetRemainingTime()) + ")";
             else
-                lblProgress.Text = transfer.GetStatusString();
+                lblProgress.Text = isTextMessage ? "" :  transfer.GetStatusString();
             progressBar.Value = (int)(transfer.Progress * 100);
             btnShowDetails.Visible = (transfer.Status == TransferStatus.FINISHED_WITH_ERRORS) || (transfer.Status == TransferStatus.FAILED && transfer.errors.Count > 0);
         }
@@ -100,6 +107,11 @@ namespace Warpinator.Controls
         private void BtnShowDetails_Click(object sender, EventArgs e)
         {            
             MessageBox.Show(ParentForm, String.Join("\n", transfer.errors), Resources.Strings.transfer);
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(transfer.Message);
         }
     }
 }

@@ -204,6 +204,9 @@
     <value>Dokončeno s chybami</value>
     <comment>Transfer status</comment>
   </data>
+  <data name="incoming_message" xml:space="preserve">
+    <value>Nová zpráva od {0}</value>
+  </data>
   <data name="incoming_transfer" xml:space="preserve">
     <value>Příchozí přenos od {0}</value>
   </data>

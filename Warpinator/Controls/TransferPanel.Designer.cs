@@ -30,22 +30,18 @@ namespace Warpinator.Controls
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransferPanel));
-            this.lblFiles = new System.Windows.Forms.Label();
             this.lblProgress = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnDecline = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
             this.btnShowDetails = new System.Windows.Forms.Button();
+            this.txtTransfer = new System.Windows.Forms.TextBox();
+            this.btnCopy = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.imgFile = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgFile)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblFiles
-            // 
-            resources.ApplyResources(this.lblFiles, "lblFiles");
-            this.lblFiles.Name = "lblFiles";
             // 
             // lblProgress
             // 
@@ -85,6 +81,22 @@ namespace Warpinator.Controls
             this.btnShowDetails.UseVisualStyleBackColor = true;
             this.btnShowDetails.Click += new System.EventHandler(this.BtnShowDetails_Click);
             // 
+            // txtTransfer
+            // 
+            resources.ApplyResources(this.txtTransfer, "txtTransfer");
+            this.txtTransfer.BackColor = System.Drawing.SystemColors.Control;
+            this.txtTransfer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtTransfer.Name = "txtTransfer";
+            this.txtTransfer.ReadOnly = true;
+            // 
+            // btnCopy
+            // 
+            resources.ApplyResources(this.btnCopy, "btnCopy");
+            this.btnCopy.BackgroundImage = global::Warpinator.Properties.Resources.copy;
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
             // btnStop
             // 
             resources.ApplyResources(this.btnStop, "btnStop");
@@ -103,6 +115,7 @@ namespace Warpinator.Controls
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.btnShowDetails);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnDecline);
@@ -110,8 +123,8 @@ namespace Warpinator.Controls
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.lblProgress);
-            this.Controls.Add(this.lblFiles);
             this.Controls.Add(this.imgFile);
+            this.Controls.Add(this.txtTransfer);
             this.Name = "TransferPanel";
             ((System.ComponentModel.ISupportInitialize)(this.imgFile)).EndInit();
             this.ResumeLayout(false);
@@ -122,7 +135,6 @@ namespace Warpinator.Controls
         #endregion
 
         private System.Windows.Forms.PictureBox imgFile;
-        private System.Windows.Forms.Label lblFiles;
         private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button btnStop;
@@ -130,5 +142,7 @@ namespace Warpinator.Controls
         private System.Windows.Forms.Button btnDecline;
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Button btnShowDetails;
+        private System.Windows.Forms.TextBox txtTransfer;
+        private System.Windows.Forms.Button btnCopy;
     }
 }

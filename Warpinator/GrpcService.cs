@@ -59,7 +59,11 @@ namespace Warpinator
 
         public override Task<RemoteMachineInfo> GetRemoteMachineInfo(LookupName request, ServerCallContext context)
         {
-            return Task.FromResult(new RemoteMachineInfo { DisplayName = Server.current.DisplayName, UserName = Server.current.UserName });
+            return Task.FromResult(new RemoteMachineInfo {
+                DisplayName = Server.current.DisplayName,
+                UserName = Server.current.UserName,
+                FeatureFlags = (uint)Server.ServerFeatures
+            });
         }
 
         public override async Task GetRemoteMachineAvatar(LookupName request, IServerStreamWriter<RemoteMachineAvatar> responseStream, ServerCallContext context)
@@ -78,22 +82,29 @@ namespace Warpinator
             return Void;
         }
 
-        public override Task<VoidType> ProcessTransferOpRequest(TransferOpRequest request, ServerCallContext context)
+        private Remote FindRemote(string remoteUUID)
         {
-            string remoteUUID = request.Info.Ident;
             Remote r = Server.current.Remotes[remoteUUID];
             if (r == null)
             {
                 log.Warn($"Received transfer from unknown remote {remoteUUID}");
-                return Void;
+                return null;
             }
-            log.Info($"Incoming transfer from {r.UserName}");
             if (r.GroupCodeError)
             {
-                log.Warn("Sending user has wrong group code, transfer ignored");
-                return Void;
+                log.Warn($"Sending user '{remoteUUID}' has wrong group code, transfer ignored");
+                return null;
             }
+            return r;
+        }
 
+        public override Task<VoidType> ProcessTransferOpRequest(TransferOpRequest request, ServerCallContext context)
+        {
+            string remoteUUID = request.Info.Ident;
+            Remote r = FindRemote(remoteUUID);
+            if (r == null)
+                return Void;
+            log.Info($"Incoming transfer from {r.UserName}");
             var t = new Transfer() {
                 Direction = TransferDirection.RECEIVE,
                 RemoteUUID = remoteUUID,
@@ -109,6 +120,26 @@ namespace Warpinator
             r.Transfers.Add(t);
             t.PrepareReceive();
             
+            return Void;
+        }
+
+        public override Task<VoidType> SendTextMessage(TextMessage request, ServerCallContext context)
+        {
+            Remote r = FindRemote(request.Ident);
+            if (r == null)
+                return Void;
+            log.Info($"Text message from {request.Ident}");
+            var t = new Transfer()
+            {
+                Direction = TransferDirection.RECEIVE,
+                RemoteUUID = request.Ident,
+                StartTime = request.Timestamp,
+                Status = TransferStatus.FINISHED,
+                Message = request.Message
+            };
+            r.Transfers.Add(t);
+            t.ShowNewReceiveTransfer();
+
             return Void;
         }
 

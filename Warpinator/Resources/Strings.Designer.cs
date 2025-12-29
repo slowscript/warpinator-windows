@@ -286,6 +286,15 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný New message from {0}.
+        /// </summary>
+        internal static string incoming_message {
+            get {
+                return ResourceManager.GetString("incoming_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledá lokalizovaný řetězec podobný Incoming transfer from {0}.
         /// </summary>
         internal static string incoming_transfer {

@@ -319,6 +319,9 @@
     <None Include="Resources\visible.png" />
     <None Include="Resources\stop.png" />
     <None Include="Resources\trashcan48.png" />
+    <None Include="Resources\copy.png" />
+    <None Include="Resources\message-sent.png" />
+    <None Include="Resources\message-received.png" />
     <Content Include="Resources\warplogo.ico" />
   </ItemGroup>
   <ItemGroup>

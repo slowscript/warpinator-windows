@@ -93,6 +93,16 @@ namespace Warpinator.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap copy {
+            get {
+                object obj = ResourceManager.GetObject("copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap disconnected {
             get {
                 object obj = ResourceManager.GetObject("disconnected", resourceCulture);
@@ -126,6 +136,26 @@ namespace Warpinator.Properties {
         internal static System.Drawing.Bitmap invisible {
             get {
                 object obj = ResourceManager.GetObject("invisible", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap message_received {
+            get {
+                object obj = ResourceManager.GetObject("message_received", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap message_sent {
+            get {
+                object obj = ResourceManager.GetObject("message_sent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
