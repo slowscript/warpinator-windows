@@ -270,6 +270,21 @@ namespace Warpinator
             }
         }
 
+        public void AddIncomingTransfer(Transfer t)
+        {
+            Transfers.Add(t);
+            // Highlight remote in main form, if remote/transfer form is not active
+            if (form == null || !form.IsActive())
+            {
+                IncomingTransferFlag = true;
+                RemoteUpdated?.Invoke(this, null);
+            }
+            // Add to UI in TransferForm
+            UpdateTransfers();
+            // Notification
+            Form1.OnIncomingTransfer(t);
+        }
+
         public void OpenWindow()
         {
             if (form == null) {
@@ -291,7 +306,6 @@ namespace Warpinator
         {
             if (form != null)
                 form.Invoke(new Action(() => form.UpdateTransfers()));
-            RemoteUpdated?.Invoke(this, null); // update RemoteButton in Form1 to indicate incoming transfer
         }
 
         public void ClearTransfers()

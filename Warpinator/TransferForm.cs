@@ -63,6 +63,8 @@ namespace Warpinator
             btnClear.Enabled = remote.Transfers.Count > 0;
         }
      
+        public bool IsActive() => ActiveForm == this;
+
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
             var ofd = new OpenFileDialog

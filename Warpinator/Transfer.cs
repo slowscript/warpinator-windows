@@ -275,17 +275,8 @@ namespace Warpinator
                 }
             }
 
-            ShowNewReceiveTransfer();
-
             if (Properties.Settings.Default.AutoAccept)
                 StartReceiving();
-        }
-
-        public void ShowNewReceiveTransfer()
-        {
-            Server.current.Remotes[RemoteUUID].IncomingTransferFlag = true;
-            Server.current.Remotes[RemoteUUID].UpdateTransfers();
-            Form1.OnIncomingTransfer(this);
         }
 
         public void StartReceiving()

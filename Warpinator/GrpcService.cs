@@ -117,8 +117,8 @@ namespace Warpinator
                 TopDirBaseNames = request.TopDirBasenames.ToList(),
                 UseCompression = request.Info.UseCompression && Properties.Settings.Default.UseCompression
             };
-            r.Transfers.Add(t);
             t.PrepareReceive();
+            r.AddIncomingTransfer(t);
             
             return Void;
         }
@@ -137,8 +137,7 @@ namespace Warpinator
                 Status = TransferStatus.FINISHED,
                 Message = request.Message
             };
-            r.Transfers.Add(t);
-            t.ShowNewReceiveTransfer();
+            r.AddIncomingTransfer(t);
 
             return Void;
         }
