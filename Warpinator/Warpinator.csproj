@@ -213,6 +213,9 @@
     <EmbeddedResource Include="Controls\TransferPanel.zh-CN.resx">
       <DependentUpon>TransferPanel.cs</DependentUpon>
     </EmbeddedResource>
+	<EmbeddedResource Include="Controls\TransferPanel.pt-BR.resx">
+      <DependentUpon>TransferPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.cs.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -225,6 +228,9 @@
     <EmbeddedResource Include="Form1.zh-CN.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+	<EmbeddedResource Include="Form1.pt-BR.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ManualConnectDialog.cs.resx">
       <DependentUpon>ManualConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -232,6 +238,9 @@
       <DependentUpon>ManualConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManualConnectDialog.zh-CN.resx">
+      <DependentUpon>ManualConnectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+	<EmbeddedResource Include="ManualConnectDialog.pt-BR.resx">
       <DependentUpon>ManualConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -244,6 +253,7 @@
     <EmbeddedResource Include="Resources\Strings.es.resx" />
     <EmbeddedResource Include="Resources\Strings.it.resx" />
     <EmbeddedResource Include="Resources\Strings.zh-CN.resx" />
+	<EmbeddedResource Include="Resources\Strings.pt-BR.resx" />
     <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
@@ -260,6 +270,9 @@
     <EmbeddedResource Include="SettingsForm.zh-CN.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+	<EmbeddedResource Include="SettingsForm.pt-BR.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TransferForm.cs.resx">
       <DependentUpon>TransferForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -270,6 +283,9 @@
       <DependentUpon>TransferForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TransferForm.zh-CN.resx">
+      <DependentUpon>TransferForm.cs</DependentUpon>
+    </EmbeddedResource>
+	<EmbeddedResource Include="TransferForm.pt-BR.resx">
       <DependentUpon>TransferForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="..\.editorconfig">

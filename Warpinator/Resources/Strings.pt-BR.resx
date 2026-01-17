@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="already_connected" xml:space="preserve">
+    <value>Dispositivo já conectado</value>
+  </data>
+  <data name="any" xml:space="preserve">
+    <value>Qualquer</value>
+    <comment>Use any interface</comment>
+  </data>
+  <data name="available_devices" xml:space="preserve">
+    <value>Dispositivos disponíveis</value>
+  </data>
+  <data name="awaiting_duplex" xml:space="preserve">
+    <value>Aguardando duplex</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="a_few_seconds" xml:space="preserve">
+    <value>alguns segundos</value>
+    <comment>... remaining</comment>
+  </data>
+  <data name="cannot_create_dldir" xml:space="preserve">
+    <value>O diretório de downloads não existe e não pode ser criado. Por favor, tente selecionar um diretório diferente nas configurações.</value>
+  </data>
+  <data name="cant_open_browser" xml:space="preserve">
+    <value>Não foi possível abrir o navegador. Use esta URL: {0}</value>
+  </data>
+  <data name="connected" xml:space="preserve">
+    <value>Conectado</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="connecting" xml:space="preserve">
+    <value>Conectando</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="declined" xml:space="preserve">
+    <value>Negado</value>
+    <comment>Transfer status</comment>
+  </data>
+  <data name="directory_doesnt_exist" xml:space="preserve">
+    <value>O diretório selecionado não existe, portanto esta configuração não será alterada</value>
+  </data>
+  <data name="disconnected" xml:space="preserve">
+    <value>Desconectado</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="do_you_want_to_check_for_updates" xml:space="preserve">
+    <value>Deseja verificar se há atualizações automaticamente?</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Error</value>
+    <comment>Connection status</comment>
+  </data>
+  <data name="error_connection" xml:space="preserve">
+    <value>Erro de conexão</value>
+  </data>
+  <data name="error_groupcode" xml:space="preserve">
+    <value>Não foi possível decodificar o certificado de {0}. Código de grupo incorreto?</value>
+  </data>
+  <data name="error_receiving" xml:space="preserve">
+    <value>Erro ao receber:</value>
+  </data>
+  <data name="failed" xml:space="preserve">
+    <value>Falha</value>
+  </data>
+  <data name="failed_open_file" xml:space="preserve">
+    <value>Falha ao abrir o arquivo para escrita</value>
+  </data>
+  <data name="failed_to_start_server" xml:space="preserve">
+    <value>Falha ao iniciar o servidor: {0}</value>
+  </data>
+  <data name="failed_write_file" xml:space="preserve">
+    <value>Falha ao escrever no arquivo {0}: {1}</value>
+  </data>
+  <data name="files" xml:space="preserve">
+    <value>{0} arquivos</value>
+  </data>
+  <data name="files_may_be_overwritten" xml:space="preserve">
+    <value> (Os arquivos podem ser sobrescritos!)</value>
+  </data>
+  <data name="finished" xml:space="preserve">
+    <value>Finalizado</value>
+  </data>
+  <data name="finished_errors" xml:space="preserve">
+    <value>Finalizado com erros</value>
+  </data>
+  <data name="incoming_message" xml:space="preserve">
+    <value>Nova mensagem de {0}</value>
+  </data>
+  <data name="incoming_transfer" xml:space="preserve">
+    <value>Transferência recebida de {0}</value>
+  </data>
+  <data name="info" xml:space="preserve">
+    <value>Informações</value>
+  </data>
+  <data name="interface_unavailable" xml:space="preserve">
+    <value>Interface selecionada indisponível</value>
+  </data>
+  <data name="invalid_address" xml:space="preserve">
+    <value>O endereço especificado não está em um formato válido.</value>
+  </data>
+  <data name="manual_connection" xml:space="preserve">
+    <value>Conexão manual</value>
+  </data>
+  <data name="manual_connection_failed" xml:space="preserve">
+    <value>Falha na conexão manual</value>
+  </data>
+  <data name="manual_connect_error" xml:space="preserve">
+    <value>Não foi possível conectar ao dispositivo: {0}</value>
+  </data>
+  <data name="manual_connect_to" xml:space="preserve">
+    <value>Deseja conectar-se a "{0}"?</value>
+  </data>
+  <data name="manual_connect_unavailable" xml:space="preserve">
+    <value>O Warpinator não está em execução no endereço fornecido, a versão em execução ainda não oferece suporte à conexão manual ou o dispositivo não pôde ser acessado na rede.</value>
+  </data>
+  <data name="manual_connect_unsupported" xml:space="preserve">
+    <value>O Warpinator neste dispositivo não suporta conexão manual.</value>
+  </data>
+  <data name="new_version_available" xml:space="preserve">
+    <value>Nova versão disponível: {0} (atual: {1}). Deseja baixá-la?</value>
+  </data>
+  <data name="no_files_selected" xml:space="preserve">
+    <value>Nenhum arquivo foi selecionado</value>
+  </data>
+  <data name="outside_group" xml:space="preserve">
+    <value>({0} fora do grupo)</value>
+  </data>
+  <data name="paused" xml:space="preserve">
+    <value>Em pausa</value>
+  </data>
+  <data name="pick_files" xml:space="preserve">
+    <value>Selecione os arquivos para enviar</value>
+  </data>
+  <data name="pick_folders" xml:space="preserve">
+    <value>Selecione as pastas para enviar</value>
+  </data>
+  <data name="remaining" xml:space="preserve">
+    <value>{0} restantes</value>
+  </data>
+  <data name="sending_failed" xml:space="preserve">
+    <value>O envio falhou com a seguinte exceção:</value>
+  </data>
+  <data name="send_to" xml:space="preserve">
+    <value>Enviar {0} arquivo(s) para</value>
+  </data>
+  <data name="service_not_running" xml:space="preserve">
+    <value>Serviço indisponível!</value>
+  </data>
+  <data name="service_running" xml:space="preserve">
+    <value>O serviço está em execução.</value>
+  </data>
+  <data name="stopped" xml:space="preserve">
+    <value>Parou</value>
+  </data>
+  <data name="symlinks_not_supported" xml:space="preserve">
+    <value>AVISO: Links simbólicos não são suportados.</value>
+  </data>
+  <data name="transfer" xml:space="preserve">
+    <value>Transferir</value>
+  </data>
+  <data name="transferring" xml:space="preserve">
+    <value>Transferindo</value>
+  </data>
+  <data name="unavailable" xml:space="preserve">
+    <value>, indisponível</value>
+  </data>
+  <data name="unavailable_interface" xml:space="preserve">
+    <value>Interface indisponível: "{0}"</value>
+  </data>
+  <data name="waiting_for_permission" xml:space="preserve">
+    <value>Aguardando autorização</value>
+  </data>
+  <data name="warning" xml:space="preserve">
+    <value>Aviso</value>
+  </data>
+</root>
