@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="about_program" xml:space="preserve">
+    <value>O aplikaci {0}</value>
+  </data>
   <data name="already_connected" xml:space="preserve">
     <value>Toto zařízení již je připojeno</value>
   </data>
@@ -290,6 +293,9 @@
   </data>
   <data name="unavailable_interface" xml:space="preserve">
     <value>Nedostupné rozhraní: "{0}"</value>
+  </data>
+  <data name="version" xml:space="preserve">
+    <value>Verze {0}</value>
   </data>
   <data name="waiting_for_permission" xml:space="preserve">
     <value>Čeká na schválení</value>

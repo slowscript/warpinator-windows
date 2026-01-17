@@ -251,6 +251,7 @@
     <EmbeddedResource Include="Resources\Strings.cs.resx" />
     <EmbeddedResource Include="Resources\Strings.de.resx" />
     <EmbeddedResource Include="Resources\Strings.es.resx" />
+    <EmbeddedResource Include="Resources\Strings.fr.resx" />
     <EmbeddedResource Include="Resources\Strings.it.resx" />
     <EmbeddedResource Include="Resources\Strings.zh-CN.resx" />
 	<EmbeddedResource Include="Resources\Strings.pt-BR.resx" />

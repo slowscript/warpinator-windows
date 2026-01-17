@@ -208,6 +208,9 @@
   <data name="btnConnectManually.Location" type="System.Drawing.Point, System.Drawing">
     <value>143, 70</value>
   </data>
+  <data name="btnConnectManually.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 23</value>
+  </data>
   <data name="btnConnectManually.Text" xml:space="preserve">
     <value>Conectar manualmente</value>
   </data>

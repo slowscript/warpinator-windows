@@ -14,9 +14,9 @@ namespace Warpinator
         public AboutBox()
         {
             InitializeComponent();
-            this.Text = String.Format("O aplikaci {0}", AssemblyTitle);
+            this.Text = String.Format(Resources.Strings.about_program, AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Verze {0}", AssemblyVersion);
+            this.labelVersion.Text = String.Format(Resources.Strings.version, AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;

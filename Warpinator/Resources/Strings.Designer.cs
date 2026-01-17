@@ -70,6 +70,15 @@ namespace Warpinator.Resources {
         }
         
         /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný About {0}.
+        /// </summary>
+        internal static string about_program {
+            get {
+                return ResourceManager.GetString("about_program", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Vyhledá lokalizovaný řetězec podobný Device already connected.
         /// </summary>
         internal static string already_connected {
@@ -534,6 +543,15 @@ namespace Warpinator.Resources {
         internal static string unavailable_interface {
             get {
                 return ResourceManager.GetString("unavailable_interface", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledá lokalizovaný řetězec podobný Version {0}.
+        /// </summary>
+        internal static string version {
+            get {
+                return ResourceManager.GetString("version", resourceCulture);
             }
         }
         
