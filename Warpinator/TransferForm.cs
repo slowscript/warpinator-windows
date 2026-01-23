@@ -97,7 +97,7 @@ namespace Warpinator
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
-            if (txtFile.Text == "")
+            if (txtFile.Text == "" && selectedFiles == null)
                 return;
             Transfer t = new Transfer();
             t.RemoteUUID = remote.UUID;
@@ -172,6 +172,7 @@ namespace Warpinator
             {
                 selectedFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
                 txtFile.Text = String.Join("; ", selectedFiles.Select((f) => Path.GetFileName(f)));
+                txtFile.ReadOnly = true;
             }
         }
 
