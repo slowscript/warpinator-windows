@@ -4,13 +4,17 @@ This is an unofficial reimplementation of Linux Mint's file sharing tool [Warpin
 
 Transfer files between Linux, Windows and Android devices
 
-## ⚠️ Warning: Fake/malicious website
+## ⚠️ Warning: Fake/malicious websites
 
-`http://warpinator.com` is a fake website, potentially malicious!
+These fake sites potentially push malware:
 
-Do **NOT** download or run any software from it!
+- `warpinator[.]com`
+- `warpinator[.]net`
+- `warpinator.technab[.]com`
 
-We do not know who maintains it. See [notice from the Linux Mint team](https://github.com/linuxmint/warpinator?tab=readme-ov-file#%EF%B8%8F-warning-fakemalicious-website).
+Do **NOT** download or run any software from them!
+
+We do not know who maintain them. See [notice from the Linux Mint team](https://github.com/linuxmint/warpinator#%EF%B8%8F-warning-fakemalicious-websites).
 
 ## Download
 Now available on the [Releases](https://github.com/slowscript/warpinator-windows/releases) page
